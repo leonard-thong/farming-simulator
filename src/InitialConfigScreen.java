@@ -3,20 +3,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
 public class InitialConfigScreen extends Application {
-    Player player = new Player();
+    public static Player player = new Player();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -94,11 +95,26 @@ public class InitialConfigScreen extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(player.getName());
-                System.out.println(player.getDiff());
-                System.out.println(player.getMoney());
-                System.out.println(player.getSeason());
-                System.out.println(player.getStartingSeed());
+                Label secondLabel = new Label("welcome to farm game, the best "
+                        + "agriculture-simulation game ever made!!! ");
+
+                StackPane secondaryLayout = new StackPane();
+                secondaryLayout.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                        CornerRadii.EMPTY, Insets.EMPTY)));
+                secondaryLayout.getChildren().add(secondLabel);
+
+                Scene secondScene = new Scene(secondaryLayout, 700, 300);
+
+                // New window (Stage)
+                Stage newWindow = new Stage();
+                newWindow.setTitle("FarmSim");
+                newWindow.setScene(secondScene);
+
+                // Set position of second window, related to primary window.
+                newWindow.setX(stage.getX() + 100);
+                newWindow.setY(stage.getY() + 100);
+
+                newWindow.show();
             }
         });
         
