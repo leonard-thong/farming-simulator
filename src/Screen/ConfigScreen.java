@@ -1,3 +1,6 @@
+package Screen;
+
+// import JavaFX
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +18,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+// import Class
+import Class.Player;
 
-public class InitialConfigScreen extends Application {
+
+public class ConfigScreen extends Application {
     public static Player player = new Player();
 
     @Override
@@ -35,9 +41,9 @@ public class InitialConfigScreen extends Application {
         Label diffLabel = new Label("Select a difficulty:");
         ObservableList<String> diffs =
                 FXCollections.observableArrayList(
-                         "Easy",
-                                "Normal",
-                                "Hard"
+                        "Easy",
+                        "Normal",
+                        "Hard"
                 );
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
         HBox diffHBox = new HBox();
@@ -71,7 +77,7 @@ public class InitialConfigScreen extends Application {
         HBox seedHBox = new HBox();
         seedHBox.getChildren().addAll(seedLabel, seedComboBox);
         seedHBox.setSpacing(10);
-        seedComboBox.setOnAction(e -> player.setStartingSeed(seedComboBox.getValue()));
+        seedComboBox.setOnAction(e -> player.setSeed(seedComboBox.getValue()));
 
         // Drop down for starting season
         Label seasonLabel = new Label("Select a starting season:");
@@ -117,8 +123,8 @@ public class InitialConfigScreen extends Application {
                 newWindow.show();
             }
         });
-        
-        
+
+
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setX(bounds.getMinX());
