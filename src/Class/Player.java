@@ -3,16 +3,16 @@ package Class;
 import org.jetbrains.annotations.NotNull;
 
 public class Player {
-    private int diff, money;
-    private String season, seed, name;
+    private int  money;
+    private String season, diff, seed, name;
     private String[] inventory;
 
     public Player() {
-        this(0, 20, 0, null, null, null);
+        this(0, 20, "Normal", null, null, null);
     }
 
-    public Player( int diff, int inventorySize, int money, String startingSeason, String startingSeed, String name) {
-        this.diff = diff;
+    public Player( int inventorySize, int money, String diff, String startingSeason, String startingSeed, String name) {
+        this.setDiff(diff);
         this.inventory = new String[inventorySize];
         this.money = money;
         this.season = startingSeason;
@@ -20,20 +20,22 @@ public class Player {
         this.name = name;
     }
 
-    public int getDiff() {
+    public String getDiff() {
         return diff;
     }
 
     public void setDiff(@NotNull String diff) {
+        this.diff = diff;
+
         switch (diff) {
             case "Easy":
-                this.diff = 0;
+                this.setMoney(100);
                 break;
             case "Normal":
-                this.diff = 1;
+                this.setMoney(50);
                 break;
             case "Hard":
-                this.diff = 2;
+                this.setMoney(25);
                 break;
         }
     }
