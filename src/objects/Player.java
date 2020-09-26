@@ -1,4 +1,4 @@
-package gameobjects;
+package objects;
 
 public class Player {
     private int money;

@@ -1,5 +1,3 @@
-run_checkstyle.py
-cs2340_checks.xml
 #IntelliJ
 .idea/
 *.iml
@@ -33,3 +31,7 @@ hs_err_pid*
 
 #machine generated files
 .DS_Store
+
+# user edit
+run_checkstyle.py
+cs2340_checks.xml

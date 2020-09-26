@@ -15,7 +15,6 @@ import main.Main;
 
 
 public class ConfigScene {
-
     public static Scene getScene() {
         // Getting User Inputs
         // Label and TextField for Name
@@ -28,10 +27,7 @@ public class ConfigScene {
 
         // Label Drop Down for Difficulty
         Label diffLabel = new Label("Select a difficulty:");
-        ObservableList<String> diffs = FXCollections.observableArrayList(
-                "Easy",
-                "Normal",
-                "Hard");
+        ObservableList<String> diffs = FXCollections.observableArrayList("Easy", "Normal", "Hard");
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
 
         HBox diffHBox = new HBox();
@@ -40,10 +36,7 @@ public class ConfigScene {
 
         // Label and Drop Down for Starting Seed
         Label seedLabel = new Label("Select a starting seed:");
-        ObservableList<String> seeds = FXCollections.observableArrayList(
-                "Corn",
-                "Sunflower",
-                "Cauliflower");
+        ObservableList<String> seeds = FXCollections.observableArrayList("Corn", "Sunflower", "Cauliflower");
         ComboBox<String> seedComboBox = new ComboBox<>(seeds);
 
         HBox seedHBox = new HBox();
@@ -52,11 +45,7 @@ public class ConfigScene {
 
         // Label and Drop Down for Starting Season
         Label seasonLabel = new Label("Select a starting season:");
-        ObservableList<String> seasons = FXCollections.observableArrayList(
-                "Spring",
-                "Summer",
-                "Fall",
-                "Winter");
+        ObservableList<String> seasons = FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter");
         ComboBox<String> seasonComboBox = new ComboBox<>(seasons);
 
         HBox seasonHBox = new HBox();
@@ -81,11 +70,11 @@ public class ConfigScene {
                 } else if ("Hard".equals(Main.getPlayer().getDiff())) {
                     Main.getPlayer().setMoney(25);
                 }
+
                 // Show next scene
                 // Main.getStage().setScene(//farmui);
             }
         });
-
 
         // Stage, Scene, and Root
         // Set Root
