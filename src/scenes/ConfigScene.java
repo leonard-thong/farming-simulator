@@ -21,27 +21,33 @@ public class ConfigScene {
     public static Scene getScene() {
         // Getting User Inputs
         // Label and TextField for Name
-        Label nameLabel = new Label("Username:");
+        Label nameLabel = new Label("USERNAME:");
         TextField nameTextField = new TextField();
 
         // Label Drop Down for Difficulty
-        Label diffLabel = new Label("Select a difficulty:");
+        Label diffLabel = new Label("SELECT A DIFFICULTY:");
         ObservableList<String> diffs = FXCollections.observableArrayList("Easy", "Normal", "Hard");
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
 
+        diffComboBox.setStyle("-fx-pref-width: 250;");
+
         // Label and Drop Down for Starting Seed
-        Label seedLabel = new Label("Select a starting seed:");
+        Label seedLabel = new Label("SELECT A STARTING SEED:");
         ObservableList<String> seeds = FXCollections.observableArrayList("Corn", "Sunflower", "Cauliflower");
         ComboBox<String> seedComboBox = new ComboBox<>(seeds);
 
+        seedComboBox.setStyle("-fx-pref-width: 250;");
+
         // Label and Drop Down for Starting Season
-        Label seasonLabel = new Label("Select a starting season:");
+        Label seasonLabel = new Label("SELECT A STARTING SEASON:");
         ObservableList<String> seasons = FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter");
         ComboBox<String> seasonComboBox = new ComboBox<>(seasons);
 
+        seasonComboBox.setStyle("-fx-pref-width: 250;");
+
         // Button to continue
         Button buttonContinue = new Button();
-        buttonContinue.setText("Continue");
+        buttonContinue.setText("CONTINUE");
 
         buttonContinue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -63,6 +69,8 @@ public class ConfigScene {
             }
         });
 
+        buttonContinue.setStyle("-fx-pref-width: 200;");
+
         // Set Grid
         GridPane grid = new GridPane();
         grid.add(nameLabel, 0, 0);
@@ -78,7 +86,7 @@ public class ConfigScene {
 
         // Scene and Root
         // Set Root
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        BackgroundFill background_fill = new BackgroundFill(Color.SKYBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         VBox root = new VBox();
         root.setSpacing(20);
         root.setAlignment(Pos.CENTER);
