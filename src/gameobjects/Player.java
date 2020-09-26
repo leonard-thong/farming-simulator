@@ -1,17 +1,19 @@
-package Class;
-
-import org.jetbrains.annotations.NotNull;
+package gameobjects;
 
 public class Player {
-    private int  money;
-    private String season, diff, seed, name;
+    private int money;
+    private String season;
+    private String diff;
+    private String seed;
+    private String name;
     private String[] inventory;
 
     public Player() {
         this(0, 20, "Normal", null, null, null);
     }
 
-    public Player( int inventorySize, int money, String diff, String startingSeason, String startingSeed, String name) {
+    public Player(int inventorySize, int money, String diff, String startingSeason,
+                  String startingSeed, String name) {
         this.setDiff(diff);
         this.inventory = new String[inventorySize];
         this.money = money;
@@ -24,20 +26,8 @@ public class Player {
         return diff;
     }
 
-    public void setDiff(@NotNull String diff) {
+    public void setDiff(String diff) {
         this.diff = diff;
-
-        switch (diff) {
-            case "Easy":
-                this.setMoney(100);
-                break;
-            case "Normal":
-                this.setMoney(50);
-                break;
-            case "Hard":
-                this.setMoney(25);
-                break;
-        }
     }
 
     public int getMoney() {

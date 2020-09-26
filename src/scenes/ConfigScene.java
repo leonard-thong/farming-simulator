@@ -1,34 +1,26 @@
-package Scene;
+package scenes;
 
-// import JavaFX
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-
-// import Class
-import Class.Player;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import main.Main;
 
 
-public class ConfigScene extends Application {
-    public static Player player = new Player();
+public class ConfigScene {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public static Scene getScene() {
         // Getting User Inputs
         // Label and TextField for Name
         Label nameLabel = new Label("Username:");
-        TextField nameTextField = new TextField ();
+        TextField nameTextField = new TextField();
 
         HBox nameHBox = new HBox();
         nameHBox.getChildren().addAll(nameLabel, nameTextField);
@@ -36,7 +28,10 @@ public class ConfigScene extends Application {
 
         // Label Drop Down for Difficulty
         Label diffLabel = new Label("Select a difficulty:");
-        ObservableList<String> diffs = FXCollections.observableArrayList("Easy", "Normal", "Hard");
+        ObservableList<String> diffs = FXCollections.observableArrayList(
+                "Easy",
+                "Normal",
+                "Hard");
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
 
         HBox diffHBox = new HBox();
@@ -45,7 +40,10 @@ public class ConfigScene extends Application {
 
         // Label and Drop Down for Starting Seed
         Label seedLabel = new Label("Select a starting seed:");
-        ObservableList<String> seeds = FXCollections.observableArrayList("Corn", "Sunflower", "Cauliflower");
+        ObservableList<String> seeds = FXCollections.observableArrayList(
+                "Corn",
+                "Sunflower",
+                "Cauliflower");
         ComboBox<String> seedComboBox = new ComboBox<>(seeds);
 
         HBox seedHBox = new HBox();
@@ -54,7 +52,11 @@ public class ConfigScene extends Application {
 
         // Label and Drop Down for Starting Season
         Label seasonLabel = new Label("Select a starting season:");
-        ObservableList<String> seasons = FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter");
+        ObservableList<String> seasons = FXCollections.observableArrayList(
+                "Spring",
+                "Summer",
+                "Fall",
+                "Winter");
         ComboBox<String> seasonComboBox = new ComboBox<>(seasons);
 
         HBox seasonHBox = new HBox();
@@ -68,13 +70,19 @@ public class ConfigScene extends Application {
         buttonContinue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                player.setName(nameTextField.getText());
-                player.setDiff(diffComboBox.getValue());
-                player.setSeed(seedComboBox.getValue());
-                player.setSeason(seasonComboBox.getValue());
-
+                Main.getPlayer().setName(nameTextField.getText());
+                Main.getPlayer().setDiff(diffComboBox.getValue());
+                Main.getPlayer().setSeed(seedComboBox.getValue());
+                Main.getPlayer().setSeason(seasonComboBox.getValue());
+                if ("Easy".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(100);
+                } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(50);
+                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(25);
+                }
                 // Show next scene
-                // CODE HERE
+                // Main.getStage().setScene(//farmui);
             }
         });
 
@@ -85,17 +93,6 @@ public class ConfigScene extends Application {
         root.getChildren().addAll(nameHBox, diffHBox, seedHBox, seasonHBox, buttonContinue);
 
         // Set Scene
-        Scene scene = new Scene(root);
-
-        // Set Stage
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        stage.setTitle("FarmSim");
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-        stage.setScene(scene);
-        stage.show();
+        return new Scene(root);
     }
 }

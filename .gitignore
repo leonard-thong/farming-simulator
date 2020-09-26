@@ -1,3 +1,5 @@
+run_checkstyle.py
+cs2340_checks.xml
 #IntelliJ
 .idea/
 *.iml
