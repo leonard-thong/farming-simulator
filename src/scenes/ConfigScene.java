@@ -13,8 +13,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.io.FileNotFoundException;
+
 
 public class ConfigScene {
+    private static Button buttonContinue = new Button();
+
+    public static Button getButtonContinue() {
+        return buttonContinue;
+    }
+
     public static Scene getScene() {
         // Getting User Inputs
         // Label and TextField for Name
@@ -57,8 +65,6 @@ public class ConfigScene {
         seasonLabel.setStyle("-fx-text-fill: White");
         seasonComboBox.setStyle("-fx-pref-width: 250;");
 
-        // Button to continue
-        Button buttonContinue = new Button();
         buttonContinue.setText("CONTINUE");
 
         buttonContinue.setOnAction(event -> {
@@ -75,7 +81,11 @@ public class ConfigScene {
             }
 
             // Show next scene
-            // Main.getStage().setScene(//FarmUI);
+            try {
+                Main.getStage().setScene(InitialFarm.getScene());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         buttonContinue.setStyle("-fx-pref-width: 200;");
@@ -96,7 +106,7 @@ public class ConfigScene {
         // Scene and Root
         // Set Root
         BackgroundFill backgroundFill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
-                                                            Insets.EMPTY);
+                Insets.EMPTY);
         VBox root = new VBox();
         root.setSpacing(20);
         root.setAlignment(Pos.CENTER);
