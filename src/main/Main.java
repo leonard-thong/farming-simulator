@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         stage.setTitle("FarmSim");
-        stage.setScene(ConfigScene.getScene());
+        stage.setScene(WelcomeScreen.getScene());
         stage.setMaximized(true);
         stage.show();
     }
@@ -34,5 +34,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
