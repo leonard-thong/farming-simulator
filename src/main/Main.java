@@ -2,6 +2,8 @@ package main;
 
 // import JavaFX
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 // import package
@@ -24,6 +26,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("FarmSim");
         primaryStage.setScene(ConfigScene.getScene());
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
