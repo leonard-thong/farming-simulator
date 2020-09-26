@@ -1,14 +1,10 @@
 package main;
 
-// import JavaFX
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import gameobjects.Player;
 import scenes.ConfigScene;
 import scenes.WelcomeScreen;
-
-// import package
 
 public class Main extends Application {
     private static Stage stage = new Stage();

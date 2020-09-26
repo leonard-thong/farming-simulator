@@ -7,19 +7,21 @@ public class Player {
     private String seed;
     private String name;
     private String[] inventory;
+    private int day;
 
     public Player() {
-        this(0, 20, "Normal", null, null, null);
+        this(0, 50, "Normal", "Summer", "Corn", "Aibek", 1);
     }
 
     public Player(int inventorySize, int money, String diff, String startingSeason,
-                  String startingSeed, String name) {
+                  String startingSeed, String name, int day) {
         this.setDiff(diff);
         this.inventory = new String[inventorySize];
         this.money = money;
         this.season = startingSeason;
         this.seed = startingSeed;
         this.name = name;
+        this.day = day;
     }
 
     public String getDiff() {
@@ -60,5 +62,13 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }
