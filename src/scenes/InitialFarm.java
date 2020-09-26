@@ -10,23 +10,11 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.*;
 import main.Main;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class InitialFarm {
@@ -36,7 +24,7 @@ public class InitialFarm {
         coins.setFont(new Font("Ubuntu", 25));
         coins.setTextFill(Color.GOLD);
 
-        Image coinsPic = new Image(new FileInputStream("images/coins.png"));
+        Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png" /*new FileInputStream("images/coins.png")*/);
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);

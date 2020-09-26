@@ -1,9 +1,8 @@
 package main;
 
+import gameobjects.Player;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import gameobjects.Player;
-import scenes.ConfigScene;
 import scenes.WelcomeScreen;
 
 public class Main extends Application {
@@ -18,7 +17,7 @@ public class Main extends Application {
         stage.setMaximized(true);
         stage.show();
     }
-
+    
     public static Stage getStage() {
         return stage;
     }
@@ -30,4 +29,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }
