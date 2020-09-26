@@ -18,7 +18,6 @@ import main.Main;
 import java.io.FileNotFoundException;
 
 public class FarmScene {
-
     public static Scene getScene() throws FileNotFoundException {
         Label coins = new Label("" + Main.getPlayer().getMoney());
         coins.setFont(new Font("Ubuntu", 25));
@@ -82,5 +81,4 @@ public class FarmScene {
 
         return new Scene(root, 1000, 750, Color.BLACK);
     }
-
 }

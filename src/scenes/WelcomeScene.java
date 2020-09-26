@@ -11,8 +11,6 @@ import javafx.scene.paint.Color;
 import main.Main;
 
 public class WelcomeScene {
-
-
     public static Scene getScene() {
         Button button = new Button();
         button.setText("Start game");
@@ -24,5 +22,4 @@ public class WelcomeScene {
         button.setOnAction(event -> Main.getStage().setScene(ConfigScene.getScene()));
         return new Scene(root);
     }
-
 }
