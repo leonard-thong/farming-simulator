@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import gameobjects.Player;
 import scenes.ConfigScene;
+import scenes.WelcomeScreen;
 
 public class Main extends Application {
     private static Stage stage = new Stage();
@@ -13,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         stage.setTitle("FarmSim");
-        stage.setScene(ConfigScene.getScene());
+        stage.setScene(WelcomeScreen.getScene());
         stage.setMaximized(true);
         stage.show();
     }
