@@ -1,12 +1,12 @@
 package main;
 
-import gameobjects.Player;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import scenes.WelcomeScreen;
+import gameobjects.Player;
+import scenes.WelcomeScene;
 
 
 public class Main extends Application {
@@ -17,14 +17,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         stage.setTitle("FarmSim");
-        stage.setScene(WelcomeScreen.getScene());
+        stage.setScene(WelcomeScene.getScene());
+
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
+
         stage.show();
     }
     

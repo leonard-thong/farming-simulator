@@ -82,7 +82,7 @@ public class ConfigScene {
 
             // Show next scene
             try {
-                Main.getStage().setScene(InitialFarm.getScene());
+                Main.getStage().setScene(FarmScene.getScene());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

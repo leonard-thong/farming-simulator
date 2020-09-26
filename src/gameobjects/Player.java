@@ -1,35 +1,35 @@
 package gameobjects;
 
 public class Player {
+    private int day;
     private int money;
     private String season;
     private String diff;
     private String seed;
     private String name;
     private String[] inventory;
-    private int day;
 
     public Player() {
-        this(0, 50, "Normal", "Summer", "Corn", "Aibek", 1);
+        this(1, 20, 50, "Normal", "Summer", "Corn", "Aibek");
     }
 
-    public Player(int inventorySize, int money, String diff, String startingSeason,
-                  String startingSeed, String name, int day) {
-        this.setDiff(diff);
+    public Player(int day, int inventorySize, int money, String diff, String startingSeason,
+                  String startingSeed, String name) {
+        this.day = day;
         this.inventory = new String[inventorySize];
         this.money = money;
+        this.setDiff(diff);
         this.season = startingSeason;
         this.seed = startingSeed;
         this.name = name;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
         this.day = day;
-    }
-
-    public String getDiff() {
-        return diff;
-    }
-
-    public void setDiff(String diff) {
-        this.diff = diff;
     }
 
     public int getMoney() {
@@ -38,6 +38,14 @@ public class Player {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getDiff() {
+        return diff;
+    }
+
+    public void setDiff(String diff) {
+        this.diff = diff;
     }
 
     public String getSeason() {
@@ -62,13 +70,5 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
     }
 }

@@ -17,14 +17,14 @@ import main.Main;
 
 import java.io.FileNotFoundException;
 
-public class InitialFarm {
+public class FarmScene {
 
     public static Scene getScene() throws FileNotFoundException {
         Label coins = new Label("" + Main.getPlayer().getMoney());
         coins.setFont(new Font("Ubuntu", 25));
         coins.setTextFill(Color.GOLD);
 
-        Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png" /*new FileInputStream("images/coins.png")*/);
+        Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png");
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);
@@ -42,8 +42,6 @@ public class InitialFarm {
         info.getChildren().addAll(money, date);
         StackPane.setAlignment(date, Pos.TOP_CENTER);
 
-        StackPane farm = new StackPane();
-
         GridPane plot = new GridPane();
         plot.setMaxSize(750, 600);
         plot.addRow(0, new Label(), new Label(), new Label(), new Label(), new Label());
@@ -56,7 +54,6 @@ public class InitialFarm {
             if (cell instanceof Control) {
                 javafx.scene.control.Control control = (Control) cell;
                 control.setPrefSize(150, 100);
-                //control.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 control.setStyle("-fx-background-color: saddlebrown; -fx-alignment: center;");
             }
         }
@@ -69,10 +66,10 @@ public class InitialFarm {
         plot.getColumnConstraints().addAll(oneThird, oneThird, oneThird, oneThird, oneThird);
         RowConstraints oneHalf = new RowConstraints();
         oneHalf.setPercentHeight(100 / 5.0);
-        //pane.setPrefSize(50, 50);
         oneHalf.setValignment(VPos.CENTER);
         plot.getRowConstraints().addAll(oneHalf, oneHalf, oneHalf, oneHalf, oneHalf);
 
+        StackPane farm = new StackPane();
         farm.getChildren().addAll(plot);
         StackPane.setAlignment(plot, Pos.CENTER);
 

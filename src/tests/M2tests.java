@@ -37,5 +37,5 @@ class M2tests {
 ////        // then:
 ////        verifyThat(".button", hasText("clicked!"));
 ////    }
-//
+
 }
