@@ -2,9 +2,6 @@ package scenes;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,49 +21,61 @@ public class ConfigScene {
         Label nameLabel = new Label("USERNAME:");
         TextField nameTextField = new TextField();
 
+        nameLabel.setStyle("-fx-text-fill: White");
+
         // Label Drop Down for Difficulty
         Label diffLabel = new Label("SELECT A DIFFICULTY:");
-        ObservableList<String> diffs = FXCollections.observableArrayList("Easy", "Normal", "Hard");
+        ObservableList<String> diffs = FXCollections.observableArrayList(
+                "Easy",
+                "Normal",
+                "Hard");
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
 
+        diffLabel.setStyle("-fx-text-fill: White");
         diffComboBox.setStyle("-fx-pref-width: 250;");
 
         // Label and Drop Down for Starting Seed
         Label seedLabel = new Label("SELECT A STARTING SEED:");
-        ObservableList<String> seeds = FXCollections.observableArrayList("Corn", "Sunflower", "Cauliflower");
+        ObservableList<String> seeds = FXCollections.observableArrayList(
+                "Corn",
+                "Sunflower",
+                "Cauliflower");
         ComboBox<String> seedComboBox = new ComboBox<>(seeds);
 
+        seedLabel.setStyle("-fx-text-fill: White");
         seedComboBox.setStyle("-fx-pref-width: 250;");
 
         // Label and Drop Down for Starting Season
         Label seasonLabel = new Label("SELECT A STARTING SEASON:");
-        ObservableList<String> seasons = FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter");
+        ObservableList<String> seasons = FXCollections.observableArrayList(
+                "Spring",
+                "Summer",
+                "Fall",
+                "Winter");
         ComboBox<String> seasonComboBox = new ComboBox<>(seasons);
 
+        seasonLabel.setStyle("-fx-text-fill: White");
         seasonComboBox.setStyle("-fx-pref-width: 250;");
 
         // Button to continue
         Button buttonContinue = new Button();
         buttonContinue.setText("CONTINUE");
 
-        buttonContinue.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Main.getPlayer().setName(nameTextField.getText());
-                Main.getPlayer().setDiff(diffComboBox.getValue());
-                Main.getPlayer().setSeed(seedComboBox.getValue());
-                Main.getPlayer().setSeason(seasonComboBox.getValue());
-                if ("Easy".equals(Main.getPlayer().getDiff())) {
-                    Main.getPlayer().setMoney(100);
-                } else if ("Normal".equals(Main.getPlayer().getDiff())) {
-                    Main.getPlayer().setMoney(50);
-                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                    Main.getPlayer().setMoney(25);
-                }
-
-                // Show next scene
-                // Main.getStage().setScene(//FarmUI);
+        buttonContinue.setOnAction(event -> {
+            Main.getPlayer().setName(nameTextField.getText());
+            Main.getPlayer().setDiff(diffComboBox.getValue());
+            Main.getPlayer().setSeed(seedComboBox.getValue());
+            Main.getPlayer().setSeason(seasonComboBox.getValue());
+            if ("Easy".equals(Main.getPlayer().getDiff())) {
+                Main.getPlayer().setMoney(100);
+            } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+                Main.getPlayer().setMoney(50);
+            } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                Main.getPlayer().setMoney(25);
             }
+
+            // Show next scene
+            // Main.getStage().setScene(//FarmUI);
         });
 
         buttonContinue.setStyle("-fx-pref-width: 200;");
@@ -86,11 +95,12 @@ public class ConfigScene {
 
         // Scene and Root
         // Set Root
-        BackgroundFill background_fill = new BackgroundFill(Color.SKYBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
+                                                            Insets.EMPTY);
         VBox root = new VBox();
         root.setSpacing(20);
         root.setAlignment(Pos.CENTER);
-        root.setBackground(new Background(background_fill));
+        root.setBackground(new Background(backgroundFill));
         root.getChildren().addAll(grid, buttonContinue);
 
         // Set Scene

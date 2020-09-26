@@ -1,14 +1,13 @@
 package main;
 
 // import JavaFX
+
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import gameobjects.Player;
+import scenes.ConfigScene;
 
 // import package
-import objects.Player;
-import scenes.ConfigScene;
 
 public class Main extends Application {
     private static Stage stage = new Stage();
@@ -22,15 +21,15 @@ public class Main extends Application {
         return player;
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("FarmSim");
         primaryStage.setScene(ConfigScene.getScene());
         primaryStage.setMaximized(true);
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
