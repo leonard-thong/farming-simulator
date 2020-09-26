@@ -27,7 +27,7 @@ public class WelcomeScreen {
         //BorderPane root;
         Button button = new Button();
         button.setText("Start game");
-        Text welcome = new Text("A game by 59minus1");
+        //Text welcome = new Text("A game by 59minus1");
 
 
         //VBox vbox = new VBox(8);
@@ -38,7 +38,6 @@ public class WelcomeScreen {
         // Create a BorderPane with a Text node in each of the five regions
 
         BorderPane root = new BorderPane(button);
-        root.setTop(welcome);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
 
