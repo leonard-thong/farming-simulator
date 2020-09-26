@@ -36,7 +36,7 @@ public class InitialFarm {
         coins.setFont(new Font("Ubuntu", 25));
         coins.setTextFill(Color.GOLD);
 
-        Image coinsPic = new Image(new FileInputStream("images/coins.png"));
+        Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png" /*new FileInputStream("images/coins.png")*/);
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);
