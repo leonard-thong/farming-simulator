@@ -13,6 +13,15 @@ public class Main extends Application {
     private static Stage stage = new Stage();
     private static Player player = new Player();
 
+    @Override
+    public void start(Stage primaryStage) {
+        stage = primaryStage;
+        stage.setTitle("FarmSim");
+        stage.setScene(ConfigScene.getScene());
+        stage.setMaximized(true);
+        stage.show();
+    }
+
     public static Stage getStage() {
         return stage;
     }
@@ -23,13 +32,5 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("FarmSim");
-        primaryStage.setScene(ConfigScene.getScene());
-        primaryStage.setMaximized(true);
-        primaryStage.show();
     }
 }
