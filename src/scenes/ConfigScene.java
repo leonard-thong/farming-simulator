@@ -106,7 +106,7 @@ public class ConfigScene {
         // Scene and Root
         // Set Root
         BackgroundFill backgroundFill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
-                                                            Insets.EMPTY);
+                Insets.EMPTY);
         VBox root = new VBox();
         root.setSpacing(20);
         root.setAlignment(Pos.CENTER);
