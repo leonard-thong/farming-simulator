@@ -17,6 +17,7 @@ public class WelcomeScene {
         button.setId("#button");
 
         BorderPane root = new BorderPane(button);
+        root.setId("rootborderpane");
         root.setBackground(new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
 

@@ -1,8 +1,12 @@
 package tests;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Main;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -70,7 +74,7 @@ class ConfigSceneTest {
     }
 
     @Test
-    void testButton(FxRobot robot) throws InterruptedException {
+    void testButton(FxRobot robot) {
         robot.clickOn(".text-field");
         robot.write("Jayant");
         robot.clickOn("#diffComboBox");
@@ -90,5 +94,10 @@ class ConfigSceneTest {
         assertEquals("Spring", Main.getPlayer().getSeason());
     }
 
-
+    @Test
+    void checksBgColor(FxRobot robot) {
+        VBox vbox = robot.lookup("#rootvbox").query();
+        Assert.assertEquals(new BackgroundFill(Color.BLACK, null, null),
+                vbox.getBackground().getFills().get(0));
+    }
 }

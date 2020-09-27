@@ -22,26 +22,30 @@ public class FarmScene {
         Label coins = new Label("" + Main.getPlayer().getMoney());
         coins.setFont(new Font("Ubuntu", 25));
         coins.setTextFill(Color.GOLD);
+        coins.setId("coinslabel");
 
         Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png");
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);
+        coinsPicture.setId("coinsimage");
 
         HBox money = new HBox();
         money.setPadding(new Insets(10));
         money.getChildren().addAll(coins, coinsPicture);
 
-        Text date = new Text("Day " + Main.getPlayer().getDay());
+        Label date = new Label("Day " + Main.getPlayer().getDay());
         date.setFont(Font.font("Ubuntu", FontWeight.BOLD, FontPosture.REGULAR, 40));
-        date.setFill(Color.GREEN);
+        date.setTextFill(Color.GREEN);
         date.setTextAlignment(TextAlignment.CENTER);
+        date.setId("daytext");
 
         StackPane info = new StackPane();
         info.getChildren().addAll(money, date);
         StackPane.setAlignment(date, Pos.TOP_CENTER);
 
         GridPane plot = new GridPane();
+        plot.setId("plotgrid");
         plot.setMaxSize(750, 600);
         plot.addRow(0, new Label(), new Label(), new Label(), new Label(), new Label());
         plot.addRow(1, new Label(), new Label(), new Label(), new Label(), new Label());
@@ -76,6 +80,7 @@ public class FarmScene {
         empty.setPrefSize(1000, 70);
 
         VBox root = new VBox();
+        root.setId("rootvbox");
         root.getChildren().addAll(info, empty, farm);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 

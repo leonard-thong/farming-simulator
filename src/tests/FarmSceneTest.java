@@ -1,6 +1,11 @@
 package tests;
 
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.Main;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -8,6 +13,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import scenes.FarmScene;
 
+import static org.junit.Assert.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -23,8 +29,29 @@ class FarmSceneTest {
     }
 
     @Test
-    void containsButton(FxRobot robot) {
-
+    void containsTexts() {
+        verifyThat("#coinslabel", hasText(String.valueOf(Main.getPlayer().getMoney())));
+        verifyThat("#coinslabel", isVisible());
+        verifyThat("#daytext", hasText("Day " + Main.getPlayer().getDay()));
+        verifyThat("#daytext", isVisible());
     }
 
+    @Test
+    void checksPlot(FxRobot robot) {
+        GridPane grid = robot.lookup("#plotgrid").query();
+        assertEquals(5, grid.getRowCount());
+        assertEquals(5, grid.getColumnCount());
+    }
+
+    @Test
+    void checksCoinImage() {
+        verifyThat("#coinsimage", isVisible());
+    }
+
+    @Test
+    void checksBgColor(FxRobot robot) {
+        VBox vbox = robot.lookup("#rootvbox").query();
+        assertEquals(new BackgroundFill(Color.BLACK, null, null),
+                vbox.getBackground().getFills().get(0));
+    }
 }

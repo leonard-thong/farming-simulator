@@ -116,6 +116,7 @@ public class ConfigScene {
         BackgroundFill backgroundFill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY,
                 Insets.EMPTY);
         VBox root = new VBox();
+        root.setId("rootvbox");
         root.setSpacing(20);
         root.setAlignment(Pos.CENTER);
         root.setBackground(new Background(backgroundFill));
