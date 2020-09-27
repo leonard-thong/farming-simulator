@@ -62,6 +62,11 @@ class ConfigSceneTest {
     }
 
 
+    /**
+     * Checks if it contains labels and it is visible
+     *
+     * @author Leonard Yi Xuen Thong
+     */
     @Test
     void containsLabels() {
         verifyThat("#nameLabel", hasText("USERNAME:"));
@@ -91,60 +96,6 @@ class ConfigSceneTest {
         assertEquals("Jayant", Main.getPlayer().getName());
         assertEquals("Easy", Main.getPlayer().getDiff());
         assertEquals(100, Main.getPlayer().getMoney());
-        assertEquals("Corn", Main.getPlayer().getStartingSeed());
-        assertEquals("Spring", Main.getPlayer().getSeason());
-    }
-
-    /**
-     * Checks if the continue buttons works correctly for normal difficulty
-     *
-     * @author Leonard Yi Xuen Thong
-     * @param robot it interacts with the GUI
-     */
-    @Test
-    void testButtonNormal(FxRobot robot) {
-        robot.clickOn(".text-field");
-        robot.write("Leonard");
-        robot.clickOn("#diffComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.DOWN, KeyCode.ENTER);
-        robot.clickOn("#seedComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.ENTER);
-        robot.clickOn("#seasonComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.ENTER);
-
-
-        verifyThat(".button", hasText("CONTINUE"));
-        robot.clickOn(".button");
-        assertEquals("Leonard", Main.getPlayer().getName());
-        assertEquals("Normal", Main.getPlayer().getDiff());
-        assertEquals(50, Main.getPlayer().getMoney());
-        assertEquals("Corn", Main.getPlayer().getStartingSeed());
-        assertEquals("Spring", Main.getPlayer().getSeason());
-    }
-
-    /**
-     * Checks if the continue buttons works correctly for hard difficulty
-     *
-     * @author Leonard Yi Xuen Thong
-     * @param robot it interacts with the GUI
-     */
-    @Test
-    void testButtonHard(FxRobot robot) {
-        robot.clickOn(".text-field");
-        robot.write("Leonard");
-        robot.clickOn("#diffComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.DOWN, KeyCode.DOWN, KeyCode.ENTER);
-        robot.clickOn("#seedComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.ENTER);
-        robot.clickOn("#seasonComboBox");
-        robot.push(KeyCode.DOWN, KeyCode.ENTER);
-
-
-        verifyThat(".button", hasText("CONTINUE"));
-        robot.clickOn(".button");
-        assertEquals("Leonard", Main.getPlayer().getName());
-        assertEquals("Hard", Main.getPlayer().getDiff());
-        assertEquals(25, Main.getPlayer().getMoney());
         assertEquals("Corn", Main.getPlayer().getStartingSeed());
         assertEquals("Spring", Main.getPlayer().getSeason());
     }
