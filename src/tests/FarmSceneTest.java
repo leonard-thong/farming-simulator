@@ -13,7 +13,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import scenes.FarmScene;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -43,11 +43,22 @@ class FarmSceneTest {
         assertEquals(5, grid.getColumnCount());
     }
 
+    /**
+     * Checks if the image of coins is displayed next to the Player's money
+     *
+     * @author Hemang Dash
+     */
     @Test
     void checksCoinImage() {
         verifyThat("#coinsimage", isVisible());
     }
 
+    /**
+     * Checks if the background color of the Farm Scene UI is black
+     *
+     * @author Hemang Dash
+     * @param robot it interacts with the GUI
+     */
     @Test
     void checksBgColor(FxRobot robot) {
         VBox vbox = robot.lookup("#rootvbox").query();
