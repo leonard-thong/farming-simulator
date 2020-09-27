@@ -30,6 +30,7 @@ public class ConfigScene {
         TextField nameTextField = new TextField();
 
         nameLabel.setStyle("-fx-text-fill: White");
+        nameLabel.setId("nameLabel");
 
         // Label Drop Down for Difficulty
         Label diffLabel = new Label("SELECT A DIFFICULTY:");
@@ -40,7 +41,9 @@ public class ConfigScene {
         ComboBox<String> diffComboBox = new ComboBox<>(diffs);
 
         diffLabel.setStyle("-fx-text-fill: White");
+        diffLabel.setId("diffLabel");
         diffComboBox.setStyle("-fx-pref-width: 250;");
+        diffComboBox.setId("diffComboBox");
 
         // Label and Drop Down for Starting Seed
         Label seedLabel = new Label("SELECT A STARTING SEED:");
@@ -51,7 +54,10 @@ public class ConfigScene {
         ComboBox<String> seedComboBox = new ComboBox<>(seeds);
 
         seedLabel.setStyle("-fx-text-fill: White");
+        seedLabel.setId("seedLabel");
         seedComboBox.setStyle("-fx-pref-width: 250;");
+        seedComboBox.setId("seedComboBox");
+
 
         // Label and Drop Down for Starting Season
         Label seasonLabel = new Label("SELECT A STARTING SEASON:");
@@ -63,7 +69,9 @@ public class ConfigScene {
         ComboBox<String> seasonComboBox = new ComboBox<>(seasons);
 
         seasonLabel.setStyle("-fx-text-fill: White");
+        seasonLabel.setId("seasonLabel");
         seasonComboBox.setStyle("-fx-pref-width: 250;");
+        seasonComboBox.setId("seasonComboBox");
 
         buttonContinue.setText("CONTINUE");
 

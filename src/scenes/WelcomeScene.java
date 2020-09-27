@@ -14,6 +14,7 @@ public class WelcomeScene {
     public static Scene getScene() {
         Button button = new Button();
         button.setText("Start game");
+        button.setId("#button");
 
         BorderPane root = new BorderPane(button);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK,
