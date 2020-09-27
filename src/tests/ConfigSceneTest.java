@@ -31,6 +31,12 @@ class ConfigSceneTest {
         stage.toFront();
     }
 
+    /**
+     * Tests that the combo box for selecting Difficulty selection works.
+     *
+     * @author Jayant Tandon
+     * @param robot interacts with the GUI
+     */
     @Test
     void testDiffBox(FxRobot robot) {
         verifyThat("#diffComboBox", ComboBoxMatchers.containsItems("Easy", "Normal", "Hard"));
@@ -38,6 +44,12 @@ class ConfigSceneTest {
         verifyThat("#diffComboBox", ComboBoxMatchers.hasSelectedItem("Easy"));
     }
 
+    /**
+     * Tests that the combo box for selecting Starting Seed selection works.
+     *
+     * @author Jayant Tandon
+     * @param robot interacts with the GUI
+     */
     @Test
     void testSeedBox(FxRobot robot) {
         verifyThat("#seedComboBox",
@@ -46,6 +58,12 @@ class ConfigSceneTest {
         verifyThat("#seedComboBox", ComboBoxMatchers.hasSelectedItem("Corn"));
     }
 
+    /**
+     * Tests that the combo box for selecting Starting Season selection works.
+     *
+     * @author Jayant Tandon
+     * @param robot interacts with the GUI
+     */
     @Test
     void testSeasonBox(FxRobot robot) {
         verifyThat("#seasonComboBox",
@@ -54,6 +72,12 @@ class ConfigSceneTest {
         verifyThat("#seasonComboBox", ComboBoxMatchers.hasSelectedItem("Spring"));
     }
 
+    /**
+     * Tests that the TextField for entering username works.
+     *
+     * @author Jayant Tandon
+     * @param robot interacts with the GUI
+     */
     @Test
     void testTextField(FxRobot robot) {
         robot.clickOn(".text-field");
@@ -79,8 +103,14 @@ class ConfigSceneTest {
         verifyThat("#seasonLabel", isVisible());
     }
 
+    /**
+     * Test that button updates the player's values as selected.
+     *
+     * @author Jayant Tandon
+     * @param robot interacts with the GUI
+     */
     @Test
-    void testButtonEasy(FxRobot robot) {
+    void testButton(FxRobot robot) {
         robot.clickOn(".text-field");
         robot.write("Jayant");
         robot.clickOn("#diffComboBox");
@@ -103,8 +133,8 @@ class ConfigSceneTest {
     /**
      * Checks if the background color is black
      *
-     * @author Leonard Yi Xuen Thong
      * @param robot it interacts with the GUI
+     * @author Leonard Yi Xuen Thong
      */
     @Test
     void checksBgColor(FxRobot robot) {
