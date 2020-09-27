@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Main;
-import org.junit.Assert;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -158,7 +158,7 @@ class ConfigSceneTest {
     @Test
     void checksBgColor(FxRobot robot) {
         VBox vbox = robot.lookup("#rootvbox").query();
-        Assert.assertEquals(new BackgroundFill(Color.BLACK, null, null),
+        assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 vbox.getBackground().getFills().get(0));
     }
 }

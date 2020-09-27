@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import main.Main;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class FarmScene {
@@ -24,7 +25,7 @@ public class FarmScene {
         coins.setTextFill(Color.GOLD);
         coins.setId("coinslabel");
 
-        Image coinsPic = new Image("https://purepng.com/public/uploads/large/purepng.com-gold-coinsflatcoinsroundmetalgold-14215264792852tpbs.png");
+        Image coinsPic = new Image(new FileInputStream("images/coins.png"));
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);

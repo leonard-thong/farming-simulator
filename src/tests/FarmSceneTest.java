@@ -45,7 +45,7 @@ class FarmSceneTest {
      * Checks to see if the farm plot has been created with the appropriate dimensions
      *
      * @author Pranav Thomas
-     * @param robot
+     * @param robot interacts with the GUI
      */
     @Test
     void checksPlot(FxRobot robot) {
@@ -68,7 +68,7 @@ class FarmSceneTest {
      * Checks if the background color of the Farm Scene UI is black
      *
      * @author Hemang Dash
-     * @param robot it interacts with the GUI
+     * @param robot interacts with the GUI
      */
     @Test
     void checksBgColor(FxRobot robot) {

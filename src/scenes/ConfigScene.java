@@ -76,16 +76,23 @@ public class ConfigScene {
         buttonContinue.setText("CONTINUE");
 
         buttonContinue.setOnAction(event -> {
-            Main.getPlayer().setName(nameTextField.getText());
-            Main.getPlayer().setDiff(diffComboBox.getValue());
-            Main.getPlayer().setSeed(seedComboBox.getValue());
-            Main.getPlayer().setSeason(seasonComboBox.getValue());
-            if ("Easy".equals(Main.getPlayer().getDiff())) {
-                Main.getPlayer().setMoney(100);
-            } else if ("Normal".equals(Main.getPlayer().getDiff())) {
-                Main.getPlayer().setMoney(50);
-            } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                Main.getPlayer().setMoney(25);
+            if (nameTextField.getText() != null) {
+                Main.getPlayer().setName(nameTextField.getText());
+            }
+            if (seedComboBox.getValue() != null) {
+                Main.getPlayer().setSeed(seedComboBox.getValue());
+            }
+            if (seedComboBox.getValue() != null) {
+                Main.getPlayer().setSeason(seasonComboBox.getValue());
+            }
+
+            if (diffComboBox.getValue() != null) {
+                Main.getPlayer().setDiff(diffComboBox.getValue());
+                if ("Easy".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(100);
+                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(25);
+                }
             }
 
             // Show next scene
