@@ -28,6 +28,11 @@ class FarmSceneTest {
         stage.toFront();
     }
 
+    /**
+     * Checks to see if the money and day values are being displayed correctly on the screen
+     *
+     * @author Pranav Thomas
+     */
     @Test
     void containsTexts() {
         verifyThat("#coinslabel", hasText(String.valueOf(Main.getPlayer().getMoney())));
@@ -36,6 +41,12 @@ class FarmSceneTest {
         verifyThat("#daytext", isVisible());
     }
 
+    /**
+     * Checks to see if the farm plot has been created with the appropriate dimensions
+     *
+     * @author Pranav Thomas
+     * @param robot
+     */
     @Test
     void checksPlot(FxRobot robot) {
         GridPane grid = robot.lookup("#plotgrid").query();
