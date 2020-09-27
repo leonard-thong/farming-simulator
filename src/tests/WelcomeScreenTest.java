@@ -30,7 +30,7 @@ class WelcomeScreenTest {
     /**
      * Checks if Start Game button exists to see if the game starts
      *
-     * @author Aravind Vengarai
+     * @author Aravind Vengarai S
      * @param robot it interacts with the GUI
      */
     @Test
@@ -38,7 +38,12 @@ class WelcomeScreenTest {
         verifyThat(".button", hasText("Start game"));
         verifyThat(".button", isVisible());
     }
-
+    /**
+     * Checks if Background color is black.
+     *
+     * @author Aravind Vengarai S
+     * @param robot it interacts with the GUI
+     */
     @Test
     void checksBgColor(FxRobot robot) {
         BorderPane borderpane = robot.lookup("#rootborderpane").query();
