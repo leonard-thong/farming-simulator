@@ -3,34 +3,18 @@ package gameobjects.items;
 import javafx.scene.image.Image;
 
 public abstract class Item {
-    private String type;
-    private int sellPrice;
-    private int buyPrice;
+    private final String type;
+    private final double basePrice;
     private Image image;
 
-
-    public int getSellPrice() {
-        return sellPrice;
-    }
-
-    public void setSellPrice(int sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    public int getBuyPrice() {
-        return buyPrice;
-    }
-
-    public void setBuyPrice(int buyPrice) {
-        this.buyPrice = buyPrice;
+    protected Item(String type, double basePrice, Image image) {
+        this.type = type;
+        this.basePrice = basePrice;
+        this.image = image;
     }
 
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Image getImage() {
@@ -39,5 +23,17 @@ public abstract class Item {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public double getBasePrice() {
+        return basePrice;
+    }
+
+    public double getSellPrice(Item item) { //Edit later
+        return item.basePrice;
+    }
+
+    public double getBuyPrice(Item item) {
+        return item.basePrice;
     }
 }
