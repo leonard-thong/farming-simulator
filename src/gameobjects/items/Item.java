@@ -7,7 +7,7 @@ public abstract class Item {
     private final double basePrice;
     private Image image;
 
-    protected Item(String type, double basePrice, Image image) {
+    public Item(String type, double basePrice, Image image) {
         this.type = type;
         this.basePrice = basePrice;
         this.image = image;

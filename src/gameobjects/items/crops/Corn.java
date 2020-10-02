@@ -4,8 +4,13 @@ import javafx.scene.image.Image;
 
 public class Corn extends Crop {
 
-    protected Corn() {
-        super("Corn", 1.3);
+    public Corn() {
+        super("Corn", 1.3, new Image("images/Corn_Stage_1.png"));
+    }
+
+    public Corn(Image image) {
+        super("Corn", 1.3, image);
+
     }
 
     @Override

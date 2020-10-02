@@ -1,12 +1,14 @@
 package gameobjects.items.crops;
 
+import javafx.scene.image.Image;
+
 public class Sunflower extends Crop {
-    protected Sunflower() {
-        super("Sunflower", 1.4);
+    public Sunflower() {
+        super("Sunflower", 1.4, new Image("images/Sunflower_Stage_1.png"));
     }
 
     @Override
     public boolean harvest() {
-        return false;
+        return this.getLifeStage() == 3;
     }
 }

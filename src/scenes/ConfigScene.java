@@ -99,7 +99,7 @@ public class ConfigScene {
 
             // Show next scene
             try {
-                if (nameTextField.getText() == null) {
+                if (!nameTextField.getText().equals("")) {
                     Main.getStage().setScene(FarmScene.getScene());
                 } else {
                     nameAlert.show();
