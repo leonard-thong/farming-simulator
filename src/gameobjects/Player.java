@@ -7,7 +7,7 @@ public class Player {
     private String diff;
     private String seed;
     private String name;
-    private String[] inventory = new String[20];
+    private String[] inventory = new String[25];
 
     public Player() {
         this(1, 50, "Normal", "Spring", "Corn", "Aibek");

@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
+import javafx.stage.Stage;
 import main.Main;
 
 import java.io.FileInputStream;
@@ -84,6 +85,9 @@ public class FarmScene {
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty, farm);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+
+        // market stuff
+
 
         return new Scene(root, 1000, 750, Color.BLACK);
     }

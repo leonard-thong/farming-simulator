@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.Main;
@@ -31,6 +28,11 @@ public class ConfigScene {
 
         nameLabel.setStyle("-fx-text-fill: White");
         nameLabel.setId("nameLabel");
+
+        // Alert for invalid username
+        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+        nameAlert.setHeaderText("Please enter a username to continue");
+        nameAlert.setTitle("Invalid Username");
 
         // Label Drop Down for Difficulty
         Label diffLabel = new Label("SELECT A DIFFICULTY:");
@@ -97,7 +99,11 @@ public class ConfigScene {
 
             // Show next scene
             try {
-                Main.getStage().setScene(FarmScene.getScene());
+                if (nameTextField.getText() == null) {
+                    Main.getStage().setScene(FarmScene.getScene());
+                } else {
+                    nameAlert.show();
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
