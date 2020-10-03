@@ -1,4 +1,15 @@
 package gameobjects.items.tools;
 
-public class Fertilizer {
+import gameobjects.items.crops.Crop;
+import javafx.scene.image.Image;
+
+public class Fertilizer extends Tool {
+    public Fertilizer() {
+        super("Fertilizer", 3, new Image("images/Hoe.png"));
+    }
+
+    @Override
+    public void action(Crop crop) {
+        crop.setLifeStage(0);
+    }
 }

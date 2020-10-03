@@ -3,13 +3,14 @@ package gameobjects.items.tools;
 import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
-public class Hoe extends Tool {
-    public Hoe() {
-        super("Hoe", 3, new Image("images/Hoe.png"));
+public class Pickaxe extends Tool {
+    public Pickaxe() {
+        super("Pickaxe", 3, new Image("images/Pickaxe.png"));
     }
 
     @Override
     public void action(Crop crop) {
+        crop.setLifeStage(0);
         this.setDurability(this.getDurability() - 1);
     }
 }
