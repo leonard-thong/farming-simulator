@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.WelcomeScene">
+<BorderPane style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.WelcomeSceneController">
    <center>
-      <Button mnemonicParsing="false" text="Start Game" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" text="Start Game" BorderPane.alignment="CENTER" onAction="#startGame"/>
    </center>
 </BorderPane>

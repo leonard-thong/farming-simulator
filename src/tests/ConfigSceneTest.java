@@ -1,5 +1,7 @@
 package tests;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
@@ -14,7 +16,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.ComboBoxMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import scenes.ConfigScene;
+import scenes.ConfigSceneController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -26,7 +28,7 @@ class ConfigSceneTest {
 
     @Start
     void onStart(Stage stage) throws Exception {
-        stage.setScene(ConfigScene.getScene());
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/ConfigScene.fxml"))));
         stage.show();
         stage.toFront();
     }
