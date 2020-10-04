@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Main;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -16,7 +15,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.ComboBoxMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import scenes.ConfigSceneController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -28,7 +26,8 @@ class ConfigSceneTest {
 
     @Start
     void onStart(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/ConfigScene.fxml"))));
+        stage.setScene(new Scene(
+                FXMLLoader.load(getClass().getResource("/scenes/ConfigScene.fxml"))));
         stage.show();
         stage.toFront();
     }
@@ -36,8 +35,8 @@ class ConfigSceneTest {
     /**
      * Tests that the combo box for selecting Difficulty selection works.
      *
-     * @author Jayant Tandon
      * @param robot interacts with the GUI
+     * @author Jayant Tandon
      */
     @Test
     void testDiffBox(FxRobot robot) {
@@ -49,8 +48,8 @@ class ConfigSceneTest {
     /**
      * Tests that the combo box for selecting Starting Seed selection works.
      *
-     * @author Jayant Tandon
      * @param robot interacts with the GUI
+     * @author Jayant Tandon
      */
     @Test
     void testSeedBox(FxRobot robot) {
@@ -63,8 +62,8 @@ class ConfigSceneTest {
     /**
      * Tests that the combo box for selecting Starting Season selection works.
      *
-     * @author Jayant Tandon
      * @param robot interacts with the GUI
+     * @author Jayant Tandon
      */
     @Test
     void testSeasonBox(FxRobot robot) {
@@ -77,8 +76,8 @@ class ConfigSceneTest {
     /**
      * Tests that the TextField for entering username works.
      *
-     * @author Jayant Tandon
      * @param robot interacts with the GUI
+     * @author Jayant Tandon
      */
     @Test
     void testTextField(FxRobot robot) {
@@ -108,8 +107,8 @@ class ConfigSceneTest {
     /**
      * Test that button updates the player's values as selected.
      *
-     * @author Jayant Tandon
      * @param robot interacts with the GUI
+     * @author Jayant Tandon
      */
     @Test
     void testButton(FxRobot robot) {
