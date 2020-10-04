@@ -1,5 +1,7 @@
 package gameobjects;
 
+import gameobjects.items.Item;
+
 public class Player {
     private int day;
     private int money;
@@ -7,7 +9,7 @@ public class Player {
     private String diff;
     private String seed;
     private String name;
-    private String[] inventory = new String[25];
+    private Item[] inventory = new Item[25];
 
     public Player() {
         this(1, 50, "Normal", "Spring", "Corn", "Aibek");
@@ -71,11 +73,11 @@ public class Player {
         this.name = name;
     }
 
-    public String[] getInventory() {
+    public Item[] getInventory() {
         return inventory;
     }
 
-    public void setInventory(String[] inventory) {
+    public void setInventory(Item[] inventory) {
         this.inventory = inventory;
     }
 }

@@ -1,5 +1,7 @@
 package tests;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -22,7 +24,7 @@ class WelcomeScreenTest {
 
     @Start
     void onStart(Stage stage) throws Exception {
-        stage.setScene(WelcomeScene.getScene());
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("WelcomeScene.fxml"))));
         stage.show();
         stage.toFront();
     }

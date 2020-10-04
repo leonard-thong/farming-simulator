@@ -1,5 +1,6 @@
 package scenes;
 
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,18 +11,11 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.awt.event.ActionEvent;
+
 public class WelcomeScene {
-    public static Scene getScene() {
-        Button button = new Button();
-        button.setText("Start game");
-        button.setId("#button");
 
-        BorderPane root = new BorderPane(button);
-        root.setId("rootborderpane");
-        root.setBackground(new Background(new BackgroundFill(Color.BLACK,
-                CornerRadii.EMPTY, Insets.EMPTY)));
-
-        button.setOnAction(event -> Main.getStage().setScene(ConfigScene.getScene()));
-        return new Scene(root);
+    @FXML public void startGame(ActionEvent e) {
+        Main.getStage().setScene(ConfigScene.getScene());
     }
 }
