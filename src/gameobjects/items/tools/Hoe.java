@@ -3,9 +3,12 @@ package gameobjects.items.tools;
 import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class Hoe extends Tool {
-    public Hoe() {
-        super("Hoe", 3, new Image("images/Hoe.png"));
+    public Hoe() throws FileNotFoundException {
+        super("Hoe", 3, new Image(new FileInputStream("images/Hoe.png")));
     }
 
     @Override

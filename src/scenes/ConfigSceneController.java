@@ -1,5 +1,8 @@
 package scenes;
 
+import gameobjects.items.crops.Cauliflower;
+import gameobjects.items.crops.Corn;
+import gameobjects.items.crops.Sunflower;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,12 +30,18 @@ public class ConfigSceneController {
     private Label diffLabel;
 
     @FXML
-    public void nextScene(ActionEvent e) {
+    public void nextScene(ActionEvent e) throws FileNotFoundException {
         if (nameTextField.getText() != null) {
             Main.getPlayer().setName(nameTextField.getText());
         }
         if (seedComboBox.getValue() != null) {
-            Main.getPlayer().setSeed(seedComboBox.getValue());
+            if (seedComboBox.getValue().equals("Corn")) {
+                Main.getPlayer().getInventory()[0] = new Corn();
+            } else if (seedComboBox.getValue().equals("Sunflower")) {
+                Main.getPlayer().getInventory()[0] = new Sunflower();
+            } else {
+                Main.getPlayer().getInventory()[0] = new Cauliflower();
+            }
         }
         if (seedComboBox.getValue() != null) {
             Main.getPlayer().setSeason(seasonComboBox.getValue());
