@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 public class Shovel extends Tool {
 
     public Shovel() throws FileNotFoundException {
-        super("Shovel", 2.3, new Image(new FileInputStream("images/Shovel.png")));
+        super("Shovel", 2.3, new Image("images/Shovel.png"));
     }
 
     @Override

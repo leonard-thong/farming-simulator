@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Rake extends Tool {
     public Rake() throws FileNotFoundException {
-        super("Rake", 2.9, new Image(new FileInputStream("images/Rake.png")));
+        super("Rake", 2.9, new Image("images/Rake.png"));
     }
 
     @Override

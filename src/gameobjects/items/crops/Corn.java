@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 public class Corn extends Crop {
 
     public Corn() throws FileNotFoundException {
-        super("Corn", 1.3, new Image(new FileInputStream("pics/Cauliflower_Stage_1.png")));
+        super("Corn", 1.3, new Image("/images/Cauliflower_Stage_1.png"));
     }
 
     public Corn(Image image) {

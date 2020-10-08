@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class WateringCan extends Tool {
     public WateringCan() throws FileNotFoundException {
-        super("WateringCan", 3, new Image(new FileInputStream("images/Watering_Can.png")));
+        super("WateringCan", 3, new Image("/images/Watering_Can.png"));
     }
 
     @Override
