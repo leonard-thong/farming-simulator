@@ -16,8 +16,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
-
+//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
         Scene scene = new Scene(root);
         stage = primaryStage;
         stage.setTitle("FarmSim");

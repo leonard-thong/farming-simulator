@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -8,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.InventoryController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.InventoryController">
     <center>
-        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,39 +27,87 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="inventoryImageView0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="inventoryImageView1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                <ImageView fx:id="inventoryImageView2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                <ImageView fx:id="inventoryImageView3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                <ImageView fx:id="inventoryImageView4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
-                <ImageView fx:id="inventoryImageView5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                <ImageView fx:id="inventoryImageView6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <ImageView fx:id="inventoryImageView7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <ImageView fx:id="inventoryImageView8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <ImageView fx:id="inventoryImageView9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                <ImageView fx:id="inventoryImageView10" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                <ImageView fx:id="inventoryImageView11" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ImageView fx:id="inventoryImageView12" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView13" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView14" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView15" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView16" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView17" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView18" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView19" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                <ImageView fx:id="inventoryImageView20" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
-                <ImageView fx:id="inventoryImageView21" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <ImageView fx:id="inventoryImageView22" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                <ImageView fx:id="inventoryImageView23" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                <ImageView fx:id="inventoryImageView24" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <ImageView fx:id="inventoryImageView0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView1" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView3" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView6" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView8" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView9" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView10" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView11" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView12" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView13" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView14" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView15" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView16" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView17" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView18" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView19" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView20" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView21" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView22" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView23" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
+                <ImageView fx:id="inventoryImageView24" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                    <Image url="@../images/empty_slot.jpg" />
+                </ImageView>
             </children>
         </GridPane>
     </center>
    <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Drop" />
-         </children>
-      </HBox>
+       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" text="Drop" />
+       </HBox>
    </bottom>
 </BorderPane>
