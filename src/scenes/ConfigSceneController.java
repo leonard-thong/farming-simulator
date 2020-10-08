@@ -28,6 +28,8 @@ public class ConfigSceneController {
     private Label nameLabel;
     @FXML
     private Label diffLabel;
+    @FXML
+    private Label seasonLabel;
 
     @FXML
     public void nextScene(ActionEvent e) throws FileNotFoundException {

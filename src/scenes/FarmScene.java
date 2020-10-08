@@ -28,7 +28,7 @@ public class FarmScene {
         coins.setTextFill(Color.GOLD);
         coins.setId("coinslabel");
 
-        Image coinsPic = new Image(new FileInputStream("images/coins.png"));
+        Image coinsPic = new Image("/images/coins.png");
         ImageView coinsPicture = new ImageView(coinsPic);
         coinsPicture.setFitHeight(35);
         coinsPicture.setFitWidth(35);

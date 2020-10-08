@@ -23,7 +23,7 @@ class WelcomeScreenTest {
 
     @Start
     void onStart(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("WelcomeScene.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"))));
         stage.show();
         stage.toFront();
     }
@@ -36,7 +36,7 @@ class WelcomeScreenTest {
      */
     @Test
     void containsButton(FxRobot robot) {
-        verifyThat(".button", hasText("Start game"));
+        verifyThat(".button", hasText("Start Game"));
         verifyThat(".button", isVisible());
     }
     /**

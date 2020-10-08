@@ -122,7 +122,7 @@ class ConfigSceneTest {
         robot.push(KeyCode.DOWN, KeyCode.ENTER);
 
 
-        verifyThat(".button", hasText("CONTINUE"));
+        verifyThat(".button", hasText("Continue"));
         robot.clickOn(".button");
         assertEquals("Jayant", Main.getPlayer().getName());
         assertEquals("Easy", Main.getPlayer().getDiff());

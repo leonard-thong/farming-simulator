@@ -12,7 +12,7 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.ConfigSceneController">
+<VBox fx:id="rootvbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.ConfigSceneController">
    <children>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <columnConstraints>
@@ -29,7 +29,7 @@
             <Label fx:id="nameLabel" text="USERNAME:" textFill="WHITE" />
             <Label fx:id="diffLabel" text="SELECT A DIFFICULTY:" textFill="WHITE" GridPane.rowIndex="1" />
             <Label fx:id="seedLabel" text="SELECT A STARTING SEED:" textFill="WHITE" GridPane.rowIndex="2" />
-            <Label text="SELECT A STARTING SEASON:" textFill="WHITE" GridPane.rowIndex="3" />
+            <Label fx:id="seasonLabel" text="SELECT A STARTING SEASON:" textFill="WHITE" GridPane.rowIndex="3" />
             <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
             <ComboBox fx:id="diffComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" >
                     <items>
