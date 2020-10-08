@@ -1,27 +1,10 @@
 package scenes;
 
 import gameobjects.items.Item;
-<<<<<<< HEAD
-import gameobjects.items.crops.Cauliflower;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-=======
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
->>>>>>> jayant
 import javafx.scene.image.ImageView;
 import main.Main;
-
-<<<<<<< HEAD
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-=======
->>>>>>> jayant
 
 public class InventoryController {
 
