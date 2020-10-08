@@ -1,6 +1,7 @@
 package scenes;
 
 import gameobjects.items.Item;
+<<<<<<< HEAD
 import gameobjects.items.crops.Cauliflower;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,97 +9,107 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+=======
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+>>>>>>> jayant
 import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import main.Main;
 
+<<<<<<< HEAD
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> jayant
 
-public class InventoryController extends Application {
-    public ImageView inventoryImageView0;
-    public ImageView inventoryImageView1;
-    public ImageView inventoryImageView2;
-    public ImageView inventoryImageView3;
-    public ImageView inventoryImageView4;
-    public ImageView inventoryImageView5;
-    public ImageView inventoryImageView6;
-    public ImageView inventoryImageView7;
-    public ImageView inventoryImageView8;
-    public ImageView inventoryImageView9;
-    public ImageView inventoryImageView10;
-    public ImageView inventoryImageView11;
-    public ImageView inventoryImageView12;
-    public ImageView inventoryImageView13;
-    public ImageView inventoryImageView14;
-    public ImageView inventoryImageView15;
-    public ImageView inventoryImageView16;
-    public ImageView inventoryImageView17;
-    public ImageView inventoryImageView18;
-    public ImageView inventoryImageView19;
-    public ImageView inventoryImageView20;
-    public ImageView inventoryImageView21;
-    public ImageView inventoryImageView22;
-    public ImageView inventoryImageView23;
-    public ImageView inventoryImageView24;
-    List<ImageView> images = new ArrayList<>();
+public class InventoryController {
 
+    @FXML
+    private ImageView inventoryImageView0;
+    @FXML
+    private ImageView inventoryImageView1;
+    @FXML
+    private ImageView inventoryImageView2;
+    @FXML
+    private ImageView inventoryImageView3;
+    @FXML
+    private ImageView inventoryImageView4;
+    @FXML
+    private ImageView inventoryImageView5;
+    @FXML
+    private ImageView inventoryImageView6;
+    @FXML
+    private ImageView inventoryImageView7;
+    @FXML
+    private ImageView inventoryImageView8;
+    @FXML
+    private ImageView inventoryImageView9;
+    @FXML
+    private ImageView inventoryImageView10;
+    @FXML
+    private ImageView inventoryImageView11;
+    @FXML
+    private ImageView inventoryImageView12;
+    @FXML
+    private ImageView inventoryImageView13;
+    @FXML
+    private ImageView inventoryImageView14;
+    @FXML
+    private ImageView inventoryImageView15;
+    @FXML
+    private ImageView inventoryImageView16;
+    @FXML
+    private ImageView inventoryImageView17;
+    @FXML
+    private ImageView inventoryImageView18;
+    @FXML
+    private ImageView inventoryImageView19;
+    @FXML
+    private ImageView inventoryImageView20;
+    @FXML
+    private ImageView inventoryImageView21;
+    @FXML
+    private ImageView inventoryImageView22;
+    @FXML
+    private ImageView inventoryImageView23;
+    @FXML
+    private ImageView inventoryImageView24;
 
-    public Item[] inventory = Main.getPlayer().getInventory();
+    @FXML
+    private Button dropButton;
 
-    @Override
-    public void start(Stage inventoryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
+    private Item[] inventory = Main.getPlayer().getInventory();
 
-        Scene scene = new Scene(root);
-        Stage stage = inventoryStage;
-        stage.setTitle("Inventory");
-        stage.setScene(scene);
+    @FXML
+    void drop() {
+    }
 
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-
-        stage.show();
-
-        images.add(inventoryImageView0);
-        images.add(inventoryImageView1);
-        images.add(inventoryImageView2);
-        images.add(inventoryImageView3);
-        images.add(inventoryImageView4);
-        images.add(inventoryImageView5);
-        images.add(inventoryImageView6);
-        images.add(inventoryImageView7);
-        images.add(inventoryImageView8);
-        images.add(inventoryImageView9);
-        images.add(inventoryImageView10);
-        images.add(inventoryImageView11);
-        images.add(inventoryImageView12);
-        images.add(inventoryImageView13);
-        images.add(inventoryImageView14);
-        images.add(inventoryImageView15);
-        images.add(inventoryImageView16);
-        images.add(inventoryImageView17);
-        images.add(inventoryImageView18);
-        images.add(inventoryImageView19);
-        images.add(inventoryImageView20);
-        images.add(inventoryImageView21);
-        images.add(inventoryImageView22);
-        images.add(inventoryImageView23);
-        images.add(inventoryImageView24);
-
-        for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i] == null) {
-                continue;
-            }
-            System.out.println(inventory[i].getBasePrice());
-            ImageView image = new ImageView(inventory[i].getImage());
-            images.set(i, image);
-        }
+    public void setImages() {
+        inventoryImageView0.setImage(inventory[0].getImage());
+        inventoryImageView1.setImage(inventory[1].getImage());
+        inventoryImageView2.setImage(inventory[2].getImage());
+        inventoryImageView3.setImage(inventory[3].getImage());
+        inventoryImageView4.setImage(inventory[4].getImage());
+        inventoryImageView5.setImage(inventory[5].getImage());
+        inventoryImageView6.setImage(inventory[6].getImage());
+        inventoryImageView7.setImage(inventory[7].getImage());
+        inventoryImageView8.setImage(inventory[8].getImage());
+        inventoryImageView9.setImage(inventory[9].getImage());
+        inventoryImageView10.setImage(inventory[10].getImage());
+        inventoryImageView11.setImage(inventory[11].getImage());
+        inventoryImageView12.setImage(inventory[12].getImage());
+        inventoryImageView13.setImage(inventory[13].getImage());
+        inventoryImageView14.setImage(inventory[14].getImage());
+        inventoryImageView15.setImage(inventory[15].getImage());
+        inventoryImageView16.setImage(inventory[16].getImage());
+        inventoryImageView17.setImage(inventory[17].getImage());
+        inventoryImageView18.setImage(inventory[18].getImage());
+        inventoryImageView19.setImage(inventory[19].getImage());
+        inventoryImageView20.setImage(inventory[20].getImage());
+        inventoryImageView21.setImage(inventory[21].getImage());
+        inventoryImageView22.setImage(inventory[22].getImage());
+        inventoryImageView23.setImage(inventory[23].getImage());
+        inventoryImageView24.setImage(inventory[24].getImage());
     }
 }

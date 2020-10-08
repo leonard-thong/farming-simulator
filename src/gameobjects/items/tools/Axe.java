@@ -3,9 +3,12 @@ package gameobjects.items.tools;
 import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class Axe extends Tool {
-    public Axe() {
-        super("Axe", 3, new Image("images/Axe.png"));
+    public Axe() throws FileNotFoundException {
+        super("Axe", 3, new Image(new FileInputStream("/images/Axe.png")));
     }
 
     @Override

@@ -3,9 +3,12 @@ package gameobjects.items.tools;
 import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class Pickaxe extends Tool {
-    public Pickaxe() {
-        super("Pickaxe", 3, new Image("images/Pickaxe.png"));
+    public Pickaxe() throws FileNotFoundException {
+        super("Pickaxe", 3, new Image(new FileInputStream("images/Pickaxe.png")));
     }
 
     @Override
