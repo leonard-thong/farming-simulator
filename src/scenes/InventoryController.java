@@ -1,13 +1,16 @@
 package scenes;
 
 import gameobjects.items.Item;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.Main;
 
-public class InventoryController {
 
+public class InventoryController {
     @FXML
     private ImageView inventoryImageView0;
     @FXML
@@ -61,11 +64,32 @@ public class InventoryController {
 
     @FXML
     private Button dropButton;
-
     private Item[] inventory = Main.getPlayer().getInventory();
+    private String selectedID = "";
+    private int selectedItem = -1;
 
     @FXML
-    void drop() {
+    private void item(MouseEvent e) {
+        ImageView img = (ImageView) e.getSource();
+        selectedID = img.getId();
+    }
+
+    @FXML
+    public void drop(ActionEvent e) {
+        if (selectedID == "") {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No item selected!");
+            alert.show();
+        } else {
+            selectedItem = Integer.parseInt(selectedID.substring(18));
+            Item[] inventory = Main.getPlayer().getInventory();
+            inventory[selectedItem] = null;
+
+            Main.getPlayer().setInventory(inventory);
+
+            selectedID = "";
+            selectedItem = -1;
+        }
     }
 
     public void setImages() {

@@ -27,79 +27,79 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="inventoryImageView0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
+                <ImageView fx:id="inventoryImageView0" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView1" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1">
+                <ImageView fx:id="inventoryImageView1" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2">
+                <ImageView fx:id="inventoryImageView2" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView3" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3">
+                <ImageView fx:id="inventoryImageView3" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4">
+                <ImageView fx:id="inventoryImageView4" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="1">
+                <ImageView fx:id="inventoryImageView5" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView6" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fx:id="inventoryImageView6" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fx:id="inventoryImageView7" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView8" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ImageView fx:id="inventoryImageView8" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView9" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                <ImageView fx:id="inventoryImageView9" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView10" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="2">
+                <ImageView fx:id="inventoryImageView10" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView11" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ImageView fx:id="inventoryImageView11" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView12" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <ImageView fx:id="inventoryImageView12" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView13" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                <ImageView fx:id="inventoryImageView13" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView14" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                <ImageView fx:id="inventoryImageView14" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView15" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="3">
+                <ImageView fx:id="inventoryImageView15" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView16" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ImageView fx:id="inventoryImageView16" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView17" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <ImageView fx:id="inventoryImageView17" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView18" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <ImageView fx:id="inventoryImageView18" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView19" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                <ImageView fx:id="inventoryImageView19" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView20" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="4">
+                <ImageView fx:id="inventoryImageView20" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView21" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ImageView fx:id="inventoryImageView21" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView22" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <ImageView fx:id="inventoryImageView22" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView23" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                <ImageView fx:id="inventoryImageView23" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="inventoryImageView24" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                <ImageView fx:id="inventoryImageView24" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
             </children>
@@ -107,7 +107,7 @@
     </center>
    <bottom>
        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" text="Drop" />
+           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" onMouseClicked="#drop" text="Drop" />
        </HBox>
    </bottom>
 </BorderPane>
