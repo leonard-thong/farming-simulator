@@ -6,8 +6,9 @@ import javafx.scene.image.Image;
 public abstract class Crop extends Item {
     private int lifeStage; // 0 -> Stage1, 1 -> Stage2, 2 -> Stage3, 3 -> Harvest
 
-    public Crop(String type, double basePrice, Image image) {
+    public Crop(int lifeStage, String type, double basePrice, Image image) {
         super(type, basePrice, image);
+        this.lifeStage = lifeStage;
     }
 
     public abstract boolean harvest();

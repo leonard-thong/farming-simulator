@@ -1,5 +1,6 @@
 package tests;
 
+import javafx.scene.Node;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -12,6 +13,9 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import scenes.FarmScene;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -75,5 +79,18 @@ class FarmSceneTest {
         VBox vbox = robot.lookup("#rootvbox").query();
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 vbox.getBackground().getFills().get(0));
+    }
+
+    @Test
+    void checksCrops(FxRobot robot) {
+        GridPane grid = robot.lookup("#plotgrid").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                chk = true;
+                break;
+            }
+        }
+        assertEquals(true, chk);
     }
 }
