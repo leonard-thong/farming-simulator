@@ -1,5 +1,6 @@
 package scenes;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,9 +17,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import main.Main;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class FarmScene {
@@ -92,5 +93,13 @@ public class FarmScene {
 
 
         return new Scene(root, 1000, 750, Color.BLACK);
+    }
+
+    public void openMarket() throws Exception {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
+        MarketController mc = new MarketController();
+        mc.initialize(Main.getPlayer().getDiff());
+        stage.show();
     }
 }
