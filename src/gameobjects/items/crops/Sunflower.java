@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 public class Sunflower extends Crop {
     public Sunflower() throws FileNotFoundException {
-        super("Sunflower", 1.4, new Image(new FileInputStream("images/Sunflower_Stage_1.png")));
+        super("Sunflower", 1.4, new Image("/images/Sunflower_Stage_1.png"));
     }
 
     @Override

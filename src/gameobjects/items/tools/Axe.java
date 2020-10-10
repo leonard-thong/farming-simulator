@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Axe extends Tool {
     public Axe() throws FileNotFoundException {
-        super("Axe", 3, new Image(new FileInputStream("/images/Axe.png")));
+        super("Axe", 3, new Image("/images/Axe.png"));
     }
 
     @Override

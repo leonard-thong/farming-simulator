@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Pickaxe extends Tool {
     public Pickaxe() throws FileNotFoundException {
-        super("Pickaxe", 3, new Image(new FileInputStream("images/Pickaxe.png")));
+        super("Pickaxe", 3, new Image("/images/Pickaxe.png"));
     }
 
     @Override

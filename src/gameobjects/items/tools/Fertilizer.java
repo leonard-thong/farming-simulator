@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Fertilizer extends Tool {
     public Fertilizer() throws FileNotFoundException {
-        super("Fertilizer", 3, new Image(new FileInputStream("images/Hoe.png")));
+        super("Fertilizer", 3, new Image("/images/Hoe.png"));
     }
 
     @Override

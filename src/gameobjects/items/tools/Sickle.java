@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Sickle extends Tool {
     public Sickle() throws FileNotFoundException {
-        super("Sickle", 3, new Image(new FileInputStream("images/Sickle.png")));
+        super("Sickle", 3, new Image("images/Sickle.png"));
     }
 
     @Override
