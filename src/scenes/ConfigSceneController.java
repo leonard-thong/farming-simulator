@@ -38,11 +38,11 @@ public class ConfigSceneController {
         }
         if (seedComboBox.getValue() != null) {
             if (seedComboBox.getValue().equals("Corn")) {
-                Main.getPlayer().getInventory()[0] = new Corn();
+                Main.getPlayer().getInventory().set(0, new Corn());
             } else if (seedComboBox.getValue().equals("Sunflower")) {
-                Main.getPlayer().getInventory()[0] = new Sunflower();
+                Main.getPlayer().getInventory().set(0, new Sunflower());
             } else {
-                Main.getPlayer().getInventory()[0] = new Cauliflower();
+                Main.getPlayer().getInventory().set(0, new Cauliflower());
             }
         }
         if (seedComboBox.getValue() != null) {

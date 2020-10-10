@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -10,10 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.lang.String?>
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.MarketController">
+<BorderPane style="-fx-background-color: BLACK" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.MarketController">
     <center>
-        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: WHITE" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,75 +30,75 @@
             </rowConstraints>
             <children>
                 <ImageView fx:id="marketImageView0" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true">
+                    <Image url="@../images/Cauliflower_Stage_1.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView1" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1">
+                    <Image url="@../images/Corn_Stage_1.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView2" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2">
+                    <Image url="@../images/Sunflower_Harvest.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView3" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3">
+                    <Image url="@../images/Shovel.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView4" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4">
+                    <Image url="@../images/Axe.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView5" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="1">
+                    <Image url="@../images/Sickle.png" />
+                </ImageView>
+                <ImageView fx:id="marketImageView6" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView1" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1">
+                <ImageView fx:id="marketImageView7" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2">
+                <ImageView fx:id="marketImageView8" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView3" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3">
+                <ImageView fx:id="marketImageView9" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4">
+                <ImageView fx:id="marketImageView10" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="1">
+                <ImageView fx:id="marketImageView11" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView6" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fx:id="marketImageView12" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fx:id="marketImageView13" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView8" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ImageView fx:id="marketImageView14" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView9" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                <ImageView fx:id="marketImageView15" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView10" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="2">
+                <ImageView fx:id="marketImageView16" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView11" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView12" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView13" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView14" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView15" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="3">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView16" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <Image url="@../images/empty_slot.jpg" />
-                </ImageView>
-                <ImageView fx:id="marketImageView17" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <ImageView fx:id="marketImageView17" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
                 <ImageView fx:id="marketImageView18" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView19" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                <ImageView fx:id="marketImageView19" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView20" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.rowIndex="4">
+                <ImageView fx:id="marketImageView20" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView21" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ImageView fx:id="marketImageView21" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView22" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <ImageView fx:id="marketImageView22" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
-                <ImageView fx:id="marketImageView23" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                <ImageView fx:id="marketImageView23" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                     <Image url="@../images/empty_slot.jpg" />
                 </ImageView>
                 <ImageView fx:id="marketImageView24" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#item" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -109,11 +109,12 @@
     </center>
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buy" text="Buy"/>
-            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sell" text="Sell"/>
+            <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buy" text="Buy" />
+            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sell" text="Sell" />
             <ListView fx:id="inventoryList" prefHeight="200.0" prefWidth="200.0">
-                <String fx:value="Main.getPlayer().getInventory[0]"/>
+                <String fx:value="Main.getPlayer().getInventory[0]" />
             </ListView>
+         <Button fx:id="backButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#goBack" text="Back" />
         </HBox>
     </bottom>
 </BorderPane>

@@ -127,7 +127,7 @@ class ConfigSceneTest {
         assertEquals("Jayant", Main.getPlayer().getName());
         assertEquals("Easy", Main.getPlayer().getDiff());
         assertEquals(100, Main.getPlayer().getMoney());
-        assertEquals("Corn", Main.getPlayer().getInventory()[0].getType());
+        assertEquals("Corn", Main.getPlayer().getInventory().get(0).getType());
         assertEquals("Spring", Main.getPlayer().getSeason());
     }
 

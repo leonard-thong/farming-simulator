@@ -164,7 +164,7 @@ public class FarmScene {
         buttons.getChildren().addAll(btnInventory, btnMarket);
         StackPane.setAlignment(btnInventory, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(btnMarket, Pos.BOTTOM_RIGHT);
-        buttons.setPadding(new Insets(5));
+//        buttons.setPadding(new Insets(5));
 
         VBox root = new VBox();
         root.setId("rootvbox");
