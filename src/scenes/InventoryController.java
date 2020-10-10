@@ -89,6 +89,8 @@ public class InventoryController {
 
             selectedID = "";
             selectedItem = -1;
+
+            this.setImages();
         }
     }
 
