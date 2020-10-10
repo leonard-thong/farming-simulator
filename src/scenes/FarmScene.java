@@ -4,6 +4,7 @@ import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
 import gameobjects.items.crops.Crop;
 import gameobjects.items.crops.Sunflower;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,12 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import main.Main;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import java.io.FileNotFoundException;
 
 public class FarmScene {
@@ -115,7 +116,7 @@ public class FarmScene {
                     (cropImages[++tracker] != null && arr.get(i * 5 + 2)) ? cropImages[tracker] : new Label(),
                     (cropImages[++tracker] != null && arr.get(i * 5 + 3)) ? cropImages[tracker] : new Label(),
                     (cropImages[++tracker] != null && arr.get(i * 5 + 4)) ? cropImages[tracker] : new Label()
-                    );
+            );
         }
         plot.setAlignment(Pos.CENTER);
         for (Node cell : plot.getChildren()) {
@@ -141,24 +142,46 @@ public class FarmScene {
         farm.getChildren().addAll(plot);
         StackPane.setAlignment(plot, Pos.CENTER);
 
-        Label empty = new Label();
-        empty.setPrefSize(1000, 70);
+        Label empty1 = new Label();
+        empty1.setPrefSize(1000, 70);
+
+        Label empty2 = new Label();
+        empty2.setPrefSize(1000, 345);
+
+        Button btnInventory = new Button();
+        btnInventory.setText("Inventory");
+        btnInventory.setOnAction(event -> {
+            System.out.println("Inventory");
+        });
+
+        Button btnMarket = new Button();
+        btnMarket.setText("Market");
+        btnMarket.setOnAction(event -> {
+            System.out.println("Market");
+        });
+
+        StackPane buttons = new StackPane();
+        buttons.getChildren().addAll(btnInventory, btnMarket);
+        StackPane.setAlignment(btnInventory, Pos.BOTTOM_LEFT);
+        StackPane.setAlignment(btnMarket, Pos.BOTTOM_RIGHT);
+        buttons.setPadding(new Insets(5));
 
         VBox root = new VBox();
         root.setId("rootvbox");
-        root.getChildren().addAll(info, empty, farm);
+        root.getChildren().addAll(info, empty1, farm, empty2, buttons);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         // market stuff
 
 
-
         return new Scene(root, 1000, 750, Color.BLACK);
     }
-//    public void openMarket() throws Exception{
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
-//        MarketController.initialize(Main.getPlayer().getDiff());
-//        stage.show();
-//    }
+
+    public void openMarket() throws Exception {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
+        MarketController mc = new MarketController();
+        //mc.initialize(Main.getPlayer().getDiff());
+        stage.show();
+    }
 }
