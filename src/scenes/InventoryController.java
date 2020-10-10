@@ -4,7 +4,6 @@ import gameobjects.items.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import main.Main;
@@ -63,7 +62,6 @@ public class InventoryController {
     private ImageView inventoryImageView24;
 
     @FXML
-    private Button dropButton;
     private Item[] inventory = Main.getPlayer().getInventory();
     private String selectedID = "";
     private int selectedItem = -1;
