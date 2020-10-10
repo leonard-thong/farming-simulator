@@ -2,15 +2,10 @@ package scenes;
 
 import gameobjects.items.Item;
 import gameobjects.items.crops.Cauliflower;
-import gameobjects.items.crops.Corn;
-import gameobjects.items.crops.Sunflower;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import main.Main;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class MarketController {
@@ -69,27 +64,7 @@ public class MarketController {
     @FXML
     private Button dropButton;
 
-    private static Map<Integer, Item[]> market = new HashMap<>();
-
-    public static void initialize(String diff) {
-        int originalNum = 0;
-        if (diff.equals("easy")) {
-            originalNum = 6;
-        } else if (diff.equals("normal")) {
-            originalNum = 4;
-        } else {
-            originalNum = 2;
-        }
-        market.put(0, new Cauliflower[originalNum]);
-        market.put(1, new Cauliflower[originalNum]);
-        market.put(2, new Corn[originalNum]);
-        market.put(3, new Corn[originalNum]);
-        market.put(4, new Sunflower[originalNum]);
-        market.put(5, new Sunflower[originalNum]);
-
-
-    }
-
+    private Item[] market = new Item[25];
     @FXML
     void buy() {
     }
@@ -100,7 +75,7 @@ public class MarketController {
     }
 
     public void setImages() {
-        marketImageView0.setImage(market.get(0).getImage());
+        marketImageView0.setImage(market[0].getImage());
         marketImageView1.setImage(market[1].getImage());
         marketImageView2.setImage(market[2].getImage());
         marketImageView3.setImage(market[3].getImage());
