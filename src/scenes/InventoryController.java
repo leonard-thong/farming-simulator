@@ -4,8 +4,10 @@ import gameobjects.items.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import main.Main;
 
 
@@ -68,7 +70,9 @@ public class InventoryController {
 
     @FXML
     private void item(MouseEvent e) {
+        this.clearEffect();
         ImageView img = (ImageView) e.getSource();
+        img.setEffect(new DropShadow(20, Color.BLACK));
         selectedID = img.getId();
     }
 
@@ -118,5 +122,33 @@ public class InventoryController {
         inventoryImageView22.setImage(inventory[22].getImage());
         inventoryImageView23.setImage(inventory[23].getImage());
         inventoryImageView24.setImage(inventory[24].getImage());
+    }
+
+    private void clearEffect() {
+        inventoryImageView0.setEffect(null);
+        inventoryImageView1.setEffect(null);
+        inventoryImageView2.setEffect(null);
+        inventoryImageView3.setEffect(null);
+        inventoryImageView4.setEffect(null);
+        inventoryImageView5.setEffect(null);
+        inventoryImageView6.setEffect(null);
+        inventoryImageView7.setEffect(null);
+        inventoryImageView8.setEffect(null);
+        inventoryImageView9.setEffect(null);
+        inventoryImageView10.setEffect(null);
+        inventoryImageView11.setEffect(null);
+        inventoryImageView12.setEffect(null);
+        inventoryImageView13.setEffect(null);
+        inventoryImageView14.setEffect(null);
+        inventoryImageView15.setEffect(null);
+        inventoryImageView16.setEffect(null);
+        inventoryImageView17.setEffect(null);
+        inventoryImageView18.setEffect(null);
+        inventoryImageView19.setEffect(null);
+        inventoryImageView20.setEffect(null);
+        inventoryImageView21.setEffect(null);
+        inventoryImageView22.setEffect(null);
+        inventoryImageView23.setEffect(null);
+        inventoryImageView24.setEffect(null);
     }
 }
