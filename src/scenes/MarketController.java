@@ -4,17 +4,29 @@ import gameobjects.items.Item;
 import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
 import gameobjects.items.crops.Sunflower;
+import gameobjects.items.tools.Axe;
+import gameobjects.items.tools.Shovel;
+import gameobjects.items.tools.Sickle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
 import main.Main;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 
 public class MarketController {
 
+    private static Map<Integer, LinkedList<Item>> market = new HashMap<>();
     @FXML
     private ImageView marketImageView0;
     @FXML
@@ -65,65 +77,104 @@ public class MarketController {
     private ImageView marketImageView23;
     @FXML
     private ImageView marketImageView24;
+    @FXML
+    private Button buyButton;
+    @FXML
+    private Button sellButton;
+    @FXML
+    private ListView<String> inventoryList;
+    private Pair<ImageView, Integer> selected = null;
 
     @FXML
-    private Button dropButton;
+    private void item(MouseEvent e) {
+        ((ImageView) e.getSource()).setImage(new Image("/images/empty_slot.jpg"));
+        this.selected = new Pair<>((ImageView) e.getSource(), Integer.parseInt(((ImageView) e.getSource()).getId().substring(15)));
+    }
 
-    private static Map<Integer, Item[]> market = new HashMap<>();
+    public void initialize(String diff) throws FileNotFoundException {
+        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
+        for (Item i : Main.getPlayer().getInventory()
+        ) {
+            if (i != null) {
+                inventoryItems.add("i.getType()");
+            }
+        }
+        inventoryItems.add("i.getType()");
+        inventoryList.setItems(inventoryItems);
 
-    public static void initialize(String diff) {
-        int originalNum = 0;
-        if (diff.equals("easy")) {
+        int originalNum;
+        if (diff.equals("Easy")) {
             originalNum = 6;
-        } else if (diff.equals("normal")) {
+        } else if (diff.equals("Normal")) {
             originalNum = 4;
         } else {
             originalNum = 2;
         }
-        market.put(0, new Cauliflower[originalNum]);
-        market.put(1, new Cauliflower[originalNum]);
-        market.put(2, new Corn[originalNum]);
-        market.put(3, new Corn[originalNum]);
-        market.put(4, new Sunflower[originalNum]);
-        market.put(5, new Sunflower[originalNum]);
-
-
+        market.put(0, new LinkedList<>());
+        market.get(0).addAll(Arrays.asList(new Cauliflower[originalNum]));
+        market.put(1, new LinkedList<>());
+        market.get(1).addAll(Arrays.asList(new Corn[originalNum]));
+        market.put(2, new LinkedList<>());
+        market.get(2).addAll(Arrays.asList(new Sunflower[originalNum]));
+        market.put(3, new LinkedList<>());
+        market.get(3).addAll(Arrays.asList(new Shovel[originalNum]));
+        market.put(4, new LinkedList<>());
+        market.get(4).addAll(Arrays.asList(new Axe[originalNum]));
+        market.put(5, new LinkedList<>());
+        market.get(5).addAll(Arrays.asList(new Sickle[originalNum]));
+        System.out.println(market.get(0).get(0));
     }
 
     @FXML
-    void buy() {
+    void buy(ActionEvent e) {
+        if (selected.getKey().getImage().equals(new Image("images/empty_slot.jpg"))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No item selected!");
+            alert.show();
+        }
+        int price = (int) Objects.requireNonNull(market.get(selected.getValue()).peek()).getBasePrice() * 10;
+        int money = Main.getPlayer().getMoney();
+        if (money < price) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Not enough money!");
+            alert.show();
+        } else {
+            Main.getPlayer().setMoney(money - price);
+            market.get(selected.getValue()).peek();
+            // change value of farm scene's money data
+        }
     }
 
     @FXML
-    void sell(){
+    void sell(ActionEvent e) {
 
     }
 
     public void setImages() {
-        marketImageView0.setImage(market.get(0).getImage());
-        marketImageView1.setImage(market[1].getImage());
-        marketImageView2.setImage(market[2].getImage());
-        marketImageView3.setImage(market[3].getImage());
-        marketImageView4.setImage(market[4].getImage());
-        marketImageView5.setImage(market[5].getImage());
-        marketImageView6.setImage(market[6].getImage());
-        marketImageView7.setImage(market[7].getImage());
-        marketImageView8.setImage(market[8].getImage());
-        marketImageView9.setImage(market[9].getImage());
-        marketImageView10.setImage(market[10].getImage());
-        marketImageView11.setImage(market[11].getImage());
-        marketImageView12.setImage(market[12].getImage());
-        marketImageView13.setImage(market[13].getImage());
-        marketImageView14.setImage(market[14].getImage());
-        marketImageView15.setImage(market[15].getImage());
-        marketImageView16.setImage(market[16].getImage());
-        marketImageView17.setImage(market[17].getImage());
-        marketImageView18.setImage(market[18].getImage());
-        marketImageView19.setImage(market[19].getImage());
-        marketImageView20.setImage(market[20].getImage());
-        marketImageView21.setImage(market[21].getImage());
-        marketImageView22.setImage(market[22].getImage());
-        marketImageView23.setImage(market[23].getImage());
-        marketImageView24.setImage(market[24].getImage());
+        marketImageView0.setImage(market.get(0).peek().getImage()); //add getOrEmpty(item) method to item
+        marketImageView1.setImage(market.get(1).peek().getImage());
+        marketImageView2.setImage(market.get(2).peek().getImage());
+        marketImageView3.setImage(market.get(3).peek().getImage());
+        marketImageView4.setImage(market.get(4).peek().getImage());
+        marketImageView5.setImage(market.get(5).peek().getImage());
+        marketImageView6.setImage(market.get(6).peek().getImage());
+        marketImageView7.setImage(market.get(7).peek().getImage());
+        marketImageView8.setImage(market.get(8).peek().getImage());
+        marketImageView9.setImage(market.get(9).peek().getImage());
+        marketImageView10.setImage(market.get(10).peek().getImage());
+        marketImageView11.setImage(market.get(11).peek().getImage());
+        marketImageView12.setImage(market.get(12).peek().getImage());
+        marketImageView13.setImage(market.get(13).peek().getImage());
+        marketImageView14.setImage(market.get(14).peek().getImage());
+        marketImageView15.setImage(market.get(15).peek().getImage());
+        marketImageView16.setImage(market.get(16).peek().getImage());
+        marketImageView17.setImage(market.get(17).peek().getImage());
+        marketImageView18.setImage(market.get(18).peek().getImage());
+        marketImageView19.setImage(market.get(19).peek().getImage());
+        marketImageView20.setImage(market.get(20).peek().getImage());
+        marketImageView21.setImage(market.get(21).peek().getImage());
+        marketImageView22.setImage(market.get(22).peek().getImage());
+        marketImageView23.setImage(market.get(23).peek().getImage());
+        marketImageView24.setImage(market.get(24).peek().getImage());
     }
 }

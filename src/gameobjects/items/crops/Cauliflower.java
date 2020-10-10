@@ -2,11 +2,9 @@ package gameobjects.items.crops;
 
 import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class Cauliflower extends Crop {
-    public Cauliflower() throws FileNotFoundException {
+    public Cauliflower() {
         super("Cauliflower", 1.5, new Image("/images/Cauliflower_Stage_1.png"));
     }
 

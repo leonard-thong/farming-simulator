@@ -3,7 +3,6 @@ package gameobjects.items.tools;
 import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class Pickaxe extends Tool {

@@ -8,16 +8,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import scenes.MarketController;
 
 
 public class Main extends Application {
     private static Stage stage = new Stage();
     private static Player player = new Player();
 
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"));
+        MarketController mc = new MarketController();
+        mc.initialize("Easy");
+
         Scene scene = new Scene(root);
         stage = primaryStage;
         stage.setTitle("FarmSim");
@@ -31,18 +48,6 @@ public class Main extends Application {
         stage.setHeight(bounds.getHeight());
 
         stage.show();
-    }
-    
-    public static Stage getStage() {
-        return stage;
-    }
-
-    public static Player getPlayer() {
-        return player;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

@@ -1,7 +1,6 @@
 package gameobjects;
 
 import gameobjects.items.Item;
-import gameobjects.items.crops.Cauliflower;
 
 public class Player {
     private int day;

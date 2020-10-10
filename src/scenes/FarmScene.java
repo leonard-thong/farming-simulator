@@ -20,7 +20,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import main.Main;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class FarmScene {
@@ -93,13 +92,14 @@ public class FarmScene {
         // market stuff
 
 
-
         return new Scene(root, 1000, 750, Color.BLACK);
     }
-    public void openMarket() throws Exception{
+
+    public void openMarket() throws Exception {
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
-        MarketController.initialize(Main.getPlayer().getDiff());
+        MarketController mc = new MarketController();
+        mc.initialize(Main.getPlayer().getDiff());
         stage.show();
     }
 }
