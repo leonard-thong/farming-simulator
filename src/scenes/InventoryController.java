@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.util.ArrayList;
+
 
 public class InventoryController {
     @FXML
@@ -64,7 +66,7 @@ public class InventoryController {
     private ImageView inventoryImageView24;
 
     @FXML
-    private Item[] inventory = Main.getPlayer().getInventory();
+    private ArrayList<Item> inventory = Main.getPlayer().getInventory();
     private String selectedID = "";
     private int selectedItem = -1;
 
@@ -84,8 +86,8 @@ public class InventoryController {
             alert.show();
         } else {
             selectedItem = Integer.parseInt(selectedID.substring(18));
-            Item[] inventory = Main.getPlayer().getInventory();
-            inventory[selectedItem] = null;
+            ArrayList<Item> inventory = Main.getPlayer().getInventory();
+            inventory.set(selectedItem, null);
 
             Main.getPlayer().setInventory(inventory);
 
@@ -97,31 +99,31 @@ public class InventoryController {
     }
 
     public void setImages() {
-        inventoryImageView0.setImage(inventory[0].getImage());
-        inventoryImageView1.setImage(inventory[1].getImage());
-        inventoryImageView2.setImage(inventory[2].getImage());
-        inventoryImageView3.setImage(inventory[3].getImage());
-        inventoryImageView4.setImage(inventory[4].getImage());
-        inventoryImageView5.setImage(inventory[5].getImage());
-        inventoryImageView6.setImage(inventory[6].getImage());
-        inventoryImageView7.setImage(inventory[7].getImage());
-        inventoryImageView8.setImage(inventory[8].getImage());
-        inventoryImageView9.setImage(inventory[9].getImage());
-        inventoryImageView10.setImage(inventory[10].getImage());
-        inventoryImageView11.setImage(inventory[11].getImage());
-        inventoryImageView12.setImage(inventory[12].getImage());
-        inventoryImageView13.setImage(inventory[13].getImage());
-        inventoryImageView14.setImage(inventory[14].getImage());
-        inventoryImageView15.setImage(inventory[15].getImage());
-        inventoryImageView16.setImage(inventory[16].getImage());
-        inventoryImageView17.setImage(inventory[17].getImage());
-        inventoryImageView18.setImage(inventory[18].getImage());
-        inventoryImageView19.setImage(inventory[19].getImage());
-        inventoryImageView20.setImage(inventory[20].getImage());
-        inventoryImageView21.setImage(inventory[21].getImage());
-        inventoryImageView22.setImage(inventory[22].getImage());
-        inventoryImageView23.setImage(inventory[23].getImage());
-        inventoryImageView24.setImage(inventory[24].getImage());
+        inventoryImageView0.setImage(inventory.get(0).getImage());
+        inventoryImageView1.setImage(inventory.get(1).getImage());
+        inventoryImageView2.setImage(inventory.get(2).getImage());
+        inventoryImageView3.setImage(inventory.get(3).getImage());
+        inventoryImageView4.setImage(inventory.get(4).getImage());
+        inventoryImageView5.setImage(inventory.get(5).getImage());
+        inventoryImageView6.setImage(inventory.get(6).getImage());
+        inventoryImageView7.setImage(inventory.get(7).getImage());
+        inventoryImageView8.setImage(inventory.get(8).getImage());
+        inventoryImageView9.setImage(inventory.get(9).getImage());
+        inventoryImageView10.setImage(inventory.get(10).getImage());
+        inventoryImageView11.setImage(inventory.get(11).getImage());
+        inventoryImageView12.setImage(inventory.get(12).getImage());
+        inventoryImageView13.setImage(inventory.get(13).getImage());
+        inventoryImageView14.setImage(inventory.get(14).getImage());
+        inventoryImageView15.setImage(inventory.get(15).getImage());
+        inventoryImageView16.setImage(inventory.get(16).getImage());
+        inventoryImageView17.setImage(inventory.get(17).getImage());
+        inventoryImageView18.setImage(inventory.get(18).getImage());
+        inventoryImageView19.setImage(inventory.get(19).getImage());
+        inventoryImageView20.setImage(inventory.get(20).getImage());
+        inventoryImageView21.setImage(inventory.get(21).getImage());
+        inventoryImageView22.setImage(inventory.get(22).getImage());
+        inventoryImageView23.setImage(inventory.get(23).getImage());
+        inventoryImageView24.setImage(inventory.get(24).getImage());
     }
 
     private void clearEffect() {

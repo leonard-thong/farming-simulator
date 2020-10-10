@@ -2,13 +2,16 @@ package gameobjects;
 
 import gameobjects.items.Item;
 
+import java.util.ArrayList;
+
+
 public class Player {
     private int day;
     private int money;
     private String season;
     private String diff;
     private String name;
-    private Item[] inventory = new Item[25];
+    private ArrayList<Item> inventory = new ArrayList<>(25);
 
     public Player() {
         this(1, 50, "Normal", "Spring", "Aibek");
@@ -63,11 +66,11 @@ public class Player {
         this.name = name;
     }
 
-    public Item[] getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Item[] inventory) {
+    public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
     }
 }
