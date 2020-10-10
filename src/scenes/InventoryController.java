@@ -3,6 +3,7 @@ package scenes;
 import gameobjects.items.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -10,8 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class InventoryController {
+
+public class InventoryController implements Initializable {
     @FXML
     private ImageView inventoryImageView0;
     @FXML
@@ -67,6 +71,11 @@ public class InventoryController {
     private Item[] inventory = Main.getPlayer().getInventory();
     private String selectedID = "";
     private int selectedItem = -1;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.setImages();
+    }
 
     @FXML
     private void item(MouseEvent e) {
