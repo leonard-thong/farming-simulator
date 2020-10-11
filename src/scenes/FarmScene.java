@@ -93,6 +93,12 @@ public class FarmScene {
             if (cropImages[i] != null) {
                 cropImages[i].setOnMouseClicked(event -> {
                     if (crops[finalI].getLifeStage() == 3) {
+                        if (Main.getPlayer().getInventory().size() == 25) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("Not enough space in inventory!");
+                            alert.show();
+                            return;
+                        }
                         cropImages[finalI] = null;
                         Main.getPlayer().getInventory().add(crops[finalI]);
                         Alert nameAlert = new Alert(Alert.AlertType.ERROR);

@@ -31,6 +31,8 @@ import java.util.*;
 public class MarketController implements Initializable {
 
     private static Map<Integer, LinkedList<Item>> market = new HashMap<>();
+    @FXML
+    private Button backButton;
 
     @FXML
     private Label moneyLabel;
@@ -171,11 +173,16 @@ public class MarketController implements Initializable {
 
     @FXML
     void sell(ActionEvent e) {
-        if (inventoryList.getSelectionModel().getSelectedIndices().size() == 0) {
+        if (Main.getPlayer().getInventory().size() == 0) {
             Alert noItems = new Alert(Alert.AlertType.ERROR);
             noItems.setHeaderText("Inventory empty!");
             noItems.show();
+        } else if (inventoryList.getSelectionModel().getSelectedIndices().size() == 0) {
+            Alert noItems = new Alert(Alert.AlertType.ERROR);
+            noItems.setHeaderText("No item selected!");
+            noItems.show();
         }
+
         for (int i : inventoryList.getSelectionModel().getSelectedIndices()
         ) {
             Item temp = Main.getPlayer().getInventory().remove(i);
