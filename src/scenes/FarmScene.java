@@ -115,7 +115,7 @@ public class FarmScene {
                         nameAlert.setHeaderText("The crop still needs to grow");
                         nameAlert.setTitle("Cannot Harvest!");
                         nameAlert.show();
-                    }// change functionality
+                    } // change functionality
                 });
             }
         }
@@ -201,9 +201,6 @@ public class FarmScene {
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-
-        // market stuff
-
 
         return new Scene(root, 1000, 750, Color.BLACK);
     }

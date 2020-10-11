@@ -147,7 +147,15 @@ public class MarketController implements Initializable {
             emptySlot.show();
             return;
         }
-        int price = (int) ((market.get(selected.getValue()).get(0)).getBasePrice() * 10);
+        int diffMultiplier = 0;
+        if ("Easy".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 5;
+        } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 10;
+        } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 15;
+        }
+        int price = (int) (market.get(selected.getValue()).get(0).getBasePrice() * diffMultiplier);
         int money = Main.getPlayer().getMoney();
         if (money < price) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

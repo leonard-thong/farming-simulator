@@ -16,6 +16,7 @@ import org.testfx.framework.junit5.Start;
 import scenes.FarmScene;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -89,6 +90,6 @@ class FarmSceneTest {
                 break;
             }
         }
-        assertEquals(true, chk);
+        assertTrue(chk);
     }
 }

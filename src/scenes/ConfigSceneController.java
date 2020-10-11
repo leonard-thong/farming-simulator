@@ -36,7 +36,7 @@ public class ConfigSceneController {
         // Show next scene
 
         if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
-                Main.getPlayer().setName(nameTextField.getText());
+            Main.getPlayer().setName(nameTextField.getText());
             if (seedComboBox.getValue() != null) {
                 if (seedComboBox.getValue().equals("Corn")) {
                     Main.getPlayer().getInventory().add(new Corn());
