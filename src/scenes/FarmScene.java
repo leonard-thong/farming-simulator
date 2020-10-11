@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 import main.Main;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -157,19 +159,33 @@ public class FarmScene {
         Button btnInventory = new Button();
         btnInventory.setText("Inventory");
         btnInventory.setOnAction(event -> {
-            System.out.println("Inventory");
+            Stage stage = new Stage();
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(FarmScene.class.getResource("/scenes/Inventory.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.setScene(new Scene(root));
+            stage.show();
         });
 
         Button btnMarket = new Button();
         btnMarket.setText("Market");
         btnMarket.setOnAction(event -> {
-            System.out.println("Market");
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(FarmScene.class.getResource("/scenes/Market.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Main.getStage().setScene(new Scene(root));
         });
 
         StackPane buttons = new StackPane();
         buttons.getChildren().addAll(btnInventory, btnMarket);
-        StackPane.setAlignment(btnInventory, Pos.BOTTOM_LEFT);
-        StackPane.setAlignment(btnMarket, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(btnInventory, Pos.TOP_LEFT);
+        StackPane.setAlignment(btnMarket, Pos.TOP_RIGHT);
         //        buttons.setPadding(new Insets(5));
 
         VBox root = new VBox();
@@ -181,11 +197,5 @@ public class FarmScene {
 
 
         return new Scene(root, 1000, 750, Color.BLACK);
-    }
-
-    public void openMarket() throws Exception {
-        Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
-        stage.show();
     }
 }
