@@ -40,7 +40,7 @@ public class Main extends Application {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setWidth(1080);
-        stage.setHeight(850);
+        stage.setHeight(800);
 
         stage.show();
     }
