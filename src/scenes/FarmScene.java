@@ -101,7 +101,7 @@ public class FarmScene {
                         }
                         cropImages[finalI] = null;
                         Main.getPlayer().getInventory().add(crops[finalI]);
-                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+                        Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
                         nameAlert.show();
