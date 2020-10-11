@@ -1,6 +1,7 @@
 package tests;
 
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -13,9 +14,6 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import scenes.FarmScene;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -48,8 +46,8 @@ class FarmSceneTest {
     /**
      * Checks to see if the farm plot has been created with the appropriate dimensions
      *
-     * @author Pranav Thomas
      * @param robot interacts with the GUI
+     * @author Pranav Thomas
      */
     @Test
     void checksPlot(FxRobot robot) {
@@ -71,8 +69,8 @@ class FarmSceneTest {
     /**
      * Checks if the background color of the Farm Scene UI is black
      *
-     * @author Hemang Dash
      * @param robot interacts with the GUI
+     * @author Hemang Dash
      */
     @Test
     void checksBgColor(FxRobot robot) {

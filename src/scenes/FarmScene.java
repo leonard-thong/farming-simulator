@@ -25,18 +25,19 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import main.Main;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.io.FileNotFoundException;
 
 public class FarmScene {
-    static Crop[] crops = new Crop[25];
-    static Image[] cropPictures = new Image[25];
-    static ImageView[] cropImages = new ImageView[25];
-    static List<Boolean> arr = new ArrayList<>();
-    static Random random = new Random();
-    static boolean built = false;
+    private static Crop[] crops = new Crop[25];
+    private static Image[] cropPictures = new Image[25];
+    private static ImageView[] cropImages = new ImageView[25];
+    private static List<Boolean> arr = new ArrayList<>();
+    private static Random random = new Random();
+    private static boolean built = false;
 
     public static void farmSceneInit() throws FileNotFoundException {
         for (int i = 0; i < 25; i++) {
@@ -111,11 +112,16 @@ public class FarmScene {
         int tracker = -1;
         for (int i = 0; i < 5; i++) {
             plot.addRow(i,
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 0)) ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 1)) ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 2)) ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 3)) ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 4)) ? cropImages[tracker] : new Label()
+                    (cropImages[++tracker] != null && arr.get(i * 5 + 0))
+                            ? cropImages[tracker] : new Label(),
+                    (cropImages[++tracker] != null && arr.get(i * 5 + 1))
+                            ? cropImages[tracker] : new Label(),
+                    (cropImages[++tracker] != null && arr.get(i * 5 + 2))
+                            ? cropImages[tracker] : new Label(),
+                    (cropImages[++tracker] != null && arr.get(i * 5 + 3))
+                            ? cropImages[tracker] : new Label(),
+                    (cropImages[++tracker] != null && arr.get(i * 5 + 4))
+                            ? cropImages[tracker] : new Label()
             );
         }
         plot.setAlignment(Pos.CENTER);
@@ -164,7 +170,7 @@ public class FarmScene {
         buttons.getChildren().addAll(btnInventory, btnMarket);
         StackPane.setAlignment(btnInventory, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(btnMarket, Pos.BOTTOM_RIGHT);
-//        buttons.setPadding(new Insets(5));
+        //        buttons.setPadding(new Insets(5));
 
         VBox root = new VBox();
         root.setId("rootvbox");
@@ -180,8 +186,6 @@ public class FarmScene {
     public void openMarket() throws Exception {
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"))));
-        MarketController mc = new MarketController();
-//        mc.initialize(Main.getPlayer().getDiff());
         stage.show();
     }
 }

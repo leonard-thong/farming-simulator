@@ -17,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -95,9 +94,7 @@ public class MarketController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        for (int i = 0; i < 25; i++) {
-            Main.getPlayer().getInventory().add(new Cauliflower());
-//        }
+        // Main.getPlayer().getInventory().add(new Cauliflower());
         ObservableList<String> inventoryItems = FXCollections.observableArrayList();
         for (Item i : Main.getPlayer().getInventory()
         ) {
@@ -129,7 +126,6 @@ public class MarketController implements Initializable {
 
     @FXML
     private void select(MouseEvent e) {
-//        ((ImageView) e.getSource()).setImage(new Image("/images/empty_slot.jpg"));
         this.clearEffect();
         if (((ImageView) e.getSource()).getImage().getUrl().contains("empty_slot.jpg")) {
             selected = null;
@@ -141,21 +137,6 @@ public class MarketController implements Initializable {
         this.selected.getKey().setEffect(new DropShadow(20, Color.BLACK));
     }
 
-//    public void initialize(String diff) throws FileNotFoundException {
-//        inventoryItems.add("i.getType()");
-//        inventoryList.setItems(inventoryItems);
-//
-//        int originalNum;
-//        if (diff.equals("Easy")) {
-//            originalNum = 6;
-//        } else if (diff.equals("Normal")) {
-//            originalNum = 4;
-//        } else {
-//            originalNum = 2;
-//        }
-//
-//    }
-
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
@@ -164,7 +145,7 @@ public class MarketController implements Initializable {
             emptySlot.show();
             return;
         }
-        int price = (int) (Objects.requireNonNull(market.get(selected.getValue()).get(0)).getBasePrice() * 10);
+        int price = (int) ((market.get(selected.getValue()).get(0)).getBasePrice() * 10);
         int money = Main.getPlayer().getMoney();
         if (money < price) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -195,8 +176,8 @@ public class MarketController implements Initializable {
             noItems.setHeaderText("Inventory empty!");
             noItems.show();
         }
-        for (int i: inventoryList.getSelectionModel().getSelectedIndices()
-             ) {
+        for (int i : inventoryList.getSelectionModel().getSelectedIndices()
+        ) {
             Item temp = Main.getPlayer().getInventory().remove(i);
             int price = (int) (temp.getBasePrice() * 5);
             Main.getPlayer().setMoney(Main.getPlayer().getMoney() + price);
@@ -212,33 +193,33 @@ public class MarketController implements Initializable {
         moneyLabel.setText(Main.getPlayer().getMoney() + "");
     }
 
-//    public void setImages() {
-//        marketImageView0.setImage(market.get(0).peek().getImage()); //add getOrEmpty(item) method to item
-//        marketImageView1.setImage(market.get(1).peek().getImage());
-//        marketImageView2.setImage(market.get(2).peek().getImage());
-//        marketImageView3.setImage(market.get(3).peek().getImage());
-//        marketImageView4.setImage(market.get(4).peek().getImage());
-//        marketImageView5.setImage(market.get(5).peek().getImage());
-//        marketImageView6.setImage(market.get(6).peek().getImage());
-//        marketImageView7.setImage(market.get(7).peek().getImage());
-//        marketImageView8.setImage(market.get(8).peek().getImage());
-//        marketImageView9.setImage(market.get(9).peek().getImage());
-//        marketImageView10.setImage(market.get(10).peek().getImage());
-//        marketImageView11.setImage(market.get(11).peek().getImage());
-//        marketImageView12.setImage(market.get(12).peek().getImage());
-//        marketImageView13.setImage(market.get(13).peek().getImage());
-//        marketImageView14.setImage(market.get(14).peek().getImage());
-//        marketImageView15.setImage(market.get(15).peek().getImage());
-//        marketImageView16.setImage(market.get(16).peek().getImage());
-//        marketImageView17.setImage(market.get(17).peek().getImage());
-//        marketImageView18.setImage(market.get(18).peek().getImage());
-//        marketImageView19.setImage(market.get(19).peek().getImage());
-//        marketImageView20.setImage(market.get(20).peek().getImage());
-//        marketImageView21.setImage(market.get(21).peek().getImage());
-//        marketImageView22.setImage(market.get(22).peek().getImage());
-//        marketImageView23.setImage(market.get(23).peek().getImage());
-//        marketImageView24.setImage(market.get(24).peek().getImage());
-//    }
+    //    public void setImages() {
+    //        marketImageView0.setImage(market.get(0).peek().getImage());
+    //        marketImageView1.setImage(market.get(1).peek().getImage());
+    //        marketImageView2.setImage(market.get(2).peek().getImage());
+    //        marketImageView3.setImage(market.get(3).peek().getImage());
+    //        marketImageView4.setImage(market.get(4).peek().getImage());
+    //        marketImageView5.setImage(market.get(5).peek().getImage());
+    //        marketImageView6.setImage(market.get(6).peek().getImage());
+    //        marketImageView7.setImage(market.get(7).peek().getImage());
+    //        marketImageView8.setImage(market.get(8).peek().getImage());
+    //        marketImageView9.setImage(market.get(9).peek().getImage());
+    //        marketImageView10.setImage(market.get(10).peek().getImage());
+    //        marketImageView11.setImage(market.get(11).peek().getImage());
+    //        marketImageView12.setImage(market.get(12).peek().getImage());
+    //        marketImageView13.setImage(market.get(13).peek().getImage());
+    //        marketImageView14.setImage(market.get(14).peek().getImage());
+    //        marketImageView15.setImage(market.get(15).peek().getImage());
+    //        marketImageView16.setImage(market.get(16).peek().getImage());
+    //        marketImageView17.setImage(market.get(17).peek().getImage());
+    //        marketImageView18.setImage(market.get(18).peek().getImage());
+    //        marketImageView19.setImage(market.get(19).peek().getImage());
+    //        marketImageView20.setImage(market.get(20).peek().getImage());
+    //        marketImageView21.setImage(market.get(21).peek().getImage());
+    //        marketImageView22.setImage(market.get(22).peek().getImage());
+    //        marketImageView23.setImage(market.get(23).peek().getImage());
+    //        marketImageView24.setImage(market.get(24).peek().getImage());
+    //    }
 
     private void clearEffect() {
         marketImageView0.setEffect(null);

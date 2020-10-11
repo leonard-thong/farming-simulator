@@ -23,7 +23,8 @@ class WelcomeScreenTest {
 
     @Start
     void onStart(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
+                "/scenes/WelcomeScene.fxml"))));
         stage.show();
         stage.toFront();
     }

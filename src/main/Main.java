@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import scenes.MarketController;
 
 
 public class Main extends Application {
@@ -29,11 +28,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/scenes/Market.fxml"));
-//        MarketController mc = new MarketController();
-//        mc.initialize("Easy");
 
         Scene scene = new Scene(root);
         stage = primaryStage;
