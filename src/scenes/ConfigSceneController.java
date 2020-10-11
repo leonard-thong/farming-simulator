@@ -33,43 +33,37 @@ public class ConfigSceneController {
 
     @FXML
     public void nextScene(ActionEvent e) throws FileNotFoundException {
-        if (nameTextField.getText() != null) {
-            Main.getPlayer().setName(nameTextField.getText());
-        }
-        if (seedComboBox.getValue() != null) {
-            if (seedComboBox.getValue().equals("Corn")) {
-                Main.getPlayer().getInventory().set(0, new Corn());
-            } else if (seedComboBox.getValue().equals("Sunflower")) {
-                Main.getPlayer().getInventory().set(0, new Sunflower());
-            } else {
-                Main.getPlayer().getInventory().set(0, new Cauliflower());
-            }
-        }
-        if (seedComboBox.getValue() != null) {
-            Main.getPlayer().setSeason(seasonComboBox.getValue());
-        }
-
-        if (diffComboBox.getValue() != null) {
-            Main.getPlayer().setDiff(diffComboBox.getValue());
-            if ("Easy".equals(Main.getPlayer().getDiff())) {
-                Main.getPlayer().setMoney(100);
-            } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                Main.getPlayer().setMoney(25);
-            }
-        }
-
         // Show next scene
-        try {
-            if (!nameTextField.getText().equals("")) {
-                Main.getStage().setScene(FarmScene.getScene());
-            } else {
-                Alert nameAlert = new Alert(Alert.AlertType.ERROR);
-                nameAlert.setHeaderText("Please enter a username to continue");
-                nameAlert.setTitle("Invalid Username");
-                nameAlert.show();
+
+        if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
+                Main.getPlayer().setName(nameTextField.getText());
+            if (seedComboBox.getValue() != null) {
+                if (seedComboBox.getValue().equals("Corn")) {
+                    Main.getPlayer().getInventory().add(new Corn());
+                } else if (seedComboBox.getValue().equals("Sunflower")) {
+                    Main.getPlayer().getInventory().add(new Sunflower());
+                } else {
+                    Main.getPlayer().getInventory().add(new Cauliflower());
+                }
             }
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            if (seasonComboBox.getValue() != null) {
+                Main.getPlayer().setSeason(seasonComboBox.getValue());
+            }
+
+            if (diffComboBox.getValue() != null) {
+                Main.getPlayer().setDiff(diffComboBox.getValue());
+                if ("Easy".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(100);
+                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                    Main.getPlayer().setMoney(25);
+                }
+            }
+            Main.getStage().setScene(FarmScene.getScene());
+        } else {
+            Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+            nameAlert.setHeaderText("Please enter a username to continue");
+            nameAlert.setTitle("Invalid Username");
+            nameAlert.show();
         }
     }
 }

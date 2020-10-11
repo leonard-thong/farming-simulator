@@ -3,17 +3,22 @@ package scenes;
 import gameobjects.items.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 
 
-public class InventoryController {
+public class InventoryController implements Initializable {
     @FXML
     private ImageView inventoryImageView0;
     @FXML
@@ -65,14 +70,30 @@ public class InventoryController {
     @FXML
     private ImageView inventoryImageView24;
 
-    @FXML
-    private ArrayList<Item> inventory = Main.getPlayer().getInventory();
+    private ArrayList<ImageView> images = new ArrayList<>();
     private String selectedID = "";
-    private int selectedItem = -1;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        images.addAll(Arrays.asList(inventoryImageView0,
+                inventoryImageView1, inventoryImageView2, inventoryImageView3, inventoryImageView4,
+                inventoryImageView5, inventoryImageView6, inventoryImageView7,
+                inventoryImageView8, inventoryImageView9, inventoryImageView10,
+                inventoryImageView11, inventoryImageView12, inventoryImageView13,
+                inventoryImageView14, inventoryImageView15, inventoryImageView16,
+                inventoryImageView17, inventoryImageView18, inventoryImageView19,
+                inventoryImageView20, inventoryImageView21, inventoryImageView22,
+                inventoryImageView23, inventoryImageView24));
+        this.setImages();
+    }
 
     @FXML
     private void item(MouseEvent e) {
         this.clearEffect();
+        if (((ImageView) e.getSource()).getImage().getUrl().contains("empty_slot.jpg")) {
+            selectedID = "";
+            return;
+        }
         ImageView img = (ImageView) e.getSource();
         img.setEffect(new DropShadow(20, Color.BLACK));
         selectedID = img.getId();
@@ -80,77 +101,29 @@ public class InventoryController {
 
     @FXML
     public void drop(ActionEvent e) {
-        if (selectedID == "") {
+        if (selectedID.equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("No item selected!");
             alert.show();
         } else {
-            selectedItem = Integer.parseInt(selectedID.substring(18));
-            ArrayList<Item> inventory = Main.getPlayer().getInventory();
-            inventory.set(selectedItem, null);
-
-            Main.getPlayer().setInventory(inventory);
-
+            int selectedItem = Integer.parseInt(selectedID.substring(18));
+            Main.getPlayer().getInventory().remove(selectedItem);
+            images.get(selectedItem).setImage(new Image("/images/empty_slot.jpg"));
             selectedID = "";
-            selectedItem = -1;
-
-            this.setImages();
         }
     }
 
     public void setImages() {
-        inventoryImageView0.setImage(inventory.get(0).getImage());
-        inventoryImageView1.setImage(inventory.get(1).getImage());
-        inventoryImageView2.setImage(inventory.get(2).getImage());
-        inventoryImageView3.setImage(inventory.get(3).getImage());
-        inventoryImageView4.setImage(inventory.get(4).getImage());
-        inventoryImageView5.setImage(inventory.get(5).getImage());
-        inventoryImageView6.setImage(inventory.get(6).getImage());
-        inventoryImageView7.setImage(inventory.get(7).getImage());
-        inventoryImageView8.setImage(inventory.get(8).getImage());
-        inventoryImageView9.setImage(inventory.get(9).getImage());
-        inventoryImageView10.setImage(inventory.get(10).getImage());
-        inventoryImageView11.setImage(inventory.get(11).getImage());
-        inventoryImageView12.setImage(inventory.get(12).getImage());
-        inventoryImageView13.setImage(inventory.get(13).getImage());
-        inventoryImageView14.setImage(inventory.get(14).getImage());
-        inventoryImageView15.setImage(inventory.get(15).getImage());
-        inventoryImageView16.setImage(inventory.get(16).getImage());
-        inventoryImageView17.setImage(inventory.get(17).getImage());
-        inventoryImageView18.setImage(inventory.get(18).getImage());
-        inventoryImageView19.setImage(inventory.get(19).getImage());
-        inventoryImageView20.setImage(inventory.get(20).getImage());
-        inventoryImageView21.setImage(inventory.get(21).getImage());
-        inventoryImageView22.setImage(inventory.get(22).getImage());
-        inventoryImageView23.setImage(inventory.get(23).getImage());
-        inventoryImageView24.setImage(inventory.get(24).getImage());
+        int i = 0;
+        for (Item item: Main.getPlayer().getInventory()) {
+            images.get(i++).setImage(item.getImage());
+        }
     }
 
     private void clearEffect() {
-        inventoryImageView0.setEffect(null);
-        inventoryImageView1.setEffect(null);
-        inventoryImageView2.setEffect(null);
-        inventoryImageView3.setEffect(null);
-        inventoryImageView4.setEffect(null);
-        inventoryImageView5.setEffect(null);
-        inventoryImageView6.setEffect(null);
-        inventoryImageView7.setEffect(null);
-        inventoryImageView8.setEffect(null);
-        inventoryImageView9.setEffect(null);
-        inventoryImageView10.setEffect(null);
-        inventoryImageView11.setEffect(null);
-        inventoryImageView12.setEffect(null);
-        inventoryImageView13.setEffect(null);
-        inventoryImageView14.setEffect(null);
-        inventoryImageView15.setEffect(null);
-        inventoryImageView16.setEffect(null);
-        inventoryImageView17.setEffect(null);
-        inventoryImageView18.setEffect(null);
-        inventoryImageView19.setEffect(null);
-        inventoryImageView20.setEffect(null);
-        inventoryImageView21.setEffect(null);
-        inventoryImageView22.setEffect(null);
-        inventoryImageView23.setEffect(null);
-        inventoryImageView24.setEffect(null);
+        for (ImageView iv: images
+             ) {
+            iv.setEffect(null);
+        }
     }
 }

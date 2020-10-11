@@ -107,7 +107,7 @@
     </center>
    <bottom>
        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" onMouseClicked="#drop" text="Drop" />
+           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" text="Drop" />
        </HBox>
    </bottom>
 </BorderPane>
