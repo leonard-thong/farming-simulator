@@ -45,6 +45,8 @@ public class ConfigSceneController {
                 } else {
                     Main.getPlayer().getInventory().add(new Cauliflower());
                 }
+            } else {
+                Main.getPlayer().getInventory().add(new Corn());
             }
             if (seasonComboBox.getValue() != null) {
                 Main.getPlayer().setSeason(seasonComboBox.getValue());
