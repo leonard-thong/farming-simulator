@@ -41,7 +41,7 @@ public class FarmScene {
     private static Random random = new Random();
     private static boolean built = false;
 
-    public static void farmSceneInit() throws FileNotFoundException {
+    public static void farmSceneInit() {
         for (int i = 0; i < 25; i++) {
             int r = random.nextInt(3);
             crops[i] = (r == 0) ? new Corn() : (r == 1) ? new Cauliflower() : new Sunflower();
@@ -93,8 +93,12 @@ public class FarmScene {
             if (cropImages[i] != null) {
                 cropImages[i].setOnMouseClicked(event -> {
                     if (crops[finalI].getLifeStage() == 3) {
-                        System.out.println(crops[finalI].getLifeStage());
                         cropImages[finalI] = null;
+                        Main.getPlayer().getInventory().add(crops[finalI]);
+                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+                        nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
+                        nameAlert.setTitle("Successfully Harvested!");
+                        nameAlert.show();
                         try {
                             Main.getStage().setScene(FarmScene.getScene());
                         } catch (FileNotFoundException e) {
@@ -105,8 +109,7 @@ public class FarmScene {
                         nameAlert.setHeaderText("The crop still needs to grow");
                         nameAlert.setTitle("Cannot Harvest!");
                         nameAlert.show();
-                    }
-                    System.out.println("Clicked!"); // change functionality
+                    }// change functionality
                 });
             }
         }
@@ -114,7 +117,7 @@ public class FarmScene {
         int tracker = -1;
         for (int i = 0; i < 5; i++) {
             plot.addRow(i,
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 0))
+                    (cropImages[++tracker] != null && arr.get(i * 5))
                             ? cropImages[tracker] : new Label(),
                     (cropImages[++tracker] != null && arr.get(i * 5 + 1))
                             ? cropImages[tracker] : new Label(),

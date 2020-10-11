@@ -8,6 +8,13 @@ public class Corn extends Crop {
 
     public Corn() {
         super(new Random().nextInt(4), "Corn", 1.3, new Image("/images/Corn_Stage_1.png"));
+        if (super.getLifeStage() == 1) {
+            super.setImage(new Image("images/Corn_Stage_2.png"));
+        } else if (super.getLifeStage() == 2) {
+            super.setImage(new Image("images/Corn_Stage_3.png"));
+        } else if (super.getLifeStage() == 3) {
+            super.setImage(new Image("images/Corn_Harvest.png"));
+        }
     }
 
     public Corn(Image image) {
