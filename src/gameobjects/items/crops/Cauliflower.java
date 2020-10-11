@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class Cauliflower extends Crop {
-    public Cauliflower() throws FileNotFoundException {
+    public Cauliflower() {
         super(new Random().nextInt(4), "Cauliflower", 1.5, new Image("/images/Cauliflower_Stage_1.png"));
     }
 

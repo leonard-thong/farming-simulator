@@ -1,10 +1,20 @@
 package scenes;
 
 import gameobjects.items.Item;
+import gameobjects.items.crops.Cauliflower;
+import gameobjects.items.crops.Corn;
+import gameobjects.items.crops.Sunflower;
+import gameobjects.items.tools.Axe;
+import gameobjects.items.tools.Shovel;
+import gameobjects.items.tools.Sickle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -15,15 +25,16 @@ import javafx.util.Pair;
 import main.Main;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
+import java.net.URL;
+import java.util.*;
 
 
-public class MarketController {
+public class MarketController implements Initializable {
 
     private static Map<Integer, LinkedList<Item>> market = new HashMap<>();
+
+    @FXML
+    private Label moneyLabel;
     @FXML
     private ImageView marketImageView0;
     @FXML
@@ -82,27 +93,55 @@ public class MarketController {
     private ListView<String> inventoryList;
     private Pair<ImageView, Integer> selected = null;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        for (int i = 0; i < 25; i++) {
+            Main.getPlayer().getInventory().add(new Cauliflower());
+//        }
+        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
+        for (Item i : Main.getPlayer().getInventory()
+        ) {
+            if (i != null) {
+                inventoryItems.add(i.getType());
+            }
+        }
+        inventoryList.setItems(inventoryItems);
+        market.put(0, new LinkedList<>());
+        market.get(0).addAll(Arrays.asList(new Cauliflower()));
+        market.get(0);
+        market.put(1, new LinkedList<>());
+        market.get(1).addAll(Arrays.asList(new Corn()));
+        market.put(2, new LinkedList<>());
+        market.get(2).addAll(Arrays.asList(new Sunflower()));
+        market.put(3, new LinkedList<>());
+        market.get(3).addAll(Arrays.asList(new Shovel()));
+        market.put(4, new LinkedList<>());
+        market.get(4).addAll(Arrays.asList(new Axe()));
+        market.put(5, new LinkedList<>());
+        market.get(5).addAll(Arrays.asList(new Sickle()));
+        moneyLabel.setText("" + Main.getPlayer().getMoney());
+    }
+
     @FXML
     private void goBack() throws FileNotFoundException {
         Main.getStage().setScene(FarmScene.getScene());
     }
 
     @FXML
-    private void item(MouseEvent e) {
+    private void select(MouseEvent e) {
 //        ((ImageView) e.getSource()).setImage(new Image("/images/empty_slot.jpg"));
-        this.selected = new Pair<>((ImageView) e.getSource(), Integer.parseInt(((ImageView) e.getSource()).getId().substring(15)));
         this.clearEffect();
+        if (((ImageView) e.getSource()).getImage().getUrl().contains("empty_slot.jpg")) {
+            selected = null;
+            return;
+        }
+        this.selected = new Pair<>((ImageView) e.getSource(),
+                Integer.parseInt(((ImageView) e.getSource()).getId().substring(15)));
+
         this.selected.getKey().setEffect(new DropShadow(20, Color.BLACK));
     }
 
 //    public void initialize(String diff) throws FileNotFoundException {
-//        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
-//        for (Item i : Main.getPlayer().getInventory()
-//        ) {
-//            if (i != null) {
-//                inventoryItems.add("i.getType()");
-//            }
-//        }
 //        inventoryItems.add("i.getType()");
 //        inventoryList.setItems(inventoryItems);
 //
@@ -114,45 +153,63 @@ public class MarketController {
 //        } else {
 //            originalNum = 2;
 //        }
-//        market.put(0, new LinkedList<>());
-//        market.get(0).addAll(Arrays.asList(new Cauliflower()));
-//        market.get(0);
-//        market.put(1, new LinkedList<>());
-//        market.get(1).addAll(Arrays.asList(new Corn()));
-//        market.put(2, new LinkedList<>());
-//        market.get(2).addAll(Arrays.asList(new Sunflower()));
-//        market.put(3, new LinkedList<>());
-//        market.get(3).addAll(Arrays.asList(new Shovel()));
-//        market.put(4, new LinkedList<>());
-//        market.get(4).addAll(Arrays.asList(new Axe()));
-//        market.put(5, new LinkedList<>());
-//        market.get(5).addAll(Arrays.asList(new Sickle()));
 //
 //    }
 
     @FXML
     void buy(ActionEvent e) {
-        if (selected.getKey().getImage().equals(new Image("images/empty_slot.jpg"))) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("No item selected!");
-            alert.show();
+        if (selected == null || market.get(selected.getValue()) == null) {
+            Alert emptySlot = new Alert(Alert.AlertType.ERROR);
+            emptySlot.setHeaderText("No item selected!");
+            emptySlot.show();
+            return;
         }
-        int price = (int) Objects.requireNonNull(market.get(selected.getValue()).peek()).getBasePrice() * 10;
+        int price = (int) (Objects.requireNonNull(market.get(selected.getValue()).get(0)).getBasePrice() * 10);
         int money = Main.getPlayer().getMoney();
         if (money < price) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Not enough money!");
             alert.show();
         } else {
-            Main.getPlayer().setMoney(money - price);
-            market.get(selected.getValue()).peek();
-            // change value of farm scene's money data
+            if (Main.getPlayer().getInventory().size() == 25) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Not enough space in inventory!");
+                alert.show();
+            } else {
+                Main.getPlayer().setMoney(money - price);
+                Item bought = market.get(selected.getValue()).get(0);
+                Main.getPlayer().getInventory().add(bought);
+                ObservableList<String> temp = inventoryList.getItems();
+                temp.add(bought.getType());
+                inventoryList.setItems(temp);
+                moneyLabel.setText("" + Main.getPlayer().getMoney());
+                // market.get(selected.getValue()).get(0);
+            }
         }
     }
 
     @FXML
     void sell(ActionEvent e) {
-
+        if (inventoryList.getSelectionModel().getSelectedIndices().size() == 0) {
+            Alert noItems = new Alert(Alert.AlertType.ERROR);
+            noItems.setHeaderText("Inventory empty!");
+            noItems.show();
+        }
+        for (int i: inventoryList.getSelectionModel().getSelectedIndices()
+             ) {
+            Item temp = Main.getPlayer().getInventory().remove(i);
+            int price = (int) (temp.getBasePrice() * 5);
+            Main.getPlayer().setMoney(Main.getPlayer().getMoney() + price);
+        }
+        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
+        for (Item i : Main.getPlayer().getInventory()
+        ) {
+            if (i != null) {
+                inventoryItems.add(i.getType());
+            }
+        }
+        inventoryList.setItems(inventoryItems);
+        moneyLabel.setText(Main.getPlayer().getMoney() + "");
     }
 
 //    public void setImages() {

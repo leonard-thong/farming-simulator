@@ -2,13 +2,11 @@ package gameobjects.items.crops;
 
 import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class Corn extends Crop {
 
-    public Corn() throws FileNotFoundException {
+    public Corn() {
         super(new Random().nextInt(4), "Corn", 1.3, new Image("/images/Corn_Stage_1.png"));
     }
 
