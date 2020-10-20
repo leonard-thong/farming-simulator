@@ -4,7 +4,7 @@ import gameobjects.items.Item;
 import javafx.scene.image.Image;
 
 public abstract class Crop extends Item {
-    private int lifeStage; // 0 -> Stage1, 1 -> Stage2, 2 -> Stage3, 3 -> Harvest
+    private int lifeStage; // 0 -> Stage1, 1 -> Stage2, 2 -> Stage3, 3 -> Harvest, 4 -> Withered
 
     public Crop(int lifeStage, String type, double basePrice, Image image) {
         super(type, basePrice, image);
