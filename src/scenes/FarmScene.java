@@ -1,9 +1,7 @@
 package scenes;
 
-import gameobjects.items.crops.Cauliflower;
-import gameobjects.items.crops.Corn;
-import gameobjects.items.crops.Crop;
-import gameobjects.items.crops.Sunflower;
+import gameobjects.Farm;
+import gameobjects.Plot;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -29,38 +27,27 @@ import main.Main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class FarmScene {
-    private static Crop[] crops = new Crop[25];
-    private static Image[] cropPictures = new Image[25];
-    private static ImageView[] cropImages = new ImageView[25];
-    private static List<Boolean> arr = new ArrayList<>();
-    private static Random random = new Random();
+    private static Farm farm;
+//    private static Plot[] farm.getFarm() = new Plot[25];
     private static boolean built = false;
 
     public static void farmSceneInit() {
-        for (int i = 0; i < 25; i++) {
-            int r = random.nextInt(3);
-            crops[i] = (r == 0) ? new Corn() : (r == 1) ? new Cauliflower() : new Sunflower();
-            cropPictures[i] = crops[i].getImage();
-            cropImages[i] = new ImageView(cropPictures[i]);
-            cropImages[i].setId("cropimage" + "i");
-            if (i == 2) {
-                arr.add(true);
-            } else {
-                arr.add(random.nextInt() % 2 == 1);
-            }
-        }
+        farm = new Farm();
     }
+
+    public static Plot[] getFarm() {
+        return farm.getFarm();
+    }
+
 
     public static Scene getScene() throws FileNotFoundException {
         if (!built) {
             farmSceneInit();
             built = true;
         }
+        
         Label coins = new Label("" + Main.getPlayer().getMoney());
         coins.setFont(new Font("Ubuntu", 25));
         coins.setTextFill(Color.GOLD);
@@ -86,21 +73,25 @@ public class FarmScene {
         info.getChildren().addAll(money, date);
         StackPane.setAlignment(date, Pos.TOP_CENTER);
 
-        GridPane plot = new GridPane();
-        plot.setId("plotgrid");
+        GridPane gridpane = new GridPane();
+        gridpane.setId("plotgrid");
         for (int i = 0; i < 25; i++) {
             int finalI = i;
-            if (cropImages[i] != null) {
-                cropImages[i].setOnMouseClicked(event -> {
-                    if (crops[finalI].getLifeStage() == 3) {
+            if (farm.getFarm()[i].getPlotImage() != null) {
+                farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
+                    if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
                         if (Main.getPlayer().getInventory().size() == 25) {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setHeaderText("Not enough space in inventory!");
                             alert.show();
                             return;
                         }
-                        cropImages[finalI] = null;
-                        Main.getPlayer().getInventory().add(crops[finalI]);
+
+                        farm.getFarm()[finalI].setCrop(null);
+                        farm.getFarm()[finalI].setPlotImage(null);
+                        farm.getFarm()[finalI].setWaterLevel(0);
+
+                        Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
                         Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
@@ -119,45 +110,45 @@ public class FarmScene {
                 });
             }
         }
-        plot.setMaxSize(750, 600);
+        gridpane.setMaxSize(750, 600);
         int tracker = -1;
         for (int i = 0; i < 5; i++) {
-            plot.addRow(i,
-                    (cropImages[++tracker] != null && arr.get(i * 5))
-                            ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 1))
-                            ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 2))
-                            ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 3))
-                            ? cropImages[tracker] : new Label(),
-                    (cropImages[++tracker] != null && arr.get(i * 5 + 4))
-                            ? cropImages[tracker] : new Label()
+            gridpane.addRow(i,
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new Label("" + (tracker + 1)))
             );
         }
-        plot.setAlignment(Pos.CENTER);
-        for (Node cell : plot.getChildren()) {
+        gridpane.setAlignment(Pos.CENTER);
+        for (Node cell : gridpane.getChildren()) {
             if (cell instanceof Control) {
                 javafx.scene.control.Control control = (Control) cell;
                 control.setPrefSize(150, 100);
-                control.setStyle("-fx-background-color: saddlebrown; -fx-alignment: center;");
+                control.setStyle("-fx-background-color: saddlebrown; -fx-alignment: center; -fx-text-fill: white");
             }
         }
-        plot.setStyle("-fx-background-color: darkgreen; -fx-padding: 2; -fx-hgap: 5; -fx-vgap: 5;");
-        plot.setSnapToPixel(false);
+        gridpane.setStyle("-fx-background-color: darkgreen; -fx-padding: 2; -fx-hgap: 5; -fx-vgap: 5;");
+        gridpane.setSnapToPixel(false);
 
         ColumnConstraints oneThird = new ColumnConstraints();
         oneThird.setPercentWidth(100 / 5.0);
         oneThird.setHalignment(HPos.CENTER);
-        plot.getColumnConstraints().addAll(oneThird, oneThird, oneThird, oneThird, oneThird);
+        gridpane.getColumnConstraints().addAll(oneThird, oneThird, oneThird, oneThird, oneThird);
         RowConstraints oneHalf = new RowConstraints();
         oneHalf.setPercentHeight(100 / 5.0);
         oneHalf.setValignment(VPos.CENTER);
-        plot.getRowConstraints().addAll(oneHalf, oneHalf, oneHalf, oneHalf, oneHalf);
+        gridpane.getRowConstraints().addAll(oneHalf, oneHalf, oneHalf, oneHalf, oneHalf);
 
         StackPane farm = new StackPane();
-        farm.getChildren().addAll(plot);
-        StackPane.setAlignment(plot, Pos.CENTER);
+        farm.getChildren().addAll(gridpane);
+        StackPane.setAlignment(gridpane, Pos.CENTER);
 
         Label empty1 = new Label();
         empty1.setPrefSize(1000, 70);
@@ -191,11 +182,22 @@ public class FarmScene {
             Main.getStage().setScene(new Scene(root));
         });
 
+        Button advanceDay = new Button();
+        advanceDay.setText("Advance Day");
+        advanceDay.setOnAction(event -> {
+            Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
+            try {
+                Main.getStage().setScene(FarmScene.getScene());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
         StackPane buttons = new StackPane();
-        buttons.getChildren().addAll(btnInventory, btnMarket);
+        buttons.getChildren().addAll(btnInventory, advanceDay, btnMarket);
         StackPane.setAlignment(btnInventory, Pos.TOP_LEFT);
+        StackPane.setAlignment(advanceDay, Pos.TOP_CENTER);
         StackPane.setAlignment(btnMarket, Pos.TOP_RIGHT);
-        //        buttons.setPadding(new Insets(5));
 
         VBox root = new VBox();
         root.setId("rootvbox");

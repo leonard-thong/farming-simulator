@@ -1,10 +1,16 @@
 package scenes;
 
+import gameobjects.Farm;
 import gameobjects.items.Item;
+import gameobjects.items.crops.Crop;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ComboBox;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,10 +18,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import main.Main;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class InventoryController implements Initializable {
@@ -110,6 +115,58 @@ public class InventoryController implements Initializable {
             Main.getPlayer().getInventory().remove(selectedItem);
             images.get(selectedItem).setImage(new Image("/images/empty_slot.jpg"));
             selectedID = "";
+        }
+    }
+
+    public void plant(ActionEvent e) {
+        if (selectedID.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No seed selected!");
+            alert.show();
+        } else {
+            int selectedItem = Integer.parseInt(selectedID.substring(18));
+            if (Main.getPlayer().getInventory().get(selectedItem) instanceof Crop) {
+                Crop crop = (Crop)Main.getPlayer().getInventory().get(selectedItem);
+                if (crop.getLifeStage() != 1) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("You can only plant a seed");
+                    System.out.println(crop.getLifeStage());
+                    alert.show();
+                } else {
+                    ObservableList<Integer> options =
+                            FXCollections.observableArrayList();
+                    for (int i = 0; i < 25; i++) {
+                        if (FarmScene.getFarm()[i].getCrop() == null) {
+                            options.add(i + 1);
+                        }
+                    }
+
+                    ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+                    dialog.setTitle("Plot Choice");
+                    dialog.setHeaderText("Select a plot ");
+
+                    Optional<Integer> result = dialog.showAndWait();
+                    int selectedPlot;
+
+                    if (result.isPresent()) {
+                        selectedPlot = result.get();
+                        FarmScene.getFarm()[selectedPlot - 1].setCrop(crop);
+                        FarmScene.getFarm()[selectedPlot - 1].setPlotImage(crop.getImage());
+                    }
+                    Main.getPlayer().getInventory().remove(selectedItem);
+                    images.get(selectedItem).setImage(new Image("/images/empty_slot.jpg"));
+                    selectedID = "";
+                    try {
+                        Main.getStage().setScene(FarmScene.getScene());
+                    } catch (FileNotFoundException d) {
+                        d.printStackTrace();
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("You can only plant a seed!");
+                alert.show();
+            }
         }
     }
 
