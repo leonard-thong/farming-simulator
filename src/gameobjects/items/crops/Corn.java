@@ -7,7 +7,7 @@ import java.util.Random;
 public class Corn extends Crop {
 
     public Corn() {
-        super(new Random().nextInt(4), "Corn", 1.3, new Image("/images/Corn_Stage_1.png"));
+        super(1, "Corn", 1.3, new Image("/images/Corn_Stage_1.png"));
         if (super.getLifeStage() == 1) {
             super.setImage(new Image("images/Corn_Stage_2.png"));
         } else if (super.getLifeStage() == 2) {

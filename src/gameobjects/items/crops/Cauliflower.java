@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Cauliflower extends Crop {
     public Cauliflower() {
-        super(new Random().nextInt(4), "Cauliflower", 1.5,
+        super(1, "Cauliflower", 1.5,
                 new Image("/images/Cauliflower_Stage_1.png"));
         if (super.getLifeStage() == 1) {
             super.setImage(new Image("images/Cauliflower_Stage_2.png"));
