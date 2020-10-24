@@ -1,6 +1,5 @@
 package scenes;
 
-import gameobjects.Farm;
 import gameobjects.items.Item;
 import gameobjects.items.crops.Crop;
 import javafx.collections.FXCollections;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.ComboBox;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +18,10 @@ import main.Main;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 
 public class InventoryController implements Initializable {
@@ -126,7 +127,7 @@ public class InventoryController implements Initializable {
         } else {
             int selectedItem = Integer.parseInt(selectedID.substring(18));
             if (Main.getPlayer().getInventory().get(selectedItem) instanceof Crop) {
-                Crop crop = (Crop)Main.getPlayer().getInventory().get(selectedItem);
+                Crop crop = (Crop) Main.getPlayer().getInventory().get(selectedItem);
                 if (crop.getLifeStage() != 1) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("You can only plant a seed");
@@ -172,14 +173,14 @@ public class InventoryController implements Initializable {
 
     public void setImages() {
         int i = 0;
-        for (Item item: Main.getPlayer().getInventory()) {
+        for (Item item : Main.getPlayer().getInventory()) {
             images.get(i++).setImage(item.getImage());
         }
     }
 
     private void clearEffect() {
-        for (ImageView iv: images
-             ) {
+        for (ImageView iv : images
+        ) {
             iv.setEffect(null);
         }
     }

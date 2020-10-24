@@ -2,8 +2,6 @@ package gameobjects.items.crops;
 
 import javafx.scene.image.Image;
 
-import java.util.Random;
-
 public class Cauliflower extends Crop {
     public Cauliflower() {
         super(1, "Cauliflower", 1.5,
