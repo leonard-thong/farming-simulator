@@ -14,8 +14,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.testfx.api.FxAssert.verifyThat;
 
 @ExtendWith(ApplicationExtension.class)
 class InventoryTest {
@@ -31,12 +29,11 @@ class InventoryTest {
     }
 
     @Test
-    void drop(FxRobot robot){
+    void drop(FxRobot robot) {
+        robot.clickOn("#inventoryImageView0");
         robot.clickOn("#dropButton");
         assertEquals(Main.getPlayer().getInventory().size(), 1);
     }
-
-
 
 
 }

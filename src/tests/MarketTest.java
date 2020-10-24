@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Main;
@@ -78,6 +77,7 @@ class MarketTest {
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 pane.getBackground().getFills().get(0));
     }
+
     @Test
     void checksItemsInMarket(FxRobot robot) {
         GridPane grid = robot.lookup("#marketPane").query();
