@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane style="-fx-background-color: BLACK" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.MarketController">
+<BorderPane fx:id="marketBGColor" style="-fx-background-color: BLACK" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.MarketController">
     <center>
-        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: WHITE" BorderPane.alignment="CENTER">
+        <GridPane fx:id = "marketPane" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: WHITE" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

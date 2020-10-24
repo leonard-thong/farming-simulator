@@ -1,9 +1,16 @@
 package tests;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Main;
 import org.junit.jupiter.api.Test;
@@ -14,6 +21,7 @@ import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.ListViewMatchers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -62,6 +70,25 @@ class MarketTest {
         verifyThat("#inventoryList", ListViewMatchers.hasItems(25));
         robot.clickOn("#marketImageView0");
         robot.clickOn("#buyButton");
+    }
+
+    @Test
+    void marketBGColor(FxRobot robot) {
+        BorderPane pane = robot.lookup("#marketBGColor").query();
+        assertEquals(new BackgroundFill(Color.BLACK, null, null),
+                pane.getBackground().getFills().get(0));
+    }
+    @Test
+    void checksItemsInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                chk = true;
+                break;
+            }
+        }
+        assertTrue(chk);
     }
 
 }

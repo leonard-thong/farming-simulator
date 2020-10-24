@@ -92,4 +92,9 @@ class FarmSceneTest {
         }
         assertTrue(chk);
     }
+    @Test
+    void advanceDay(FxRobot robot) {
+        robot.clickOn("#advanceDayButton");
+        assertEquals(Main.getPlayer().getDay(), 2);
+    }
 }

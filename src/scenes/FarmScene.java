@@ -176,6 +176,7 @@ public class FarmScene {
             Main.getStage().setScene(new Scene(root));
         });
         Button advanceDay = new Button();
+        advanceDay.setId("advanceDayButton");
         advanceDay.setText("Advance Day");
         advanceDay.setOnAction(event -> advanceDay());
         StackPane buttons = new StackPane();
@@ -192,7 +193,6 @@ public class FarmScene {
 
     private static void advanceDay() {
         Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
-
         for (Plot pl : farm.getFarm()) {
             if (pl.getCrop() != null) {
                 if (pl.getWaterLevel() < 10) {

@@ -209,7 +209,6 @@ public class MarketController implements Initializable {
     }
 
     //    public void setImages() {
-    //        marketImageView0.setImage(market.get(0).peek().getImage());
     //        marketImageView1.setImage(market.get(1).peek().getImage());
     //        marketImageView2.setImage(market.get(2).peek().getImage());
     //        marketImageView3.setImage(market.get(3).peek().getImage());
