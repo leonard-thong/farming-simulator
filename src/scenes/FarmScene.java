@@ -197,7 +197,7 @@ public class FarmScene {
             if (pl.getCrop() != null) {
                 if (pl.getWaterLevel() < 10) {
                     pl.getCrop().setLifeStage(4);
-                    pl.setPlotImage(new Image("withered.png")); // size????
+                    pl.setPlotImage(new Image("/images/withered.png")); // size????
                 } else {
                     pl.setWaterLevel(pl.getWaterLevel() - 5);
                 }
