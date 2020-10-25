@@ -70,16 +70,20 @@ class MarketTest {
         robot.clickOn("#marketImageView0");
         robot.clickOn("#buyButton");
     }
-
+    /**
+     * Implemented for M4
+     */
     @Test
     void marketBGColor(FxRobot robot) {
         BorderPane pane = robot.lookup("#marketBGColor").query();
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 pane.getBackground().getFills().get(0));
     }
-
+    /**
+     * Implemented for M4
+     */
     @Test
-    void checksItemsInMarket(FxRobot robot) {
+    void checksIfItemsInMarket(FxRobot robot) {
         GridPane grid = robot.lookup("#marketPane").query();
         boolean chk = false;
         for (Node child : grid.getChildren()) {
