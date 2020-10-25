@@ -20,7 +20,7 @@ public abstract class Crop extends Item {
     public void setLifeStage(int lifeStage) {
         if (lifeStage < 3) {
             this.lifeStage = lifeStage;
-            this.setImage(new Image("/images/" + this.getType() + "_Stage_" + lifeStage + ".png"));
+            this.setImage(new Image("/images/" + this.getType() + "_Stage_" + (lifeStage+1) + ".png"));
         } else if (lifeStage == 3) {
             this.lifeStage = 3;
             this.setImage(new Image("/images/" + this.getType() + "_Harvest.png"));

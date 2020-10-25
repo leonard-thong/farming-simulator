@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Sunflower extends Crop {
     public Sunflower() {
-        super(1, "Sunflower", 1.4, new Image("/images/Sunflower_Stage_1.png"));
+        super(0, "Sunflower", 1.4, new Image("/images/Sunflower_Stage_1.png"));
     }
 
     @Override

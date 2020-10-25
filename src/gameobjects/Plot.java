@@ -64,5 +64,8 @@ public class Plot {
 
     public void setWaterLevel(int waterLevel) {
         this.waterLevel = waterLevel;
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
     }
 }
