@@ -31,14 +31,14 @@ public class Plot {
         plotImage.setFitWidth(100);
         waterLevel += 10;
         plotImage.setPickOnBounds(true);
-        Tooltip tooltip = new Tooltip(String.valueOf(this.getWaterLevel()));
+        Tooltip tooltip = new Tooltip("Water Level: " + String.valueOf(this.getWaterLevel()));
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
 
     public void waterPlant(int val) {
         waterLevel += val;
-        Tooltip tooltip = new Tooltip(String.valueOf(this.getWaterLevel()));
+        Tooltip tooltip = new Tooltip("Water Level: " + String.valueOf(this.getWaterLevel()));
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
