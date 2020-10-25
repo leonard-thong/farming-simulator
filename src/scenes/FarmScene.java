@@ -205,7 +205,7 @@ public class FarmScene {
                 } else if (pl.getWaterLevel() > 50) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
-                } else {
+                } else if (pl.getWaterLevel() > 0) {
                     pl.setWaterLevel(pl.getWaterLevel() - 10);
                 }
             }
