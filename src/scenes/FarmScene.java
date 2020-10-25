@@ -85,10 +85,8 @@ public class FarmScene {
                             alert.show();
                             return;
                         }
-                        farm.getFarm()[finalI].setCrop(null);
-                        farm.getFarm()[finalI].setPlotImage(null);
-                        farm.getFarm()[finalI].setWaterLevel(0);
                         Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
+                        farm.getFarm()[finalI] = new Plot();
                         Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
@@ -227,16 +225,22 @@ public class FarmScene {
             }
         }
 
-        ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
-        dialog.setTitle("Plot Choice");
-        dialog.setHeaderText("Select a plot ");
+        if (options.size() > 0) {
+            ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+            dialog.setTitle("Plot Choice");
+            dialog.setHeaderText("Select a plot ");
 
-        Optional<Integer> result = dialog.showAndWait();
-        int selectedPlot;
+            Optional<Integer> result = dialog.showAndWait();
+            int selectedPlot;
 
-        if (result.isPresent()) {
-            selectedPlot = result.get();
-            FarmScene.getFarm()[selectedPlot - 1].waterPlant(10);
+            if (result.isPresent()) {
+                selectedPlot = result.get();
+                FarmScene.getFarm()[selectedPlot - 1].waterPlant(10);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Plant some crops to water!");
+            alert.show();
         }
     }
 }
