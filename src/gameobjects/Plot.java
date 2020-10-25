@@ -1,8 +1,10 @@
 package gameobjects;
 
 import gameobjects.items.crops.Crop;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Plot {
     private ImageView plotImage;
@@ -28,10 +30,17 @@ public class Plot {
         plotImage.setFitHeight(100);
         plotImage.setFitWidth(100);
         waterLevel += 10;
+        plotImage.setPickOnBounds(true);
+        Tooltip tooltip = new Tooltip(String.valueOf(this.getWaterLevel()));
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
     }
 
     public void waterPlant(int val) {
         waterLevel += val;
+        Tooltip tooltip = new Tooltip(String.valueOf(this.getWaterLevel()));
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
     }
 
     public ImageView getPlotImage() {

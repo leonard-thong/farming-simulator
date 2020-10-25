@@ -70,6 +70,12 @@ public class FarmScene {
         for (int i = 0; i < 25; i++) {
             int finalI = i;
             if (farm.getFarm()[i].getPlotImage() != null) {
+//                farm.getFarm()[i].getPlotImage().setOnMouseDragOver(event -> {
+//                    Tooltip tooltip = new Tooltip();
+//                    ImageView imageView = new ImageView("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.png?v=9c558ec15d8a");
+//                    imageView.setPickOnBounds(true);
+//                    Tooltip.install(imageView, tooltip);
+//                });
                 farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
                     if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
                         if (Main.getPlayer().getInventory().size() == 25) {
