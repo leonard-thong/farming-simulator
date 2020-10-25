@@ -25,6 +25,8 @@ public class Plot {
 
     public void setPlotImage(Image image) {
         plotImage = new ImageView(image);
+        plotImage.setFitHeight(100);
+        plotImage.setFitWidth(100);
         waterLevel += 10;
     }
 

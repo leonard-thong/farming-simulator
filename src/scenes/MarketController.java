@@ -208,33 +208,6 @@ public class MarketController implements Initializable {
         moneyLabel.setText(Main.getPlayer().getMoney() + "");
     }
 
-    //    public void setImages() {
-    //        marketImageView1.setImage(market.get(1).peek().getImage());
-    //        marketImageView2.setImage(market.get(2).peek().getImage());
-    //        marketImageView3.setImage(market.get(3).peek().getImage());
-    //        marketImageView4.setImage(market.get(4).peek().getImage());
-    //        marketImageView5.setImage(market.get(5).peek().getImage());
-    //        marketImageView6.setImage(market.get(6).peek().getImage());
-    //        marketImageView7.setImage(market.get(7).peek().getImage());
-    //        marketImageView8.setImage(market.get(8).peek().getImage());
-    //        marketImageView9.setImage(market.get(9).peek().getImage());
-    //        marketImageView10.setImage(market.get(10).peek().getImage());
-    //        marketImageView11.setImage(market.get(11).peek().getImage());
-    //        marketImageView12.setImage(market.get(12).peek().getImage());
-    //        marketImageView13.setImage(market.get(13).peek().getImage());
-    //        marketImageView14.setImage(market.get(14).peek().getImage());
-    //        marketImageView15.setImage(market.get(15).peek().getImage());
-    //        marketImageView16.setImage(market.get(16).peek().getImage());
-    //        marketImageView17.setImage(market.get(17).peek().getImage());
-    //        marketImageView18.setImage(market.get(18).peek().getImage());
-    //        marketImageView19.setImage(market.get(19).peek().getImage());
-    //        marketImageView20.setImage(market.get(20).peek().getImage());
-    //        marketImageView21.setImage(market.get(21).peek().getImage());
-    //        marketImageView22.setImage(market.get(22).peek().getImage());
-    //        marketImageView23.setImage(market.get(23).peek().getImage());
-    //        marketImageView24.setImage(market.get(24).peek().getImage());
-    //    }
-
     private void clearEffect() {
         marketImageView0.setEffect(null);
         marketImageView1.setEffect(null);

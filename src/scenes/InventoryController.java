@@ -106,6 +106,11 @@ public class InventoryController implements Initializable {
     }
 
     @FXML
+    private void goBack() throws FileNotFoundException {
+        Main.getStage().setScene(FarmScene.getScene());
+    }
+
+    @FXML
     public void drop(ActionEvent e) {
         if (selectedID.equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -179,8 +184,7 @@ public class InventoryController implements Initializable {
     }
 
     private void clearEffect() {
-        for (ImageView iv : images
-        ) {
+        for (ImageView iv : images) {
             iv.setEffect(null);
         }
     }

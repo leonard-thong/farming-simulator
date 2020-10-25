@@ -26,7 +26,7 @@ public abstract class Crop extends Item {
             this.setImage(new Image("/images/" + this.getType() + "_Harvest.png"));
         } else if (lifeStage == 4) {
             this.lifeStage = 4;
-            this.setImage(new Image("/images/withered.png"));
+            this.setImage(new Image("/images/Wilted.png"));
         }
     }
 

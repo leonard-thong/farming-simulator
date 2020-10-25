@@ -2,6 +2,10 @@ package scenes;
 
 import gameobjects.Farm;
 import gameobjects.Plot;
+import gameobjects.items.crops.Crop;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -10,10 +14,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -27,20 +28,17 @@ import main.Main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 public class FarmScene {
     private static Farm farm;
-    //    private static Plot[] farm.getFarm() = new Plot[25];
     private static boolean built = false;
-
     public static void farmSceneInit() {
         farm = new Farm();
     }
-
     public static Plot[] getFarm() {
         return farm.getFarm();
     }
-
 
     public static Scene getScene() throws FileNotFoundException {
         if (!built) {
@@ -161,8 +159,7 @@ public class FarmScene {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            stage.setScene(new Scene(root));
-            stage.show();
+            Main.getStage().setScene(new Scene(root));
         });
         Button btnMarket = new Button();
         btnMarket.setText("Market");
@@ -175,15 +172,16 @@ public class FarmScene {
             }
             Main.getStage().setScene(new Scene(root));
         });
-        Button advanceDay = new Button();
-        advanceDay.setId("advanceDayButton");
-        advanceDay.setText("Advance Day");
-        advanceDay.setOnAction(event -> advanceDay());
-        StackPane buttons = new StackPane();
-        buttons.getChildren().addAll(btnInventory, advanceDay, btnMarket);
-        StackPane.setAlignment(btnInventory, Pos.TOP_LEFT);
-        StackPane.setAlignment(advanceDay, Pos.TOP_CENTER);
-        StackPane.setAlignment(btnMarket, Pos.TOP_RIGHT);
+        Button btnAdvanceDay = new Button();
+        btnAdvanceDay.setId("advanceDayButton");
+        btnAdvanceDay.setText("Advance Day");
+        btnAdvanceDay.setOnAction(event -> advanceDay());
+        Button btnWater = new Button();
+        btnWater.setId("advanceDayButton");
+        btnWater.setText("Water");
+        btnWater.setOnAction(event -> water());
+        HBox buttons = new HBox();
+        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
@@ -197,9 +195,12 @@ public class FarmScene {
             if (pl.getCrop() != null) {
                 if (pl.getWaterLevel() < 10) {
                     pl.getCrop().setLifeStage(4);
-                    pl.setPlotImage(new Image("/images/withered.png")); // size????
+                    pl.setPlotImage(new Image("/images/Wilted.png"));
+                } else if (pl.getWaterLevel() > 50) {
+                    pl.getCrop().setLifeStage(4);
+                    pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else {
-                    pl.setWaterLevel(pl.getWaterLevel() - 5);
+                    pl.setWaterLevel(pl.getWaterLevel() - 10);
                 }
             }
         }
@@ -207,6 +208,28 @@ public class FarmScene {
             Main.getStage().setScene(FarmScene.getScene());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void water() {
+        ObservableList<Integer> options =
+                FXCollections.observableArrayList();
+        for (int i = 0; i < 25; i++) {
+            if (FarmScene.getFarm()[i].getCrop() != null) {
+                options.add(i + 1);
+            }
+        }
+
+        ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+        dialog.setTitle("Plot Choice");
+        dialog.setHeaderText("Select a plot ");
+
+        Optional<Integer> result = dialog.showAndWait();
+        int selectedPlot;
+
+        if (result.isPresent()) {
+            selectedPlot = result.get();
+            FarmScene.getFarm()[selectedPlot - 1].waterPlant(10);
         }
     }
 }
