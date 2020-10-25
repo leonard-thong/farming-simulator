@@ -2,10 +2,8 @@ package scenes;
 
 import gameobjects.Farm;
 import gameobjects.Plot;
-import gameobjects.items.crops.Crop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -23,7 +21,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 import main.Main;
 
 import java.io.FileNotFoundException;
@@ -33,9 +30,18 @@ import java.util.Optional;
 public class FarmScene {
     private static Farm farm;
     private static boolean built = false;
+
+    // TAKE FROM HERE
+    //  farm.getFarm()[i].getPlotImage().setOnMouseDragOver(event -> {
+    //      Tooltip tooltip = new Tooltip();
+    //      ImageView imageView = new ImageView("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.png?v=9c558ec15d8a");
+    //      imageView.setPickOnBounds(true);
+    //      Tooltip.install(imageView, tooltip);
+    //  });
     public static void farmSceneInit() {
         farm = new Farm();
     }
+
     public static Plot[] getFarm() {
         return farm.getFarm();
     }
@@ -70,12 +76,7 @@ public class FarmScene {
         for (int i = 0; i < 25; i++) {
             int finalI = i;
             if (farm.getFarm()[i].getPlotImage() != null) {
-//                farm.getFarm()[i].getPlotImage().setOnMouseDragOver(event -> {
-//                    Tooltip tooltip = new Tooltip();
-//                    ImageView imageView = new ImageView("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.png?v=9c558ec15d8a");
-//                    imageView.setPickOnBounds(true);
-//                    Tooltip.install(imageView, tooltip);
-//                });
+                // INSERT  HERE
                 farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
                     if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
                         if (Main.getPlayer().getInventory().size() == 25) {
@@ -158,7 +159,6 @@ public class FarmScene {
         Button btnInventory = new Button();
         btnInventory.setText("Inventory");
         btnInventory.setOnAction(event -> {
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 root = FXMLLoader.load(FarmScene.class.getResource("/scenes/Inventory.fxml"));
@@ -206,7 +206,8 @@ public class FarmScene {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else if (pl.getWaterLevel() > 0) {
-                    pl.setWaterLevel(pl.getWaterLevel() - 10);
+                    pl.cropGrowth();
+                    pl.setWaterLevel(pl.getWaterLevel() - 5);
                 }
             }
         }
