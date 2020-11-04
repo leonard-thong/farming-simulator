@@ -197,12 +197,45 @@ public class FarmScene {
 
     private static void advanceDay() {
         Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
+        // 30% chance of random event
+        if (Math.random() > 0.0) {
+            int event = (int) (Math.random() * 3 + 1);
+
+            switch(event) {
+                case 1:
+                    // increase 5, 10, or 15 water level
+                    int rain = (int) (Math.random() * 3 + 1) * 5;
+
+                    for (Plot pl : farm.getFarm()) {
+                        if (pl.getCrop() != null) {
+                            pl.setWaterLevel(pl.getWaterLevel() + rain);
+                        }
+                    }
+                    System.out.println("Rain event: Increase water level of each plot by " + rain + ".");
+                    break;
+                case 2:
+                    // decrease 5, 10, or 15 water level
+                    int drought = (int) (Math.random() * 3 + 1) * 5;
+
+                    for (Plot pl : farm.getFarm()) {
+                        if (pl.getCrop() != null) {
+                            pl.setWaterLevel(pl.getWaterLevel() - drought);
+                        }
+                    }
+                    System.out.println("Decrease water level of each plot by " + drought + ".");
+                    break;
+                case 3:
+                    System.out.println("Locusts Event");
+                    break;
+            }
+        }
+
         for (Plot pl : farm.getFarm()) {
             if (pl.getCrop() != null) {
                 if (pl.getWaterLevel() < 10) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
-                } else if (pl.getWaterLevel() > 50) {
+                } else if (pl.getWaterLevel() > 75) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else if (pl.getWaterLevel() > 0) {
