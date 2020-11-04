@@ -2,6 +2,7 @@ package scenes;
 
 import gameobjects.Farm;
 import gameobjects.Plot;
+import gameobjects.items.tools.Pesticide;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -184,8 +185,29 @@ public class FarmScene {
         btnWater.setId("advanceDayButton");
         btnWater.setText("Water");
         btnWater.setOnAction(event -> water());
+        Button btnPesticide = new Button();
+        btnPesticide.setId("addPesticideButton");
+        btnPesticide.setText("Pesticide");
+        btnPesticide.setOnAction(event -> {
+            int index = -1;
+            for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1) {
+                addPesticide();
+                Main.getPlayer().getInventory().remove(index);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("You do not have any pesticides! Buy pesticide from the market to use it.");
+                alert.show();
+            }
+                }
+        );
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater);
+        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater, btnPesticide);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
@@ -213,6 +235,34 @@ public class FarmScene {
             Main.getStage().setScene(FarmScene.getScene());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void addPesticide() {
+        ObservableList<Integer> options =
+                FXCollections.observableArrayList();
+        for (int i = 0; i < 25; i++) {
+            if (FarmScene.getFarm()[i].getCrop() != null) {
+                options.add(i + 1);
+            }
+        }
+
+        if (options.size() > 0) {
+            ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+            dialog.setTitle("Plot Choice");
+            dialog.setHeaderText("Select a plot ");
+
+            Optional<Integer> result = dialog.showAndWait();
+            int selectedPlot;
+
+            if (result.isPresent()) {
+                selectedPlot = result.get();
+                FarmScene.getFarm()[selectedPlot - 1].getCrop().setHasPesticide(true);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Plant some crops to add pesticide to!");
+            alert.show();
         }
     }
 
