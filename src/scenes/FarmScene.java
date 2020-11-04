@@ -207,25 +207,63 @@ public class FarmScene {
                     int rain = (int) (Math.random() * 3 + 1) * 5;
 
                     for (Plot pl : farm.getFarm()) {
-                        if (pl.getCrop() != null) {
+                        if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
                             pl.setWaterLevel(pl.getWaterLevel() + rain);
                         }
                     }
-                    System.out.println("Rain event: Increase water level of each plot by " + rain + ".");
+
+                    Alert rainAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    rainAlert.setTitle("Rain Event");
+                    rainAlert.setHeaderText("Increase water level of each plots by " + rain + ".");
+                    rainAlert.show();
                     break;
                 case 2:
                     // decrease 5, 10, or 15 water level
                     int drought = (int) (Math.random() * 3 + 1) * 5;
 
                     for (Plot pl : farm.getFarm()) {
-                        if (pl.getCrop() != null) {
+                        if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
                             pl.setWaterLevel(pl.getWaterLevel() - drought);
                         }
                     }
-                    System.out.println("Decrease water level of each plot by " + drought + ".");
+
+                    Alert droughtAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    droughtAlert.setTitle("Drought Event");
+                    droughtAlert.setHeaderText("Decrease water level of each plot by " + drought + ".");
+                    droughtAlert.show();
                     break;
                 case 3:
-                    System.out.println("Locusts Event");
+                    int dead = 0;
+                    for (Plot pl : farm.getFarm()) {
+                        if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
+                            double locusts = Math.random();
+                            double probability = 0.5;
+                            String difficulty = Main.getPlayer().getDiff();
+
+                            switch (difficulty) {
+                                case "Easy":
+                                    probability = 0.3;
+                                    break;
+                                case "Normal":
+                                    probability = 0.5;
+                                    break;
+                                case "Hard":
+                                    probability = 0.7;
+                                    break;
+                            }
+
+                            if (locusts < probability) {
+                                pl.getCrop().setLifeStage(4);
+                                pl.setPlotImage(new Image("/images/Wilted.png"));
+                                dead++;
+                            }
+                        }
+                    }
+
+                    Alert locustsAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    locustsAlert.setTitle("Locusts Event");
+                    locustsAlert.setHeaderText(Integer.toString(dead) + " of your plant had been killed");
+                    locustsAlert.show();
                     break;
             }
         }
