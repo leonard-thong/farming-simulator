@@ -194,9 +194,12 @@ public class FarmScene {
     }
 
     private static void advanceDay() {
-        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
         for (Plot pl : farm.getFarm()) {
             if (pl.getCrop() != null) {
+                try {
+                    pl.getWorker().work(pl);
+                } catch (Exception ignored) {
+                }
                 if (pl.getWaterLevel() < 10) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
@@ -209,6 +212,7 @@ public class FarmScene {
                 }
             }
         }
+        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
         try {
             Main.getStage().setScene(FarmScene.getScene());
         } catch (FileNotFoundException e) {

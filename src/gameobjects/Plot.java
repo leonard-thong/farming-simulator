@@ -1,6 +1,7 @@
 package gameobjects;
 
 import gameobjects.items.crops.Crop;
+import gameobjects.npc.FarmWorker;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ public class Plot {
     private ImageView plotImage;
     private int waterLevel;
     private Crop crop;
+    private FarmWorker worker;
 
     public Plot() {
         plotImage = null;
@@ -18,22 +20,12 @@ public class Plot {
         crop = null;
     }
 
-    public void setCrop(Crop crop) {
-        this.crop = crop;
-    }
-
     public Crop getCrop() {
         return crop;
     }
 
-    public void setPlotImage(Image image) {
-        plotImage = new ImageView(image);
-        plotImage.setFitHeight(100);
-        plotImage.setFitWidth(100);
-        plotImage.setPickOnBounds(true);
-        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
-        tooltip.setShowDelay(Duration.seconds(.1));
-        Tooltip.install(plotImage, tooltip);
+    public void setCrop(Crop crop) {
+        this.crop = crop;
     }
 
     public void cropGrowth() {
@@ -44,7 +36,7 @@ public class Plot {
     public void waterPlant(int val) {
         if (waterLevel < 70) {
             waterLevel += val;
-            Tooltip tooltip = new Tooltip("Water Level: " + String.valueOf(this.getWaterLevel()));
+            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
             tooltip.setShowDelay(Duration.seconds(.1));
             Tooltip.install(plotImage, tooltip);
         } else {
@@ -58,6 +50,16 @@ public class Plot {
         return plotImage;
     }
 
+    public void setPlotImage(Image image) {
+        plotImage = new ImageView(image);
+        plotImage.setFitHeight(100);
+        plotImage.setFitWidth(100);
+        plotImage.setPickOnBounds(true);
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
+    }
+
     public int getWaterLevel() {
         return waterLevel;
     }
@@ -67,5 +69,13 @@ public class Plot {
         Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
+    }
+
+    public FarmWorker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(FarmWorker worker) {
+        this.worker = worker;
     }
 }
