@@ -36,7 +36,8 @@ public class Plot {
     public void waterPlant(int val) {
         if (waterLevel < 70) {
             waterLevel += val;
-            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
+                    + (this.worker != null));
             tooltip.setShowDelay(Duration.seconds(.1));
             Tooltip.install(plotImage, tooltip);
         } else {

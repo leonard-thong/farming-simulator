@@ -201,13 +201,15 @@ public class FarmScene {
                 Main.getPlayer().getInventory().remove(index);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("You do not have any pesticides! Buy pesticide from the market to use it.");
+                alert.setHeaderText("You do not have any pesticides! "
+                        + "Buy pesticide from the market to use it.");
                 alert.show();
             }
-                }
+        }
         );
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater, btnPesticide);
+        buttons.getChildren().addAll(btnInventory,
+                btnMarket, btnAdvanceDay, btnWater, btnPesticide);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);

@@ -147,8 +147,8 @@ public class MarketController implements Initializable {
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
             System.out.println(selected);
-//            System.out.println(selected.getKey());
-//            System.out.println(selected.getValue());
+            //            System.out.println(selected.getKey());
+            //            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
             emptySlot.setHeaderText("No item selected!");
             emptySlot.show();
