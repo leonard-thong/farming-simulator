@@ -218,7 +218,6 @@ public class FarmScene {
     }
 
     private static void advanceDay() {
-        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
         // 30% chance of random event
         if (Math.random() > 0.0) {
             int event = (int) (Math.random() * 3 + 1);
@@ -252,7 +251,7 @@ public class FarmScene {
             } else if (event == 3) {
                 int dead = 0;
                 for (Plot pl : farm.getFarm()) {
-                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
+                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4 && !pl.getCrop().getHasPesticide()) {
                         double locusts = Math.random();
                         double probability = 0.5;
                         String difficulty = Main.getPlayer().getDiff();
