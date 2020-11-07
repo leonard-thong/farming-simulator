@@ -5,16 +5,28 @@ import javafx.scene.image.Image;
 
 public abstract class Crop extends Item {
     private int lifeStage; // 0 -> Stage1, 1 -> Stage2, 2 -> Stage3, 3 -> Harvest, 4 -> Withered
+    private boolean hasPesticide;
+
+
 
     public Crop(int lifeStage, String type, double basePrice, Image image) {
         super(type, basePrice, image);
         this.lifeStage = lifeStage;
+        this.hasPesticide = false;
     }
 
     public abstract boolean harvest();
 
     public int getLifeStage() {
         return lifeStage;
+    }
+
+    public void setHasPesticide(boolean HasPesticide) {
+        this.hasPesticide = hasPesticide;
+    }
+
+    public boolean getHasPesticide() {
+        return this.hasPesticide;
     }
 
     public void setLifeStage(int lifeStage) {

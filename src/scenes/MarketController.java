@@ -4,10 +4,10 @@ import gameobjects.items.Item;
 import gameobjects.items.PlaceHolder;
 import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
+import gameobjects.items.crops.Crop;
 import gameobjects.items.crops.Sunflower;
-import gameobjects.items.tools.Axe;
-import gameobjects.items.tools.Shovel;
-import gameobjects.items.tools.Sickle;
+import gameobjects.items.tools.*;
+
 import gameobjects.npc.FarmWorker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -116,6 +116,10 @@ public class MarketController implements Initializable {
         market.get(4).addAll(Arrays.asList(new Axe()));
         market.put(5, new LinkedList<>());
         market.get(5).addAll(Arrays.asList(new Sickle()));
+        market.put(6, new LinkedList<>());
+        market.get(6).addAll(Arrays.asList(new Pesticide()));
+        market.put(7, new LinkedList<>());
+        market.get(7).addAll(Arrays.asList(new Fertilizer()));
         market.put(15, new LinkedList<>());
         market.get(15).addAll(Arrays.asList(new PlaceHolder()));
         moneyLabel.setText("" + Main.getPlayer().getMoney());
@@ -254,6 +258,17 @@ public class MarketController implements Initializable {
         ) {
             Item temp = Main.getPlayer().getInventory().remove(i);
             int price = (int) (temp.getBasePrice() * 5);
+            if (((Crop) temp).getHasPesticide()) {
+                int diffMultiplier = 0;
+                if ("Easy".equals(Main.getPlayer().getDiff())) {
+                    diffMultiplier = 5;
+                } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+                    diffMultiplier = 10;
+                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                    diffMultiplier = 15;
+                }
+                price = price - diffMultiplier;
+            }
             Main.getPlayer().setMoney(Main.getPlayer().getMoney() + price);
         }
         ObservableList<String> inventoryItems = FXCollections.observableArrayList();
