@@ -55,7 +55,8 @@ public class Plot {
         plotImage.setFitHeight(100);
         plotImage.setFitWidth(100);
         plotImage.setPickOnBounds(true);
-        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
+                + (this.worker != null));
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
@@ -66,7 +67,8 @@ public class Plot {
 
     public void setWaterLevel(int waterLevel) {
         this.waterLevel = waterLevel;
-        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
+                + (this.worker != null));
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
@@ -77,5 +79,9 @@ public class Plot {
 
     public void setWorker(FarmWorker worker) {
         this.worker = worker;
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
+                + (this.worker != null));
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
     }
 }

@@ -31,12 +31,25 @@ public class FarmWorker extends NPC {
         this(5, skill);
     }
 
-    public double getWage() {
+    public int getWage() {
         return wage;
     }
 
     public void setWage(int wage) {
         this.wage = wage;
+    }
+
+    public void setSkill(int skill) {
+        int baseWage = 5;
+        String diff = Main.getPlayer().getDiff();
+        if (diff.equals("Easy")) {
+            this.wage = (baseWage / 2) * skill;
+        } else if (diff.equals("Normal")) {
+            this.wage = baseWage * skill;
+        } else {
+            this.wage = baseWage * 2 * skill;
+        }
+        super.setSkill(skill);
     }
 
     public void work(Plot plot) {

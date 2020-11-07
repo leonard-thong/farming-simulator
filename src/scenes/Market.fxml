@@ -75,7 +75,7 @@
                 <Image url="@../images/empty_slot.jpg" />
             </ImageView>
             <ImageView fx:id="marketImageView15" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.rowIndex="3">
-                <Image url="@../images/empty_slot.jpg" />
+                <Image url="@../images/farm_worker.png" />
             </ImageView>
             <ImageView fx:id="marketImageView16" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <Image url="@../images/empty_slot.jpg" />

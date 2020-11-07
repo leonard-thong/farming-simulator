@@ -1,21 +1,20 @@
 package scenes;
 
 import gameobjects.items.Item;
+import gameobjects.items.PlaceHolder;
 import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
 import gameobjects.items.crops.Sunflower;
 import gameobjects.items.tools.Axe;
 import gameobjects.items.tools.Shovel;
 import gameobjects.items.tools.Sickle;
+import gameobjects.npc.FarmWorker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -107,7 +106,6 @@ public class MarketController implements Initializable {
         inventoryList.setItems(inventoryItems);
         market.put(0, new LinkedList<>());
         market.get(0).addAll(Arrays.asList(new Cauliflower()));
-        market.get(0);
         market.put(1, new LinkedList<>());
         market.get(1).addAll(Arrays.asList(new Corn()));
         market.put(2, new LinkedList<>());
@@ -118,6 +116,8 @@ public class MarketController implements Initializable {
         market.get(4).addAll(Arrays.asList(new Axe()));
         market.put(5, new LinkedList<>());
         market.get(5).addAll(Arrays.asList(new Sickle()));
+        market.put(15, new LinkedList<>());
+        market.get(15).addAll(Arrays.asList(new PlaceHolder()));
         moneyLabel.setText("" + Main.getPlayer().getMoney());
     }
 
@@ -142,9 +142,16 @@ public class MarketController implements Initializable {
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
+            System.out.println(selected);
+//            System.out.println(selected.getKey());
+//            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
             emptySlot.setHeaderText("No item selected!");
             emptySlot.show();
+            return;
+        }
+        if (selected.getValue() > 14) {
+            this.hire();
             return;
         }
         int diffMultiplier = 0;
@@ -178,6 +185,58 @@ public class MarketController implements Initializable {
             }
         }
     }
+
+    private void hire() {
+        ObservableList<Integer> skills = FXCollections.observableArrayList();
+        for (int i = 1; i < 6; i++) {
+            skills.add(i);
+        }
+        ChoiceDialog<Integer> selectSkill = new ChoiceDialog<>(skills.get(0), skills);
+        selectSkill.setTitle("Skill selection");
+        selectSkill.setHeaderText("Please select a skill level ");
+        Optional<Integer> skill = selectSkill.showAndWait();
+        FarmWorker worker = new FarmWorker();
+        skill.ifPresent(worker::setSkill);
+
+        ObservableList<Integer> plots =
+                FXCollections.observableArrayList();
+        for (int i = 0; i < 25; i++) {
+            if (FarmScene.getFarm()[i].getCrop() != null) {
+                plots.add(i + 1);
+            }
+        }
+        if (plots.size() == 0) {
+            Alert noPlots = new Alert(Alert.AlertType.ERROR);
+            noPlots.setTitle("No plots available");
+            noPlots.setHeaderText("Please plant some crops!");
+            noPlots.show();
+            return;
+        }
+
+        ChoiceDialog<Integer> plotSelect = new ChoiceDialog<>(plots.get(0), plots);
+        plotSelect.setTitle("Plot Choice");
+        plotSelect.setHeaderText("Select a plot ");
+
+        Optional<Integer> result = plotSelect.showAndWait();
+        int selectedPlot;
+
+        if (result.isPresent()) {
+            selectedPlot = result.get();
+            // FarmScene.getFarm()[selectedPlot - 1].setPlotImage(crop.getImage());
+            int price = worker.getWage();
+            int money = Main.getPlayer().getMoney();
+            if (money < price) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Not enough money!");
+                alert.show();
+            } else {
+                Main.getPlayer().setMoney(money - price);
+                moneyLabel.setText("" + Main.getPlayer().getMoney());
+                FarmScene.getFarm()[selectedPlot - 1].setWorker(worker);
+            }
+        }
+    }
+
 
     @FXML
     void sell(ActionEvent e) {

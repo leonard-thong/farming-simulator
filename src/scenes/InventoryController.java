@@ -147,7 +147,7 @@ public class InventoryController implements Initializable {
                         }
                     }
 
-                    ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+                    ChoiceDialog<Integer> dialog = new ChoiceDialog<>(options.get(0), options);
                     dialog.setTitle("Plot Choice");
                     dialog.setHeaderText("Select a plot ");
 
