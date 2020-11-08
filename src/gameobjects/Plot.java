@@ -13,11 +13,15 @@ public class Plot {
     private int waterLevel;
     private Crop crop;
     private FarmWorker worker;
+    private int fertilizerLevel;
+    private int growth;
 
     public Plot() {
         plotImage = null;
         waterLevel = 0;
         crop = null;
+        fertilizerLevel = 0;
+        growth = 0;
     }
 
     public Crop getCrop() {
@@ -26,23 +30,48 @@ public class Plot {
 
     public void setCrop(Crop crop) {
         this.crop = crop;
+
     }
 
     public void cropGrowth() {
-        this.crop.grow();
-        this.setPlotImage(this.crop.getImage());
+        if (waterLevel > 0) {
+            growth++;
+        }
+        if (fertilizerLevel > 0) {
+            growth++;
+        }
+        if (growth >= 3) {
+            growth = 0;
+            this.crop.grow();
+            this.setPlotImage(this.crop.getImage());
+        }
     }
 
     public void waterPlant(int val) {
         if (waterLevel < 70) {
             waterLevel += val;
             Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
-                    + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide());
+                    + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide()
+                    + "\nFertilizer Level: " + this.getFertilizerLevel());
             tooltip.setShowDelay(Duration.seconds(.1));
             Tooltip.install(plotImage, tooltip);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Water level reached max (70)");
+            alert.show();
+        }
+    }
+
+    public void addFertilizer(int val) {
+        if (fertilizerLevel < 50) {
+            fertilizerLevel += val;
+            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: "
+                    + this.getFertilizerLevel());
+            tooltip.setShowDelay(Duration.seconds(.1));
+            Tooltip.install(plotImage, tooltip);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Water level reached max (50)");
             alert.show();
         }
     }
@@ -57,7 +86,8 @@ public class Plot {
         plotImage.setFitWidth(100);
         plotImage.setPickOnBounds(true);
         Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
-                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide());
+                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide()
+                + "\nFertilizer Level: " + this.getFertilizerLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
@@ -69,7 +99,8 @@ public class Plot {
     public void setWaterLevel(int waterLevel) {
         this.waterLevel = waterLevel;
         Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
-                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide());
+                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide()
+                + "\nFertilizer Level: " + this.getFertilizerLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
@@ -81,8 +112,21 @@ public class Plot {
     public void setWorker(FarmWorker worker) {
         this.worker = worker;
         Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
-                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide());
+                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide()
+                + "\nFertilizer Level: " + this.getFertilizerLevel());
+    }
+
+    public int getFertilizerLevel() {
+        return fertilizerLevel;
+    }
+
+    public void setFertilizerLevel(int fertilizerLevel) {
+        this.fertilizerLevel = fertilizerLevel;
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nWorker: "
+                + (this.worker != null) + "\nPesticide: " + this.crop.getHasPesticide()
+                + "\nFertilizer Level: " + this.getFertilizerLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
+
 }
