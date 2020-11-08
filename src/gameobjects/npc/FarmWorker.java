@@ -63,24 +63,25 @@ public class FarmWorker extends NPC {
         }
         if (plot.getCrop().getLifeStage() == 3) {
             for (int i = 0; i < this.getSkill(); i++) {
-                int diffMultiplier = 0;
+                double diffMultiplier = 1;
                 if (plot.getCrop().getHasPesticide()) {
                     if ("Easy".equals(Main.getPlayer().getDiff())) {
-                        diffMultiplier = 5;
+                        diffMultiplier = 0.9;
                     } else if ("Normal".equals(Main.getPlayer().getDiff())) {
-                        diffMultiplier = 10;
+                        diffMultiplier = 0.8;
                     } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                        diffMultiplier = 15;
+                        diffMultiplier = 0.7;
                     }
                 }
-                player.setMoney((int) (player.getMoney() + (plot.getCrop().getBasePrice() * 5) - diffMultiplier));
+                player.setMoney((int) (player.getMoney()
+                        + (plot.getCrop().getBasePrice() * 5) * diffMultiplier));
             }
             plot.getCrop().setLifeStage(1);
             plot.getCrop().setHasPesticide(false);
             plot.setPlotImage(plot.getCrop().getImage());
         }
         if (plot.getWaterLevel() <= 10) {
-            plot.setWaterLevel(plot.getWaterLevel() + (this.getSkill() * 5));
+            plot.setWaterLevel(plot.getWaterLevel() + (this.getSkill() * 10));
         }
     }
 

@@ -145,7 +145,7 @@ public class MarketController implements Initializable {
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
-            System.out.println(selected);
+            //            System.out.println(selected);
             //            System.out.println(selected.getKey());
             //            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
@@ -261,16 +261,18 @@ public class MarketController implements Initializable {
         ) {
             Item temp = Main.getPlayer().getInventory().remove(i);
             int price = (int) (temp.getBasePrice() * 5);
-            if (((Crop) temp).getHasPesticide()) {
-                int diffMultiplier = 0;
-                if ("Easy".equals(Main.getPlayer().getDiff())) {
-                    diffMultiplier = 5;
-                } else if ("Normal".equals(Main.getPlayer().getDiff())) {
-                    diffMultiplier = 10;
-                } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                    diffMultiplier = 15;
+            if (temp instanceof Crop) {
+                if (((Crop) temp).getHasPesticide()) {
+                    double diffMultiplier = 1;
+                    if ("Easy".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.9;
+                    } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.8;
+                    } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.7;
+                    }
+                    price = (int) (price * diffMultiplier);
                 }
-                price = price - diffMultiplier;
             }
             Main.getPlayer().setMoney(Main.getPlayer().getMoney() + price);
         }

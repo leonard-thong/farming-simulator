@@ -75,64 +75,9 @@ public class FarmScene {
         StackPane.setAlignment(date, Pos.TOP_CENTER);
         GridPane gridpane = new GridPane();
         gridpane.setId("plotgrid");
-        for (int i = 0; i < 25; i++) {
-            int finalI = i;
-            if (farm.getFarm()[i].getPlotImage() != null) {
-                // INSERT  HERE
-                farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
-                    if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
-                        if (Main.getPlayer().getInventory().size() == 25) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("Not enough space in inventory!");
-                            alert.show();
-                            return;
-                        }
-                        int fertilizer = farm.getFarm()[finalI].getFertilizerLevel();
-                        double chance = Math.random();
-                        if (fertilizer > 0 && chance > 0.5) {
-                            Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
-                        }
-                        Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
-                        farm.getFarm()[finalI] = new Plot();
-                        Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                        nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
-                        nameAlert.setTitle("Successfully Harvested!");
-                        nameAlert.show();
-                        try {
-                            Main.getStage().setScene(FarmScene.getScene());
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
-                        nameAlert.setHeaderText("The crop still needs to grow");
-                        nameAlert.setTitle("Cannot Harvest!");
-                        nameAlert.show();
-                    } // change functionality
-                });
-            }
-        }
+        FarmScene.harvest();
         gridpane.setMaxSize(750, 600);
-        int tracker = -1;
-        for (int i = 0; i < 5; i++) {
-            gridpane.addRow(i,
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1)))
-            );
-        }
+        FarmScene.buildFarm(gridpane);
         gridpane.setAlignment(Pos.CENTER);
         for (Node cell : gridpane.getChildren()) {
             if (cell instanceof Control) {
@@ -195,48 +140,48 @@ public class FarmScene {
         btnPesticide.setId("addPesticideButton");
         btnPesticide.setText("Pesticide");
         btnPesticide.setOnAction(event -> {
-                    int index = -1;
-                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
-                        if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index != -1) {
-                        int num = addPesticide();
-                        if (num != -1) {
-                            Main.getPlayer().getInventory().remove(index);
-                        }
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("You do not have any pesticides! "
-                                + "Buy pesticide from the market to use it.");
-                        alert.show();
-                    }
+            int index = -1;
+            for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
+                    index = i;
+                    break;
                 }
-        );
+            }
+            if (index != -1) {
+                int num = addPesticide();
+                if (num != -1) {
+                    Main.getPlayer().getInventory().remove(index);
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("You do not have any pesticides! "
+                        + "Buy pesticide from the market to use it.");
+                alert.show();
+            }
+        });
         Button btnFertilizer = new Button();
         btnFertilizer.setId("fertilizerButton");
         btnFertilizer.setText("Fertilizer");
         btnFertilizer.setOnAction(event -> {
-                    int index = -1;
-                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
-                        if (Main.getPlayer().getInventory().get(i) instanceof Fertilizer) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index != -1) {
-                        boolean var = addFertilizer();
-                        if (var) {
-                            Main.getPlayer().getInventory().remove(index);
-                        }
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("You do not have any fertilizers! Buy fertilizer from the market to use it.");
-                        alert.show();
+                int index = -1;
+                for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                    if (Main.getPlayer().getInventory().get(i) instanceof Fertilizer) {
+                        index = i;
+                        break;
                     }
                 }
+                if (index != -1) {
+                    boolean var = addFertilizer();
+                    if (var) {
+                        Main.getPlayer().getInventory().remove(index);
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("You do not have any fertilizers! "
+                            + "Buy fertilizer from the market to use it.");
+                    alert.show();
+                }
+            }
         );
         HBox buttons = new HBox();
         buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater,
@@ -289,7 +234,8 @@ public class FarmScene {
             } else if (event == 3) {
                 int dead = 0;
                 for (Plot pl : farm.getFarm()) {
-                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4 && !pl.getCrop().getHasPesticide()) {
+                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4
+                            && !pl.getCrop().getHasPesticide()) {
                         double locusts = Math.random();
 
                         if (locusts > probability) {
@@ -420,6 +366,69 @@ public class FarmScene {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Plant some crops to water!");
             alert.show();
+        }
+    }
+
+    public static void harvest() {
+        for (int i = 0; i < 25; i++) {
+            int finalI = i;
+            if (farm.getFarm()[i].getPlotImage() != null) {
+                // INSERT  HERE
+                farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
+                    if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
+                        if (Main.getPlayer().getInventory().size() == 25) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("Not enough space in inventory!");
+                            alert.show();
+                            return;
+                        }
+                        int fertilizer = farm.getFarm()[finalI].getFertilizerLevel();
+                        double chance = Math.random();
+                        if (fertilizer > 0 && chance > 0.5) {
+                            Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
+                        }
+                        Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
+                        farm.getFarm()[finalI] = new Plot();
+                        Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                        nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
+                        nameAlert.setTitle("Successfully Harvested!");
+                        nameAlert.show();
+                        try {
+                            Main.getStage().setScene(FarmScene.getScene());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+                        nameAlert.setHeaderText("The crop still needs to grow");
+                        nameAlert.setTitle("Cannot Harvest!");
+                        nameAlert.show();
+                    } // change functionality
+                });
+            }
+        }
+    }
+
+    public static void buildFarm(GridPane gridPane) {
+        int tracker = -1;
+        for (int i = 0; i < 5; i++) {
+            gridPane.addRow(i,
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm()[++tracker].getPlotImage() != null
+                            ? farm.getFarm()[tracker].getPlotImage() : new
+                            Label("" + (tracker + 1)))
+            );
         }
     }
 }
