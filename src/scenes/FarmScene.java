@@ -190,25 +190,25 @@ public class FarmScene {
         btnPesticide.setId("addPesticideButton");
         btnPesticide.setText("Pesticide");
         btnPesticide.setOnAction(event -> {
-            int index = -1;
-            for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
-                if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
-                    index = i;
-                    break;
+                    int index = -1;
+                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                        if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1) {
+                        int num = addPesticide();
+                        if (num != -1) {
+                            Main.getPlayer().getInventory().remove(index);
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("You do not have any pesticides! "
+                                + "Buy pesticide from the market to use it.");
+                        alert.show();
+                    }
                 }
-            }
-            if (index != -1) {
-                int num = addPesticide();
-                if (num != -1) {
-                    Main.getPlayer().getInventory().remove(index);
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("You do not have any pesticides! "
-                        + "Buy pesticide from the market to use it.");
-                alert.show();
-            }
-        }
         );
         Button btnFertilizer = new Button();
         btnFertilizer.setId("fertilizerButton");
@@ -349,7 +349,7 @@ public class FarmScene {
 
             if (result.isPresent()) {
                 selectedPlot = result.get();
-                FarmScene.getFarm()[selectedPlot - 1].getCrop().setHasPesticide(true);
+                FarmScene.getFarm()[selectedPlot - 1].addPesticide();
             }
             return 0;
         } else {

@@ -7,7 +7,6 @@ import gameobjects.items.crops.Corn;
 import gameobjects.items.crops.Crop;
 import gameobjects.items.crops.Sunflower;
 import gameobjects.items.tools.*;
-
 import gameobjects.npc.FarmWorker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -232,6 +231,10 @@ public class MarketController implements Initializable {
             if (money < price) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Not enough money!");
+                alert.show();
+            } else if (FarmScene.getFarm()[selectedPlot - 1].getWorker() != null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Plot already has a worker!");
                 alert.show();
             } else {
                 Main.getPlayer().setMoney(money - price);
