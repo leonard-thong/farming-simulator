@@ -122,4 +122,19 @@ class FarmSceneTest {
         }
         assertTrue(chk);
     }
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void fertilizeButtonExists() {
+        verifyThat("#fertilizerButton", isVisible());
+    }
+
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void pesticideButtonExists(FxRobot robot) {
+        verifyThat("#addPesticideButton", isVisible());
+    }
 }

@@ -1,0 +1,5 @@
+For M5 we checked if the fertilize button exists in farmscene as we need a way to apply fertilizer.
+We checked if pesticide button exists in farmscene as we need a way to apply pesticide.
+We checked if worker is in the market, as the player needs an option to hire a worker to increase efficiency.
+We checked if fertilizer is in the market, and is available to be purchased.
+We checked if pesticide is in the market, and is available to be purchased.

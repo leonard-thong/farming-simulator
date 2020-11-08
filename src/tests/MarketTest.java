@@ -1,5 +1,8 @@
 package tests;
 
+import gameobjects.items.tools.Fertilizer;
+import gameobjects.items.tools.Pesticide;
+import gameobjects.npc.FarmWorker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -90,6 +93,61 @@ class MarketTest {
             if (child instanceof ImageView) {
                 chk = true;
                 break;
+            }
+        }
+        assertTrue(chk);
+    }
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void checksIfPesticideInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                System.out.println(((ImageView) child).getImage().getUrl());
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/Desktop/FarmSim/out/production/FarmSim/images/Pesticide.png")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void checksIfFertilizerInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/Desktop/FarmSim/out/production/FarmSim/images/Fertilizer.png")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
+    /**
+    * Implemented for M5
+    */
+    @Test
+    void checksIfWorkerInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/Desktop/FarmSim/out/production/FarmSim/images/farm_worker.png")) {
+                    chk = true;
+                    break;
+                }
+
             }
         }
         assertTrue(chk);
