@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class Fertilizer extends Tool {
     public Fertilizer() {
-        super("Fertilizer", 3, new Image("/images/Fertilizer.png"));
+        super("Fertilizer", 2, new Image("/images/Fertilizer.png"));
     }
 
     @Override

@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class Pesticide extends Tool {
     public Pesticide() {
-        super("Pesticide", 2, new Image("/images/Pesticide.png"));
+        super("Pesticide", 2.5, new Image("/images/Pesticide.png"));
     }
 
     @Override

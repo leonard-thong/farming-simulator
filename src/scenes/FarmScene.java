@@ -2,6 +2,7 @@ package scenes;
 
 import gameobjects.Farm;
 import gameobjects.Plot;
+import gameobjects.items.tools.Fertilizer;
 import gameobjects.items.tools.Pesticide;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -182,7 +183,7 @@ public class FarmScene {
         btnAdvanceDay.setText("Advance Day");
         btnAdvanceDay.setOnAction(event -> advanceDay());
         Button btnWater = new Button();
-        btnWater.setId("advanceDayButton");
+        btnWater.setId("waterButton");
         btnWater.setText("Water");
         btnWater.setOnAction(event -> water());
         Button btnPesticide = new Button();
@@ -197,8 +198,10 @@ public class FarmScene {
                 }
             }
             if (index != -1) {
-                addPesticide();
-                Main.getPlayer().getInventory().remove(index);
+                int num = addPesticide();
+                if (num != -1) {
+                    Main.getPlayer().getInventory().remove(index);
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("You do not have any pesticides! Buy pesticide from the market to use it.");
@@ -206,8 +209,31 @@ public class FarmScene {
             }
                 }
         );
+        Button btnFertilizer = new Button();
+        btnFertilizer.setId("fertilizerButton");
+        btnFertilizer.setText("Fertilizer");
+        btnFertilizer.setOnAction(event -> {
+                    int index = -1;
+                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                        if (Main.getPlayer().getInventory().get(i) instanceof Fertilizer) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1) {
+                        boolean var = addFertilizer();
+                        if (var) {
+                            Main.getPlayer().getInventory().remove(index);
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("You do not have any fertilizers! Buy fertilizer from the market to use it.");
+                        alert.show();
+                    }
+                }
+        );
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater, btnPesticide);
+        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater, btnPesticide, btnFertilizer);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
@@ -229,6 +255,9 @@ public class FarmScene {
                     pl.cropGrowth();
                     pl.setWaterLevel(pl.getWaterLevel() - 5);
                 }
+                if (pl.getFertilizerLevel() > 0) {
+                    pl.setFertilizerLevel(pl.getFertilizerLevel() - 5);
+                }
             }
         }
         try {
@@ -238,7 +267,7 @@ public class FarmScene {
         }
     }
 
-    public static void addPesticide() {
+    public static int addPesticide() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
@@ -259,11 +288,43 @@ public class FarmScene {
                 selectedPlot = result.get();
                 FarmScene.getFarm()[selectedPlot - 1].getCrop().setHasPesticide(true);
             }
+            return 0;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Plant some crops to add pesticide to!");
             alert.show();
+            return -1;
         }
+    }
+
+    public static boolean addFertilizer() {
+        ObservableList<Integer> options =
+                FXCollections.observableArrayList();
+        for (int i = 0; i < 25; i++) {
+            if (FarmScene.getFarm()[i].getCrop() != null) {
+                options.add(i + 1);
+            }
+        }
+
+        if (options.size() > 0) {
+            ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+            dialog.setTitle("Plot Choice");
+            dialog.setHeaderText("Select a plot ");
+
+            Optional<Integer> result = dialog.showAndWait();
+            int selectedPlot;
+
+            if (result.isPresent()) {
+                selectedPlot = result.get();
+                FarmScene.getFarm()[selectedPlot - 1].addFertilizer(10);
+                return true;
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Plant some crops to add fertilizer to!");
+            alert.show();
+        }
+        return false;
     }
 
     public static void water() {

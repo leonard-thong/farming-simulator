@@ -55,9 +55,9 @@ public class ConfigSceneController {
             if (diffComboBox.getValue() != null) {
                 Main.getPlayer().setDiff(diffComboBox.getValue());
                 if ("Easy".equals(Main.getPlayer().getDiff())) {
-                    Main.getPlayer().setMoney(100);
+                    Main.getPlayer().setMoney(200);
                 } else if ("Hard".equals(Main.getPlayer().getDiff())) {
-                    Main.getPlayer().setMoney(25);
+                    Main.getPlayer().setMoney(50);
                 }
             }
             Main.getStage().setScene(FarmScene.getScene());

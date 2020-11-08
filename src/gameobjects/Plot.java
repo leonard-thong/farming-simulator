@@ -11,11 +11,15 @@ public class Plot {
     private ImageView plotImage;
     private int waterLevel;
     private Crop crop;
+    private int fertilizerLevel;
+    private int growth;
 
     public Plot() {
         plotImage = null;
         waterLevel = 0;
         crop = null;
+        fertilizerLevel = 0;
+        growth = 0;
     }
 
     public void setCrop(Crop crop) {
@@ -31,25 +35,47 @@ public class Plot {
         plotImage.setFitHeight(100);
         plotImage.setFitWidth(100);
         plotImage.setPickOnBounds(true);
-        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: " + this.getFertilizerLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
 
     public void cropGrowth() {
-        this.crop.grow();
-        this.setPlotImage(this.crop.getImage());
+        if (waterLevel > 0) {
+            growth++;
+        }
+        if (fertilizerLevel > 0) {
+            growth++;
+        }
+        if (growth >= 3) {
+            growth = 0;
+            this.crop.grow();
+            this.setPlotImage(this.crop.getImage());
+        }
     }
 
     public void waterPlant(int val) {
         if (waterLevel < 70) {
             waterLevel += val;
-            Tooltip tooltip = new Tooltip("Water Level: " + String.valueOf(this.getWaterLevel()));
+            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: " + this.getFertilizerLevel());
             tooltip.setShowDelay(Duration.seconds(.1));
             Tooltip.install(plotImage, tooltip);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Water level reached max (70)");
+            alert.show();
+        }
+    }
+
+    public void addFertilizer(int val) {
+        if (fertilizerLevel < 50) {
+            fertilizerLevel += val;
+            Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: " + this.getFertilizerLevel());
+            tooltip.setShowDelay(Duration.seconds(.1));
+            Tooltip.install(plotImage, tooltip);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Water level reached max (50)");
             alert.show();
         }
     }
@@ -64,7 +90,18 @@ public class Plot {
 
     public void setWaterLevel(int waterLevel) {
         this.waterLevel = waterLevel;
-        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel());
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: " + this.getFertilizerLevel());
+        tooltip.setShowDelay(Duration.seconds(.1));
+        Tooltip.install(plotImage, tooltip);
+    }
+
+    public int getFertilizerLevel() {
+        return fertilizerLevel;
+    }
+
+    public void setFertilizerLevel(int fertilizerLevel) {
+        this.fertilizerLevel = fertilizerLevel;
+        Tooltip tooltip = new Tooltip("Water Level: " + this.getWaterLevel() + "\nFertilizer Level: " + this.getFertilizerLevel());
         tooltip.setShowDelay(Duration.seconds(.1));
         Tooltip.install(plotImage, tooltip);
     }
