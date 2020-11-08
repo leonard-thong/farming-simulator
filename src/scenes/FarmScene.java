@@ -87,6 +87,11 @@ public class FarmScene {
                             alert.show();
                             return;
                         }
+                        int fertilizer = farm.getFarm()[finalI].getFertilizerLevel();
+                        double chance = Math.random();
+                        if (fertilizer > 0 && chance > 0.5) {
+                            Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
+                        }
                         Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
                         farm.getFarm()[finalI] = new Plot();
                         Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
