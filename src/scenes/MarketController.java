@@ -120,10 +120,10 @@ public class MarketController implements Initializable {
         market.get(4).addAll(Arrays.asList(new Axe()));
         market.put(5, new LinkedList<>());
         market.get(5).addAll(Arrays.asList(new Sickle()));
-        market.put(6, new LinkedList<>());
-        market.get(6).addAll(Arrays.asList(new Tractor()));
-        market.put(7, new LinkedList<>());
-        market.get(7).addAll(Arrays.asList(new Irrigation()));
+        market.put(8, new LinkedList<>());
+        market.get(8).addAll(Arrays.asList(new Tractor()));
+        market.put(9, new LinkedList<>());
+        market.get(9).addAll(Arrays.asList(new Irrigation()));
         moneyLabel.setText("" + Main.getPlayer().getMoney());
     }
 

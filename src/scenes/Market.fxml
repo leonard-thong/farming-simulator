@@ -48,16 +48,16 @@
                 <Image url="@../images/Sickle.png" />
             </ImageView>
             <ImageView fx:id="marketImageView6" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <Image url="@../images/Tractor.png" />
+                <Image url="@../images/empty_slot.jpg" />
             </ImageView>
             <ImageView fx:id="marketImageView7" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <Image url="@../images/Irrigation.png" />
+                <Image url="@../images/empty_slot.jpg" />
             </ImageView>
             <ImageView fx:id="marketImageView8" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                 <Image url="@../images/empty_slot.jpg" />
             </ImageView>
             <ImageView fx:id="marketImageView9" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                <Image url="@../images/empty_slot.jpg" />
+                <Image url="@../images/Tractor.png" />
             </ImageView>
             <ImageView fx:id="marketImageView10" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#select" pickOnBounds="true" GridPane.rowIndex="2">
                 <Image url="@../images/empty_slot.jpg" />
