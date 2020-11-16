@@ -27,7 +27,9 @@ class InventoryTest {
         stage.show();
         stage.toFront();
     }
-
+    /**
+     * Implemented for M4
+     */
     @Test
     void drop(FxRobot robot) {
         robot.clickOn("#inventoryImageView0");

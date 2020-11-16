@@ -10,7 +10,7 @@ public class WateringCan extends Tool {
 
     @Override
     public void action(Crop crop) {
-        crop.incrLifeStage();
+        crop.grow();
         this.setDurability(this.getDurability() - 1);
     }
 }

@@ -133,7 +133,7 @@ public class InventoryController implements Initializable {
             int selectedItem = Integer.parseInt(selectedID.substring(18));
             if (Main.getPlayer().getInventory().get(selectedItem) instanceof Crop) {
                 Crop crop = (Crop) Main.getPlayer().getInventory().get(selectedItem);
-                if (crop.getLifeStage() != 1) {
+                if (crop.getLifeStage() != 0) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("You can only plant a seed");
                     System.out.println(crop.getLifeStage());
@@ -147,7 +147,7 @@ public class InventoryController implements Initializable {
                         }
                     }
 
-                    ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+                    ChoiceDialog<Integer> dialog = new ChoiceDialog<>(options.get(0), options);
                     dialog.setTitle("Plot Choice");
                     dialog.setHeaderText("Select a plot ");
 

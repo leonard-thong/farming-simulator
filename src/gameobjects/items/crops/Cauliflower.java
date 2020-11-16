@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Cauliflower extends Crop {
     public Cauliflower() {
-        super(1, "Cauliflower", 1.5,
+        super(0, "Cauliflower", 1.5,
                 new Image("/images/Cauliflower_Stage_1.png"));
         if (super.getLifeStage() == 1) {
             super.setImage(new Image("images/Cauliflower_Stage_2.png"));

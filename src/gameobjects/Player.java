@@ -14,7 +14,7 @@ public class Player {
     private ArrayList<Item> inventory = new ArrayList<>(25);
 
     public Player() {
-        this(1, 50, "Normal", "Spring", "Aibek");
+        this(1, 100, "Normal", "Spring", "Aibek");
     }
 
     public Player(int day, int money, String diff, String startingSeason,

@@ -1,23 +1,27 @@
 package scenes;
 
 import gameobjects.items.Item;
+import gameobjects.items.PlaceHolder;
 import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
+import gameobjects.items.crops.Crop;
 import gameobjects.items.crops.Sunflower;
+<<<<<<< HEAD
 import gameobjects.items.tools.Axe;
 import gameobjects.items.tools.Irrigation;
 import gameobjects.items.tools.Shovel;
 import gameobjects.items.tools.Sickle;
 import gameobjects.items.tools.Tractor;
+=======
+import gameobjects.items.tools.*;
+import gameobjects.npc.FarmWorker;
+>>>>>>> master
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -109,7 +113,6 @@ public class MarketController implements Initializable {
         inventoryList.setItems(inventoryItems);
         market.put(0, new LinkedList<>());
         market.get(0).addAll(Arrays.asList(new Cauliflower()));
-        market.get(0);
         market.put(1, new LinkedList<>());
         market.get(1).addAll(Arrays.asList(new Corn()));
         market.put(2, new LinkedList<>());
@@ -120,10 +123,16 @@ public class MarketController implements Initializable {
         market.get(4).addAll(Arrays.asList(new Axe()));
         market.put(5, new LinkedList<>());
         market.get(5).addAll(Arrays.asList(new Sickle()));
+        market.put(6, new LinkedList<>());
+        market.get(6).addAll(Arrays.asList(new Pesticide()));
+        market.put(7, new LinkedList<>());
+        market.get(7).addAll(Arrays.asList(new Fertilizer()));
         market.put(8, new LinkedList<>());
         market.get(8).addAll(Arrays.asList(new Tractor()));
         market.put(9, new LinkedList<>());
         market.get(9).addAll(Arrays.asList(new Irrigation()));
+        market.put(15, new LinkedList<>());
+        market.get(15).addAll(Arrays.asList(new PlaceHolder()));
         moneyLabel.setText("" + Main.getPlayer().getMoney());
     }
 
@@ -148,9 +157,16 @@ public class MarketController implements Initializable {
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
+            //            System.out.println(selected);
+            //            System.out.println(selected.getKey());
+            //            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
             emptySlot.setHeaderText("No item selected!");
             emptySlot.show();
+            return;
+        }
+        if (selected.getValue() > 14) {
+            this.hire();
             return;
         }
         int diffMultiplier = 0;
@@ -185,6 +201,62 @@ public class MarketController implements Initializable {
         }
     }
 
+    private void hire() {
+        ObservableList<Integer> skills = FXCollections.observableArrayList();
+        for (int i = 1; i < 6; i++) {
+            skills.add(i);
+        }
+        ChoiceDialog<Integer> selectSkill = new ChoiceDialog<>(skills.get(0), skills);
+        selectSkill.setTitle("Skill selection");
+        selectSkill.setHeaderText("Please select a skill level ");
+        Optional<Integer> skill = selectSkill.showAndWait();
+        FarmWorker worker = new FarmWorker();
+        skill.ifPresent(worker::setSkill);
+
+        ObservableList<Integer> plots =
+                FXCollections.observableArrayList();
+        for (int i = 0; i < 25; i++) {
+            if (FarmScene.getFarm()[i].getCrop() != null) {
+                plots.add(i + 1);
+            }
+        }
+        if (plots.size() == 0) {
+            Alert noPlots = new Alert(Alert.AlertType.ERROR);
+            noPlots.setTitle("No plots available");
+            noPlots.setHeaderText("Please plant some crops!");
+            noPlots.show();
+            return;
+        }
+
+        ChoiceDialog<Integer> plotSelect = new ChoiceDialog<>(plots.get(0), plots);
+        plotSelect.setTitle("Plot Choice");
+        plotSelect.setHeaderText("Select a plot ");
+
+        Optional<Integer> result = plotSelect.showAndWait();
+        int selectedPlot;
+
+        if (result.isPresent()) {
+            selectedPlot = result.get();
+            // FarmScene.getFarm()[selectedPlot - 1].setPlotImage(crop.getImage());
+            int price = worker.getWage();
+            int money = Main.getPlayer().getMoney();
+            if (money < price) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Not enough money!");
+                alert.show();
+            } else if (FarmScene.getFarm()[selectedPlot - 1].getWorker() != null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Plot already has a worker!");
+                alert.show();
+            } else {
+                Main.getPlayer().setMoney(money - price);
+                moneyLabel.setText("" + Main.getPlayer().getMoney());
+                FarmScene.getFarm()[selectedPlot - 1].setWorker(worker);
+            }
+        }
+    }
+
+
     @FXML
     void sell(ActionEvent e) {
         if (Main.getPlayer().getInventory().size() == 0) {
@@ -201,6 +273,19 @@ public class MarketController implements Initializable {
         ) {
             Item temp = Main.getPlayer().getInventory().remove(i);
             int price = (int) (temp.getBasePrice() * 5);
+            if (temp instanceof Crop) {
+                if (((Crop) temp).getHasPesticide()) {
+                    double diffMultiplier = 1;
+                    if ("Easy".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.9;
+                    } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.8;
+                    } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+                        diffMultiplier = 0.7;
+                    }
+                    price = (int) (price * diffMultiplier);
+                }
+            }
             Main.getPlayer().setMoney(Main.getPlayer().getMoney() + price);
         }
         ObservableList<String> inventoryItems = FXCollections.observableArrayList();

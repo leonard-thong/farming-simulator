@@ -1,0 +1,8 @@
+For M4, we created a test to check if the advanceDay button works, as day is incremented by 1.
+We also created a check to ensure all plots are empty in farm scene once we just start a new game.
+We checked if drop button works properly in InventoryScreen, in order to ensure item no longer remains
+in inventory once dropped.
+We made a test to ensure market is not empty once we start a new game, so that the player is able to
+purchase any items at the start.
+We also wrote a test to ensure market background color is set to black, in order to maintain
+uniformity with the other scenes.

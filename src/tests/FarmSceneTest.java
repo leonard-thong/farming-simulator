@@ -1,6 +1,7 @@
 package tests;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -79,7 +80,9 @@ class FarmSceneTest {
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 vbox.getBackground().getFills().get(0));
     }
-
+    /**
+     * Implemented for M4
+     */
     @Test
     void checksCrops(FxRobot robot) {
         GridPane grid = robot.lookup("#plotgrid").query();
@@ -91,10 +94,47 @@ class FarmSceneTest {
             }
         }
         assertTrue(chk);
+
     }
+    /**
+     * Implemented for M4
+     */
     @Test
     void advanceDay(FxRobot robot) {
         robot.clickOn("#advanceDayButton");
         assertEquals(Main.getPlayer().getDay(), 2);
+    }
+    /**
+     * Implemented for M4
+     */
+    @Test
+    void checksPlotInFarmIsEmptyAtStart(FxRobot robot) {
+        GridPane grid = robot.lookup("#plotgrid").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof Label) {
+                chk = true;
+
+            } else {
+                chk = false;
+                break;
+            }
+        }
+        assertTrue(chk);
+    }
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void fertilizeButtonExists() {
+        verifyThat("#fertilizerButton", isVisible());
+    }
+
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void pesticideButtonExists(FxRobot robot) {
+        verifyThat("#addPesticideButton", isVisible());
     }
 }

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.InventoryController">
+<BorderPane style="-fx-background-color: BLACK" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.InventoryController">
     <center>
-        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: GREY" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -105,11 +100,11 @@
             </children>
         </GridPane>
     </center>
-   <bottom>
-       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" text="Drop" />
-         <Button fx:id="plantButton" mnemonicParsing="false" onAction="#plant" text="Plant " />
-         <Button fx:id="plantButton1" layoutX="55.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-       </HBox>
-   </bottom>
+    <bottom>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" text="Drop" />
+            <Button fx:id="plantButton" mnemonicParsing="false" onAction="#plant" text="Plant " />
+            <Button fx:id="plantButton1" layoutX="55.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+        </HBox>
+    </bottom>
 </BorderPane>
