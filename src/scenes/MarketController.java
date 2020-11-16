@@ -2,20 +2,9 @@ package scenes;
 
 import gameobjects.items.Item;
 import gameobjects.items.PlaceHolder;
-import gameobjects.items.crops.Cauliflower;
-import gameobjects.items.crops.Corn;
-import gameobjects.items.crops.Crop;
-import gameobjects.items.crops.Sunflower;
-<<<<<<< HEAD
-import gameobjects.items.tools.Axe;
-import gameobjects.items.tools.Irrigation;
-import gameobjects.items.tools.Shovel;
-import gameobjects.items.tools.Sickle;
-import gameobjects.items.tools.Tractor;
-=======
+import gameobjects.items.crops.*;
 import gameobjects.items.tools.*;
 import gameobjects.npc.FarmWorker;
->>>>>>> master
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -102,7 +91,6 @@ public class MarketController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Main.getPlayer().getInventory().add(new Cauliflower());
         ObservableList<String> inventoryItems = FXCollections.observableArrayList();
         for (Item i : Main.getPlayer().getInventory()
         ) {
