@@ -5,8 +5,10 @@ import gameobjects.items.crops.Cauliflower;
 import gameobjects.items.crops.Corn;
 import gameobjects.items.crops.Sunflower;
 import gameobjects.items.tools.Axe;
+import gameobjects.items.tools.Irrigation;
 import gameobjects.items.tools.Shovel;
 import gameobjects.items.tools.Sickle;
+import gameobjects.items.tools.Tractor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -118,6 +120,10 @@ public class MarketController implements Initializable {
         market.get(4).addAll(Arrays.asList(new Axe()));
         market.put(5, new LinkedList<>());
         market.get(5).addAll(Arrays.asList(new Sickle()));
+        market.put(6, new LinkedList<>());
+        market.get(6).addAll(Arrays.asList(new Tractor()));
+        market.put(7, new LinkedList<>());
+        market.get(7).addAll(Arrays.asList(new Irrigation()));
         moneyLabel.setText("" + Main.getPlayer().getMoney());
     }
 
