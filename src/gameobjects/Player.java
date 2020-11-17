@@ -13,17 +13,26 @@ public class Player {
     private String name;
     private ArrayList<Item> inventory = new ArrayList<>(25);
 
+    private int harvestingMaximum;
+    private int wateringMaximum;
+    private int harvestingCount;
+    private int wateringCount;
+
     public Player() {
-        this(1, 100, "Normal", "Spring", "Aibek");
+        this(1, 100, "Normal", "Spring", "Aibek", 3, 7, 0, 0);
     }
 
-    public Player(int day, int money, String diff, String startingSeason,
-                  String name) {
+    public Player(int day, int money, String diff, String startingSeason, String name,
+                  int harvestingMaximum, int wateringMaximum, int wateringCount, int harvestingCount) {
         this.day = day;
         this.money = money;
         this.setDiff(diff);
         this.season = startingSeason;
         this.name = name;
+        this.harvestingMaximum = harvestingMaximum;
+        this.wateringMaximum = wateringMaximum;
+        this.harvestingCount = harvestingCount;
+        this.wateringCount = wateringCount;
     }
 
     public int getDay() {
@@ -72,5 +81,37 @@ public class Player {
 
     public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
+    }
+
+    public int getHarvestingMaximum() {
+        return harvestingMaximum;
+    }
+
+    public int getWateringMaximum() {
+        return wateringMaximum;
+    }
+
+    public void setHarvestingMaximum(int n) {
+        harvestingMaximum = n;
+    }
+
+    public void setWateringMaximum(int n) {
+        wateringMaximum = n;
+    }
+
+    public int getHarvestingCount() {
+        return harvestingCount;
+    }
+
+    public int getWateringCount() {
+        return wateringCount;
+    }
+
+    public void setHarvestingCount(int n) {
+        harvestingCount = n;
+    }
+
+    public void setWateringCount(int n) {
+        wateringCount = n;
     }
 }

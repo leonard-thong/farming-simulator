@@ -21,7 +21,7 @@ public abstract class Crop extends Item {
         return lifeStage;
     }
 
-    public void setHasPesticide(boolean HasPesticide) {
+    public void setHasPesticide(boolean hasPesticide) {
         this.hasPesticide = hasPesticide;
     }
 

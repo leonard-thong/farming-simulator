@@ -70,6 +70,7 @@ class MarketTest {
         robot.clickOn("#marketImageView0");
         robot.clickOn("#buyButton");
     }
+
     /**
      * Implemented for M4
      */
@@ -79,6 +80,7 @@ class MarketTest {
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 pane.getBackground().getFills().get(0));
     }
+
     /**
      * Implemented for M4
      */
@@ -90,6 +92,67 @@ class MarketTest {
             if (child instanceof ImageView) {
                 chk = true;
                 break;
+            }
+        }
+        assertTrue(chk);
+    }
+
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void checksIfPesticideInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                System.out.println(((ImageView) child).getImage().getUrl());
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai"
+                        + "/Desktop/FarmSim/out/production/FarmSim/images/Pesticide.png")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
+
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void checksIfFertilizerInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai"
+                        +    "/Desktop/FarmSim/out/production/FarmSim/images/Fertilizer.png")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
+
+    /**
+     * Implemented for M5
+     */
+    @Test
+    void checksIfWorkerInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/"
+                        + "Desktop/FarmSim/out/production/FarmSim/images/farm_worker.png")) {
+                    chk = true;
+                    break;
+                }
+
             }
         }
         assertTrue(chk);

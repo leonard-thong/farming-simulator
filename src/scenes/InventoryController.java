@@ -141,13 +141,13 @@ public class InventoryController implements Initializable {
                 } else {
                     ObservableList<Integer> options =
                             FXCollections.observableArrayList();
-                    for (int i = 0; i < 25; i++) {
-                        if (FarmScene.getFarm()[i].getCrop() == null) {
+                    for (int i = 0; i < FarmScene.getFarm().size(); i++) {
+                        if (FarmScene.getFarm().get(i).getCrop() == null) {
                             options.add(i + 1);
                         }
                     }
 
-                    ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+                    ChoiceDialog<Integer> dialog = new ChoiceDialog<>(options.get(0), options);
                     dialog.setTitle("Plot Choice");
                     dialog.setHeaderText("Select a plot ");
 
@@ -156,8 +156,8 @@ public class InventoryController implements Initializable {
 
                     if (result.isPresent()) {
                         selectedPlot = result.get();
-                        FarmScene.getFarm()[selectedPlot - 1].setCrop(crop);
-                        FarmScene.getFarm()[selectedPlot - 1].setPlotImage(crop.getImage());
+                        FarmScene.getFarm().get(selectedPlot - 1).setCrop(crop);
+                        FarmScene.getFarm().get(selectedPlot - 1).setPlotImage(crop.getImage());
                     }
                     Main.getPlayer().getInventory().remove(selectedItem);
                     images.get(selectedItem).setImage(new Image("/images/empty_slot.jpg"));

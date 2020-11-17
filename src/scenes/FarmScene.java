@@ -27,6 +27,7 @@ import main.Main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class FarmScene {
@@ -44,7 +45,7 @@ public class FarmScene {
         farm = new Farm();
     }
 
-    public static Plot[] getFarm() {
+    public static ArrayList<Plot> getFarm() {
         return farm.getFarm();
     }
 
@@ -75,64 +76,9 @@ public class FarmScene {
         StackPane.setAlignment(date, Pos.TOP_CENTER);
         GridPane gridpane = new GridPane();
         gridpane.setId("plotgrid");
-        for (int i = 0; i < 25; i++) {
-            int finalI = i;
-            if (farm.getFarm()[i].getPlotImage() != null) {
-                // INSERT  HERE
-                farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
-                    if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
-                        if (Main.getPlayer().getInventory().size() == 25) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("Not enough space in inventory!");
-                            alert.show();
-                            return;
-                        }
-                        int fertilizer = farm.getFarm()[finalI].getFertilizerLevel();
-                        double chance = Math.random();
-                        if (fertilizer > 0 && chance > 0.5) {
-                            Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
-                        }
-                        Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
-                        farm.getFarm()[finalI] = new Plot();
-                        Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                        nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
-                        nameAlert.setTitle("Successfully Harvested!");
-                        nameAlert.show();
-                        try {
-                            Main.getStage().setScene(FarmScene.getScene());
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
-                        nameAlert.setHeaderText("The crop still needs to grow");
-                        nameAlert.setTitle("Cannot Harvest!");
-                        nameAlert.show();
-                    } // change functionality
-                });
-            }
-        }
+        FarmScene.harvest();
         gridpane.setMaxSize(750, 600);
-        int tracker = -1;
-        for (int i = 0; i < 5; i++) {
-            gridpane.addRow(i,
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1))),
-                    (farm.getFarm()[++tracker].getPlotImage() != null
-                            ? farm.getFarm()[tracker].getPlotImage() : new
-                            Label("" + (tracker + 1)))
-            );
-        }
+        FarmScene.buildFarm(gridpane);
         gridpane.setAlignment(Pos.CENTER);
         for (Node cell : gridpane.getChildren()) {
             if (cell instanceof Control) {
@@ -151,7 +97,7 @@ public class FarmScene {
         oneThird.setHalignment(HPos.CENTER);
         gridpane.getColumnConstraints().addAll(oneThird, oneThird, oneThird, oneThird, oneThird);
         RowConstraints oneHalf = new RowConstraints();
-        oneHalf.setPercentHeight(100 / 5.0);
+        oneHalf.setPercentHeight(100 / 6.0);
         oneHalf.setValignment(VPos.CENTER);
         gridpane.getRowConstraints().addAll(oneHalf, oneHalf, oneHalf, oneHalf, oneHalf);
         StackPane farm = new StackPane();
@@ -195,23 +141,24 @@ public class FarmScene {
         btnPesticide.setId("addPesticideButton");
         btnPesticide.setText("Pesticide");
         btnPesticide.setOnAction(event -> {
-            int index = -1;
-            for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
-                if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index != -1) {
-                int num = addPesticide();
-                if (num != -1) {
-                    Main.getPlayer().getInventory().remove(index);
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("You do not have any pesticides! Buy pesticide from the market to use it.");
-                alert.show();
-            }
+                    int index = -1;
+                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                        if (Main.getPlayer().getInventory().get(i) instanceof Pesticide) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1) {
+                        int num = addPesticide();
+                        if (num != -1) {
+                            Main.getPlayer().getInventory().remove(index);
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("You do not have any pesticides! "
+                                + "Buy pesticide from the market to use it.");
+                        alert.show();
+                    }
                 }
         );
         Button btnFertilizer = new Button();
@@ -232,13 +179,21 @@ public class FarmScene {
                         }
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("You do not have any fertilizers! Buy fertilizer from the market to use it.");
+                        alert.setHeaderText("You do not have any fertilizers! "
+                                + "Buy fertilizer from the market to use it.");
                         alert.show();
                     }
                 }
         );
+        Button btnUnlock = new Button();
+        btnUnlock.setId("unlockButton");
+        btnUnlock.setText("Expand");
+        btnUnlock.setOnAction(event -> {
+            addPlot();
+        });
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater, btnPesticide, btnFertilizer);
+        buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater,
+                btnPesticide, btnFertilizer, btnUnlock);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
@@ -247,16 +202,77 @@ public class FarmScene {
     }
 
     private static void advanceDay() {
-        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
+        String difficulty = Main.getPlayer().getDiff();
+        double probability = 0.5;
+        if ("Easy".equals(difficulty)) {
+            probability = 0.7;
+        } else if ("Hard".equals(difficulty)) {
+            probability = 0.3;
+        }
+        // chance of random event
+        if (Math.random() > probability) {
+            int event = (int) (Math.random() * 3 + 1);
+
+            if (event == 1) { // increase 5, 10, or 15 water level
+                int rain = (int) (Math.random() * 3 + 1) * 5;
+
+                for (Plot pl : farm.getFarm()) {
+                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
+                        pl.setWaterLevel(pl.getWaterLevel() + rain);
+                    }
+                }
+
+                Alert rainAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                rainAlert.setTitle("Rain Event");
+                rainAlert.setHeaderText("Increase water level of each plots by " + rain + ".");
+                rainAlert.show();
+            } else if (event == 2) { // decrease 5, 10, or 15 water level
+                int drought = (int) (Math.random() * 3 + 1) * 5;
+
+                for (Plot pl : farm.getFarm()) {
+                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
+                        pl.setWaterLevel(pl.getWaterLevel() - drought);
+                    }
+                }
+
+                Alert droughtAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                droughtAlert.setTitle("Drought Event");
+                droughtAlert.setHeaderText("Decrease water level of each plot by " + drought + ".");
+                droughtAlert.show();
+            } else if (event == 3) {
+                int dead = 0;
+                for (Plot pl : farm.getFarm()) {
+                    if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4
+                            && !pl.getCrop().getHasPesticide()) {
+                        double locusts = Math.random();
+
+                        if (locusts > probability) {
+                            pl.getCrop().setLifeStage(4);
+                            pl.setPlotImage(new Image("/images/Wilted.png"));
+                            dead++;
+                        }
+                    }
+                }
+
+                Alert locustsAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                locustsAlert.setTitle("Locusts Event");
+                locustsAlert.setHeaderText(dead + " of your plant had been killed");
+                locustsAlert.show();
+            }
+        }
         for (Plot pl : farm.getFarm()) {
             if (pl.getCrop() != null) {
+                try {
+                    pl.getWorker().work(pl);
+                } catch (Exception ignored) {
+                }
                 if (pl.getWaterLevel() < 10) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
-                } else if (pl.getWaterLevel() > 50) {
+                } else if (pl.getWaterLevel() > 75) {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
-                } else if (pl.getWaterLevel() > 0) {
+                } else {
                     pl.cropGrowth();
                     pl.setWaterLevel(pl.getWaterLevel() - 5);
                 }
@@ -265,6 +281,7 @@ public class FarmScene {
                 }
             }
         }
+        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
         try {
             Main.getStage().setScene(FarmScene.getScene());
         } catch (FileNotFoundException e) {
@@ -275,8 +292,8 @@ public class FarmScene {
     public static int addPesticide() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
-        for (int i = 0; i < 25; i++) {
-            if (FarmScene.getFarm()[i].getCrop() != null) {
+        for (int i = 0; i < FarmScene.getFarm().size(); i++) {
+            if (FarmScene.getFarm().get(i).getCrop() != null) {
                 options.add(i + 1);
             }
         }
@@ -291,7 +308,7 @@ public class FarmScene {
 
             if (result.isPresent()) {
                 selectedPlot = result.get();
-                FarmScene.getFarm()[selectedPlot - 1].getCrop().setHasPesticide(true);
+                FarmScene.getFarm().get(selectedPlot - 1).addPesticide();
             }
             return 0;
         } else {
@@ -305,8 +322,8 @@ public class FarmScene {
     public static boolean addFertilizer() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
-        for (int i = 0; i < 25; i++) {
-            if (FarmScene.getFarm()[i].getCrop() != null) {
+        for (int i = 0; i < FarmScene.getFarm().size(); i++) {
+            if (FarmScene.getFarm().get(i).getCrop() != null) {
                 options.add(i + 1);
             }
         }
@@ -321,7 +338,7 @@ public class FarmScene {
 
             if (result.isPresent()) {
                 selectedPlot = result.get();
-                FarmScene.getFarm()[selectedPlot - 1].addFertilizer(10);
+                FarmScene.getFarm().get(selectedPlot - 1).addFertilizer(10);
                 return true;
             }
         } else {
@@ -332,11 +349,37 @@ public class FarmScene {
         return false;
     }
 
+    public static void addPlot() {
+        int farmSize = FarmScene.getFarm().size();
+        if (farmSize < 30) {
+            int cost = (farmSize % 25) * 10 + 20;
+            int money = Main.getPlayer().getMoney();
+
+            if (money >= cost) {
+                Main.getPlayer().setMoney(money - cost);
+                FarmScene.getFarm().add(new Plot());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("You don't have enough money to buy a new plot");
+                alert.show();
+            }
+            try {
+                Main.getStage().setScene(FarmScene.getScene());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You need to buy the premium version to unlock more plots");
+            alert.show();
+        }
+    }
+
     public static void water() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
-        for (int i = 0; i < 25; i++) {
-            if (FarmScene.getFarm()[i].getCrop() != null) {
+        for (int i = 0; i < FarmScene.getFarm().size(); i++) {
+            if (FarmScene.getFarm().get(i).getCrop() != null) {
                 options.add(i + 1);
             }
         }
@@ -351,12 +394,113 @@ public class FarmScene {
 
             if (result.isPresent()) {
                 selectedPlot = result.get();
-                FarmScene.getFarm()[selectedPlot - 1].waterPlant(10);
+                FarmScene.getFarm().get(selectedPlot - 1).waterPlant(10);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Plant some crops to water!");
             alert.show();
         }
+    }
+
+    public static void harvest() {
+        for (int i = 0; i < FarmScene.getFarm().size(); i++) {
+            int finalI = i;
+            if (farm.getFarm().get(i).getPlotImage() != null) {
+                // INSERT  HERE
+                farm.getFarm().get(i).getPlotImage().setOnMouseClicked(event -> {
+                    if (farm.getFarm().get(finalI).getCrop().getLifeStage() == 3) {
+                        if (Main.getPlayer().getInventory().size() == 25) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("Not enough space in inventory!");
+                            alert.show();
+                            return;
+                        }
+                        int fertilizer = farm.getFarm().get(finalI).getFertilizerLevel();
+                        double chance = Math.random();
+                        if (fertilizer > 0 && chance > 0.5) {
+                            Main.getPlayer().getInventory().add(farm.getFarm().get(finalI).getCrop());
+                        }
+                        Main.getPlayer().getInventory().add(farm.getFarm().get(finalI).getCrop());
+                        farm.getFarm().set(finalI, new Plot());
+                        Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                        nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
+                        nameAlert.setTitle("Successfully Harvested!");
+                        nameAlert.show();
+                        try {
+                            Main.getStage().setScene(FarmScene.getScene());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Alert nameAlert = new Alert(Alert.AlertType.ERROR);
+                        nameAlert.setHeaderText("The crop still needs to grow");
+                        nameAlert.setTitle("Cannot Harvest!");
+                        nameAlert.show();
+                    } // change functionality
+                });
+            }
+        }
+    }
+
+    public static void buildFarm(GridPane gridPane) {
+        int tracker = -1;
+        for (int i = 0; i < 5; i++) {
+            gridPane.addRow(i,
+                    (farm.getFarm().get(++tracker).getPlotImage() != null
+                            ? farm.getFarm().get(tracker).getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm().get(++tracker).getPlotImage() != null
+                            ? farm.getFarm().get(tracker).getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm().get(++tracker).getPlotImage() != null
+                            ? farm.getFarm().get(tracker).getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm().get(++tracker).getPlotImage() != null
+                            ? farm.getFarm().get(tracker).getPlotImage() : new
+                            Label("" + (tracker + 1))),
+                    (farm.getFarm().get(++tracker).getPlotImage() != null
+                            ? farm.getFarm().get(tracker).getPlotImage() : new
+                            Label("" + (tracker + 1)))
+            );
+        }
+        boolean b1 = farm.getFarm().size() - 25 >= 1;
+        boolean b2 = farm.getFarm().size() - 25 >= 2;
+        boolean b3 = farm.getFarm().size() - 25 >= 3;
+        boolean b4 = farm.getFarm().size() - 25 >= 4;
+        boolean b5 = farm.getFarm().size() - 25 >= 5;
+        ImageView lockedImage1 = new ImageView(new Image("/images/locked.png"));
+        lockedImage1.setFitHeight(100);
+        lockedImage1.setFitWidth(150);
+        ImageView lockedImage2 = new ImageView(new Image("/images/locked.png"));
+        lockedImage2.setFitHeight(100);
+        lockedImage2.setFitWidth(150);
+        ImageView lockedImage3 = new ImageView(new Image("/images/locked.png"));
+        lockedImage3.setFitHeight(100);
+        lockedImage3.setFitWidth(150);
+        ImageView lockedImage4 = new ImageView(new Image("/images/locked.png"));
+        lockedImage4.setFitHeight(100);
+        lockedImage4.setFitWidth(150);
+        ImageView lockedImage5 = new ImageView(new Image("/images/locked.png"));
+        lockedImage5.setFitHeight(100);
+        lockedImage5.setFitWidth(150);
+        gridPane.addRow(5,
+                !b1 ? lockedImage1 : (farm.getFarm().get(++tracker).getPlotImage() != null
+                        ? farm.getFarm().get(tracker).getPlotImage() : new
+                        Label("" + (tracker + 1))),
+                !b2 ? lockedImage2 : (farm.getFarm().get(++tracker).getPlotImage() != null
+                        ? farm.getFarm().get(tracker).getPlotImage() : new
+                        Label("" + (tracker + 1))),
+                !b3 ? lockedImage3 : (farm.getFarm().get(++tracker).getPlotImage() != null
+                        ? farm.getFarm().get(tracker).getPlotImage() : new
+                        Label("" + (tracker + 1))),
+                !b4 ? lockedImage4 : (farm.getFarm().get(++tracker).getPlotImage() != null
+                        ? farm.getFarm().get(tracker).getPlotImage() : new
+                        Label("" + (tracker + 1))),
+                !b5 ? lockedImage5 : (farm.getFarm().get(++tracker).getPlotImage() != null
+                        ? farm.getFarm().get(tracker).getPlotImage() : new
+                        Label("" + (tracker + 1))));
+
+
     }
 }
