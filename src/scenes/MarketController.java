@@ -170,7 +170,7 @@ public class MarketController implements Initializable {
             alert.setHeaderText("Not enough money!");
             alert.show();
         } else if (market.get(selected.getValue()).get(0).getType() == "Tractor"
-                && Main.getPlayer().getHarvestingMaximum() == 12) {
+                && Main.getPlayer().getHarvestingMaximum() == 5) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("You already have a tractor.");
             alert.show();
@@ -194,7 +194,7 @@ public class MarketController implements Initializable {
                 moneyLabel.setText("" + Main.getPlayer().getMoney());
 
                 if (bought.getType() == "Tractor") {
-                    Main.getPlayer().setHarvestingMaximum(12);
+                    Main.getPlayer().setHarvestingMaximum(5);
                 }
 
                 if (bought.getType() == "Irrigation") {

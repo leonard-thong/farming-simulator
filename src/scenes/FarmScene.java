@@ -265,8 +265,9 @@ public class FarmScene {
                     pl.getCrop().setLifeStage(4);
                     pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else {
-                    pl.cropGrowth();
-                    pl.setWaterLevel(pl.getWaterLevel() - 5);
+//                    pl.cropGrowth();
+//                    pl.setWaterLevel(pl.getWaterLevel() - 5);
+                    pl.getCrop().setLifeStage(3);
                 }
                 if (pl.getFertilizerLevel() > 0) {
                     pl.setFertilizerLevel(pl.getFertilizerLevel() - 5);
@@ -351,6 +352,7 @@ public class FarmScene {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("You have reached the watering maximum of the day.");
             alert.show();
+            return;
         }
 
         ObservableList<Integer> options =
@@ -382,21 +384,20 @@ public class FarmScene {
     }
 
     public static void harvest() {
-        int playerHarvestMax = Main.getPlayer().getWateringMaximum();
-        int playerHarvestCount = Main.getPlayer().getWateringCount();
-
-        if (playerHarvestCount >= playerHarvestMax) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("You have reached the harvesting maximum of the day.");
-            alert.show();
-        }
+        int playerHarvestMax = Main.getPlayer().getHarvestingMaximum();
+        int playerHarvestCount = Main.getPlayer().getHarvestingCount();
 
         for (int i = 0; i < 25; i++) {
             int finalI = i;
             if (farm.getFarm()[i].getPlotImage() != null) {
                 // INSERT  HERE
                 farm.getFarm()[i].getPlotImage().setOnMouseClicked(event -> {
-                    if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
+                    if (playerHarvestCount >= playerHarvestMax) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("You have reached the harvesting maximum of the day.");
+                        alert.show();
+                        return;
+                    } else if (farm.getFarm()[finalI].getCrop().getLifeStage() == 3) {
                         if (Main.getPlayer().getInventory().size() == 25) {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setHeaderText("Not enough space in inventory!");
@@ -410,11 +411,11 @@ public class FarmScene {
                         }
                         Main.getPlayer().getInventory().add(farm.getFarm()[finalI].getCrop());
                         farm.getFarm()[finalI] = new Plot();
+                        Main.getPlayer().setHarvestingCount(playerHarvestCount + 1);
                         Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
                         nameAlert.show();
-                        Main.getPlayer().setHarvestingCount(playerHarvestCount + 1);
                         try {
                             Main.getStage().setScene(FarmScene.getScene());
                         } catch (FileNotFoundException e) {

@@ -19,7 +19,7 @@ public class Player {
     private int wateringCount;
 
     public Player() {
-        this(1, 100, "Normal", "Spring", "Aibek", 7, 7, 0, 0);
+        this(1, 100, "Normal", "Spring", "Aibek", 3, 7, 0, 0);
     }
 
     public Player(int day, int money, String diff, String startingSeason, String name,
