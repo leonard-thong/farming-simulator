@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class Irrigation extends Tool {
     public Irrigation() {
-        super("Irrigation", 3, new Image("images/Irrigation.png"));
+        super("Irrigation", 5, new Image("images/Irrigation.png"));
     }
 
     @Override

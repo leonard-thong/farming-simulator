@@ -145,9 +145,6 @@ public class MarketController implements Initializable {
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
-            //            System.out.println(selected);
-            //            System.out.println(selected.getKey());
-            //            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
             emptySlot.setHeaderText("No item selected!");
             emptySlot.show();
@@ -167,9 +164,20 @@ public class MarketController implements Initializable {
         }
         int price = (int) (market.get(selected.getValue()).get(0).getBasePrice() * diffMultiplier);
         int money = Main.getPlayer().getMoney();
+        // check if tractor or irrigation already exist
         if (money < price) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Not enough money!");
+            alert.show();
+        } else if (market.get(selected.getValue()).get(0).getType() == "Tractor"
+                && Main.getPlayer().getHarvestingMaximum() == 12) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You already have a tractor.");
+            alert.show();
+        } else if (market.get(selected.getValue()).get(0).getType() == "Irrigation"
+                && Main.getPlayer().getWateringMaximum() == 12) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You already have a irrigation.");
             alert.show();
         } else {
             if (Main.getPlayer().getInventory().size() == 25) {
@@ -184,7 +192,14 @@ public class MarketController implements Initializable {
                 temp.add(bought.getType());
                 inventoryList.setItems(temp);
                 moneyLabel.setText("" + Main.getPlayer().getMoney());
-                // market.get(selected.getValue()).get(0);
+
+                if (bought.getType() == "Tractor") {
+                    Main.getPlayer().setHarvestingMaximum(12);
+                }
+
+                if (bought.getType() == "Irrigation") {
+                    Main.getPlayer().setWateringMaximum(12);
+                }
             }
         }
     }
