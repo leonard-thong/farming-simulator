@@ -274,6 +274,8 @@ public class FarmScene {
             }
         }
         Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
+        Main.getPlayer().setHarvestingCount(0);
+        Main.getPlayer().setWateringCount(0);
         try {
             Main.getStage().setScene(FarmScene.getScene());
         } catch (FileNotFoundException e) {
@@ -342,6 +344,15 @@ public class FarmScene {
     }
 
     public static void water() {
+        int playerWaterMax = Main.getPlayer().getWateringMaximum();
+        int playerWaterCount = Main.getPlayer().getWateringCount();
+
+        if (playerWaterCount >= playerWaterMax) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You have reached the watering maximum of the day.");
+            alert.show();
+        }
+
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
@@ -361,6 +372,7 @@ public class FarmScene {
             if (result.isPresent()) {
                 selectedPlot = result.get();
                 FarmScene.getFarm()[selectedPlot - 1].waterPlant(10);
+                Main.getPlayer().setWateringCount(playerWaterCount + 1);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -370,6 +382,15 @@ public class FarmScene {
     }
 
     public static void harvest() {
+        int playerHarvestMax = Main.getPlayer().getWateringMaximum();
+        int playerHarvestCount = Main.getPlayer().getWateringCount();
+
+        if (playerHarvestCount >= playerHarvestMax) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You have reached the harvesting maximum of the day.");
+            alert.show();
+        }
+
         for (int i = 0; i < 25; i++) {
             int finalI = i;
             if (farm.getFarm()[i].getPlotImage() != null) {
@@ -393,6 +414,7 @@ public class FarmScene {
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
                         nameAlert.show();
+                        Main.getPlayer().setHarvestingCount(playerHarvestCount + 1);
                         try {
                             Main.getStage().setScene(FarmScene.getScene());
                         } catch (FileNotFoundException e) {
