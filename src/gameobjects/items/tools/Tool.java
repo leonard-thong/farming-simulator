@@ -8,7 +8,12 @@ public abstract class Tool extends Item {
     private int durability;
 
     public Tool(String type, double basePrice, Image image) {
+        this(type, basePrice, image, 100);
+    }
+
+    public Tool(String type, double basePrice, Image image, int durability) {
         super(type, basePrice, image);
+        this.durability = durability;
     }
 
     public int getDurability() {

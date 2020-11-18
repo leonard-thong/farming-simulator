@@ -62,5 +62,6 @@
          </children>
       </GridPane>
       <Button fx:id="buttonContinue" mnemonicParsing="false" onAction="#nextScene" text="Continue" />
+      <Button fx:id="buttonLoad" text="Load" onAction="#load"/>
    </children>
 </VBox>

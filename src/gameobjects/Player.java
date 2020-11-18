@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 
 public class Player {
-    private int day;
-    private int money;
-    private String season;
-    private String diff;
     private String name;
+    private String diff;
+    private int money;
+    private int day;
+    private String season;
+
     private ArrayList<Item> inventory = new ArrayList<>(25);
 
     public Player() {

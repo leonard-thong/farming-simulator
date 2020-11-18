@@ -30,7 +30,13 @@ public class Plot {
 
     public void setCrop(Crop crop) {
         this.crop = crop;
+    }
 
+    public void setGrowth(int growth) {
+        this.growth = growth;
+    }
+    public int getGrowth() {
+        return this.growth;
     }
 
     public void cropGrowth() {

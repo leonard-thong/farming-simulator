@@ -1,9 +1,13 @@
 package scenes;
 
 import gameobjects.Farm;
+import gameobjects.Player;
 import gameobjects.Plot;
+import gameobjects.items.Item;
+import gameobjects.items.crops.Crop;
 import gameobjects.items.tools.Fertilizer;
 import gameobjects.items.tools.Pesticide;
+import gameobjects.items.tools.Tool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +29,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import main.Main;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -48,7 +54,11 @@ public class FarmScene {
         return farm.getFarm();
     }
 
-    public static Scene getScene() throws FileNotFoundException {
+    public static Farm getFarmObj() {
+        return farm;
+    }
+
+    public static Scene getScene() {
         if (!built) {
             farmSceneInit();
             built = true;
@@ -163,29 +173,38 @@ public class FarmScene {
         btnFertilizer.setId("fertilizerButton");
         btnFertilizer.setText("Fertilizer");
         btnFertilizer.setOnAction(event -> {
-                int index = -1;
-                for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
-                    if (Main.getPlayer().getInventory().get(i) instanceof Fertilizer) {
-                        index = i;
-                        break;
+                    int index = -1;
+                    for (int i = 0; i < Main.getPlayer().getInventory().size(); i++) {
+                        if (Main.getPlayer().getInventory().get(i) instanceof Fertilizer) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1) {
+                        boolean var = addFertilizer();
+                        if (var) {
+                            Main.getPlayer().getInventory().remove(index);
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("You do not have any fertilizers! "
+                                + "Buy fertilizer from the market to use it.");
+                        alert.show();
                     }
                 }
-                if (index != -1) {
-                    boolean var = addFertilizer();
-                    if (var) {
-                        Main.getPlayer().getInventory().remove(index);
-                    }
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText("You do not have any fertilizers! "
-                            + "Buy fertilizer from the market to use it.");
-                    alert.show();
-                }
-            }
         );
+        Button btnSave = new Button("Save");
+        btnSave.setId("saveButton");
+        btnSave.setOnAction(e -> {
+            try {
+                save();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
         HBox buttons = new HBox();
         buttons.getChildren().addAll(btnInventory, btnMarket, btnAdvanceDay, btnWater,
-                btnPesticide, btnFertilizer);
+                btnPesticide, btnFertilizer, btnSave);
         VBox root = new VBox();
         root.setId("rootvbox");
         root.getChildren().addAll(info, empty1, farm, empty2, buttons);
@@ -273,15 +292,41 @@ public class FarmScene {
                 }
             }
         }
-        Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
-        try {
+        int diffMultiplier = 0;
+        if ("Easy".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 5;
+        } else if ("Normal".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 10;
+        } else if ("Hard".equals(Main.getPlayer().getDiff())) {
+            diffMultiplier = 15;
+        }
+        int lowestPrice = (int) (1.3 * diffMultiplier);
+
+        boolean anyLeft = true;
+        if (Main.getPlayer().getMoney() < lowestPrice && Main.getPlayer().getInventory().size() == 0) {
+            anyLeft = false;
+            for (Plot pl : farm.getFarm()) {
+                if (pl.getCrop() != null && pl.getCrop().getLifeStage() != 4) {
+                    anyLeft = true;
+                    break;
+                }
+            }
+        }
+        if (!anyLeft) {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(FarmScene.class.getResource("/scenes/EndScene.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Main.getStage().setScene(new Scene(root));
+        } else {
+            Main.getPlayer().setDay(Main.getPlayer().getDay() + 1);
             Main.getStage().setScene(FarmScene.getScene());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
-    public static int addPesticide() {
+    private static int addPesticide() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
@@ -311,7 +356,7 @@ public class FarmScene {
         }
     }
 
-    public static boolean addFertilizer() {
+    private static boolean addFertilizer() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
@@ -341,7 +386,7 @@ public class FarmScene {
         return false;
     }
 
-    public static void water() {
+    private static void water() {
         ObservableList<Integer> options =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
@@ -369,7 +414,7 @@ public class FarmScene {
         }
     }
 
-    public static void harvest() {
+    private static void harvest() {
         for (int i = 0; i < 25; i++) {
             int finalI = i;
             if (farm.getFarm()[i].getPlotImage() != null) {
@@ -393,11 +438,7 @@ public class FarmScene {
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
                         nameAlert.show();
-                        try {
-                            Main.getStage().setScene(FarmScene.getScene());
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        Main.getStage().setScene(FarmScene.getScene());
                     } else {
                         Alert nameAlert = new Alert(Alert.AlertType.ERROR);
                         nameAlert.setHeaderText("The crop still needs to grow");
@@ -409,7 +450,7 @@ public class FarmScene {
         }
     }
 
-    public static void buildFarm(GridPane gridPane) {
+    private static void buildFarm(GridPane gridPane) {
         int tracker = -1;
         for (int i = 0; i < 5; i++) {
             gridPane.addRow(i,
@@ -430,5 +471,87 @@ public class FarmScene {
                             Label("" + (tracker + 1)))
             );
         }
+    }
+
+    private static void save() throws IOException {
+        // show popup to overwrite or create new & save
+        File dir = new File("src/saves");
+        if (dir.listFiles().length == 0) {
+            Alert noSaves = new Alert(Alert.AlertType.ERROR);
+            noSaves.setHeaderText("No saves available");
+            noSaves.show();
+            return;
+        }
+        ObservableList<String> saves = FXCollections.observableArrayList();
+        saves.add("Create new save");
+        for (File f : dir.listFiles()) {
+            saves.add(f.getName().substring(0, f.getName().length() - 4));
+        }
+        ChoiceDialog<String> chooseSave = new ChoiceDialog<>(saves.get(0), saves);
+        chooseSave.setTitle("Select Save");
+        chooseSave.setHeaderText("Please select a save ");
+        Optional<String> save = chooseSave.showAndWait();
+        if (save.isPresent()) {
+            File savef = null;
+            if (save.get().equals(saves.get(0))) {
+                TextInputDialog newfNametd = new TextInputDialog("");
+                newfNametd.setTitle("Create new save");
+                newfNametd.setHeaderText("Enter name here ");
+                Optional<String> newfname = newfNametd.showAndWait();
+                if (newfname.isPresent()) {
+                    savef = new File("src/saves/" + newfname.get() + ".txt");
+                    savef.createNewFile();
+                }
+            } else {
+                savef = new File("src/saves/" + save.get() + ".txt");
+            }
+            Player player = Main.getPlayer();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(savef))) {
+                writer.write(player.getName());
+                writer.append("\n" + player.getDiff());
+                writer.append("\n" + player.getMoney());
+                writer.append("\n" + player.getDay());
+                writer.append("\n" + player.getSeason());
+                writer.newLine();
+                if (player.getInventory().size() != 0) {
+                    Item item = player.getInventory().get(0);
+                    if (item instanceof Crop) {
+                        writer.append(item.getType());
+                    } else {
+                        writer.append(item.getType() + ":" + ((Tool) item).getDurability());
+                    }
+                }
+                for (int i = 1; i < player.getInventory().size(); i++) {
+                    Item item = player.getInventory().get(i);
+                    if (item instanceof Crop) {
+                        writer.append("," + item.getType());
+                    } else {
+                        writer.append("," + item.getType() + ":" + ((Tool) item).getDurability());
+                    }
+                }
+                writer.newLine();
+                Plot plot = farm.getFarm()[0];
+                if (plot.getCrop() == null) {
+                    writer.append("null");
+                } else {
+                    writer.append("0:" + plot.getCrop().getType() + "/" + plot.getCrop().getLifeStage() + ":" + plot.getGrowth() + ":" + plot.getWaterLevel() + ":" + plot.getFertilizerLevel() + ":");
+                    writer.append(plot.getWorker() != null ? "true/" + plot.getWorker().getSkill() : "false");
+                    writer.append(":" + plot.getCrop().getHasPesticide());
+                }
+                for (int i = 1; i < farm.getFarm().length; i++) {
+                    plot = farm.getFarm()[i];
+                    if (plot.getCrop() == null) {
+                        writer.append(",null");
+                    } else {
+                        writer.append(",0:" + plot.getCrop().getType() + "/" + plot.getCrop().getLifeStage() + ":" + plot.getGrowth() + ":" + plot.getWaterLevel() + ":" + plot.getFertilizerLevel() + ":");
+                        writer.append(plot.getWorker() != null ? ("true/" + plot.getWorker().getSkill()) : "false");
+                        writer.append(":" + plot.getCrop().getHasPesticide());
+                    }
+                }
+            }
+        }
+    }
+    public static void setBuilt(boolean built) {
+        FarmScene.built = built;
     }
 }

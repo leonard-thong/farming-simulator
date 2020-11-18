@@ -5,7 +5,11 @@ import javafx.scene.image.Image;
 
 public class Sickle extends Tool {
     public Sickle() {
-        super("Sickle", 3, new Image("images/Sickle.png"));
+        this(100);
+    }
+
+    public Sickle(int durability) {
+        super("Sickle", 3, new Image("images/Sickle.png"), durability);
     }
 
     @Override

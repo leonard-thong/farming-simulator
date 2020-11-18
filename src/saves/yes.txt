@@ -1,0 +1,7 @@
+name
+difficulty
+money
+day
+Season
+item1,item2
+pos:crop/lifestage:growth:water:fertilizer:worker/level:pesticide

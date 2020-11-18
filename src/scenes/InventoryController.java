@@ -162,11 +162,7 @@ public class InventoryController implements Initializable {
                     Main.getPlayer().getInventory().remove(selectedItem);
                     images.get(selectedItem).setImage(new Image("/images/empty_slot.jpg"));
                     selectedID = "";
-                    try {
-                        Main.getStage().setScene(FarmScene.getScene());
-                    } catch (FileNotFoundException d) {
-                        d.printStackTrace();
-                    }
+                    Main.getStage().setScene(FarmScene.getScene());
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

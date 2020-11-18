@@ -5,7 +5,11 @@ import javafx.scene.image.Image;
 
 public class Axe extends Tool {
     public Axe() {
-        super("Axe", 3, new Image("/images/Axe.png"));
+        this(100);
+    }
+
+    public Axe(int durability) {
+        super("Axe", 3, new Image("/images/Axe.png"), durability);
     }
 
     @Override
