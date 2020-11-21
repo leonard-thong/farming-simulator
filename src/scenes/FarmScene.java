@@ -548,6 +548,9 @@ public class FarmScene {
                 writer.append("\n" + player.getMoney());
                 writer.append("\n" + player.getDay());
                 writer.append("\n" + player.getSeason());
+                writer.append("\n" + player.getHarvestingMaximum() + "," + player.getHarvestingCount());
+                writer.append("\n" + player.getWateringMaximum() + "," + player.getWateringCount());
+                // Inventory
                 writer.newLine();
                 if (player.getInventory().size() != 0) {
                     Item item = player.getInventory().get(0);
@@ -565,6 +568,7 @@ public class FarmScene {
                         writer.append("," + item.getType() + ":" + ((Tool) item).getDurability());
                     }
                 }
+                // Farm
                 writer.newLine();
                 Plot plot = farm.getFarm().get(0);
                 if (plot.getCrop() == null) {

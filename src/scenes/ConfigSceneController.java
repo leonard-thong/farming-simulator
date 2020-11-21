@@ -117,6 +117,14 @@ public class ConfigSceneController {
             player.setDay(Integer.parseInt(fsave.readLine()));
             // Season
             player.setSeason(fsave.readLine());
+            // Harvesting
+            String[] harvesting = fsave.readLine().split(",");
+            player.setHarvestingMaximum(Integer.parseInt(harvesting[0]));
+            player.setHarvestingCount(Integer.parseInt(harvesting[1]));
+            // Watering
+            String[] watering = fsave.readLine().split(",");
+            player.setWateringMaximum(Integer.parseInt(watering[0]));
+            player.setWateringCount(Integer.parseInt(watering[1]));
             // Inventory
             ArrayList<Item> inventory = Main.getPlayer().getInventory();
             String[] items = fsave.readLine().split(",");
@@ -130,7 +138,31 @@ public class ConfigSceneController {
             FarmScene.farmSceneInit();
             ArrayList<Plot> farm = FarmScene.getFarm();
             String[] plots = fsave.readLine().split(",");
-            for (String plot : plots) {
+            for (int i = 0; i < 25; i++) {
+                String plot = plots[i];
+                if (plot.equals("null")) {
+                    continue;
+                }
+                String[] plotDetails = plot.split(":");
+                Plot pl = farm.get(Integer.parseInt(plotDetails[0]));
+                String[] cropDetails = plotDetails[1].split("/");
+                Crop crop = whichCrop(cropDetails[0]);
+                crop.setLifeStage(Integer.parseInt(cropDetails[1]));
+                pl.setCrop(crop);
+                pl.setGrowth(Integer.parseInt(plotDetails[2]));
+                pl.setWaterLevel(Integer.parseInt(plotDetails[3]));
+                pl.setFertilizerLevel(Integer.parseInt(plotDetails[4]));
+                if (plotDetails[5].contains("true")) {
+                    pl.setWorker(new FarmWorker(Integer.parseInt(plotDetails[5].split("/")[1])));
+                }
+                if (plotDetails[6].equals("true")) {
+                    pl.addPesticide();
+                }
+                pl.setPlotImage(pl.getCrop().getImage());
+            }
+            for (int i = 25; i < plots.length; i++) {
+                String plot = plots[i];
+                farm.add(new Plot());
                 if (plot.equals("null")) {
                     continue;
                 }

@@ -3,5 +3,7 @@ difficulty
 money
 day
 Season
+harvestingMaximum, harvestingCount
+wateringMax, wateringCount
 item1,item2
-pos:crop/lifestage:growth:water:fertilizer:worker/level:pesticide
+pos:crop/lifestage:growth:water:fertilizer:worker/level:pesticide:expanded
