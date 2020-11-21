@@ -294,7 +294,7 @@ public class FarmScene {
                     pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else {
                     pl.cropGrowth();
-                    pl.setWaterLevel(pl.getWaterLevel() - 5);
+                    pl.setWaterLevel(pl.getWaterLevel() + 5);
                 }
                 if (pl.getFertilizerLevel() > 0) {
                     pl.setFertilizerLevel(pl.getFertilizerLevel() - 5);
@@ -478,6 +478,11 @@ public class FarmScene {
                             alert.setHeaderText("Not enough space in inventory!");
                             alert.show();
                             return;
+                        } else if (playerHarvestCount >= playerHarvestMax) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("You have reached your maximum harvest count.");
+                            alert.show();
+                            return;
                         }
                         int fertilizer = farm.getFarm().get(finalI).getFertilizerLevel();
                         double chance = Math.random();
@@ -487,6 +492,7 @@ public class FarmScene {
                         Main.getPlayer().getInventory().add(farm.getFarm().get(finalI).getCrop());
                         farm.getFarm().set(finalI, new Plot());
 
+                        Main.getPlayer().setHarvestingCount(Main.getPlayer().getHarvestingCount() + 1);
                         Alert nameAlert = new Alert(Alert.AlertType.CONFIRMATION);
                         nameAlert.setHeaderText("Congratulations! You just harvested a crop!");
                         nameAlert.setTitle("Successfully Harvested!");
