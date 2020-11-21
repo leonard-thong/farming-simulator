@@ -28,9 +28,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/scenes/WelcomeScene.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("/scenes/Inventory.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("/scenes/ConfigScene.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/scenes/ConfigScene.fxml"));
 
         Scene scene = new Scene(root);
         stage = primaryStage;
@@ -43,6 +43,10 @@ public class Main extends Application {
         stage.setHeight(800);
 
         stage.show();
+    }
+
+    public static void reset() {
+        player = new Player();
     }
 
 }

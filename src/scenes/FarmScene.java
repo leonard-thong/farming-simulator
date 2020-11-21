@@ -324,6 +324,8 @@ public class FarmScene {
             }
         }
         if (!anyLeft) {
+            Main.reset();
+            farm = new Farm();
             Parent root = null;
             try {
                 root = FXMLLoader.load(FarmScene.class.getResource("/scenes/EndScene.fxml"));

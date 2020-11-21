@@ -128,14 +128,14 @@ public class ConfigSceneController {
             }
             // Farm
             FarmScene.farmSceneInit();
-            Plot[] farm = FarmScene.getFarm();
+            ArrayList<Plot> farm = FarmScene.getFarm();
             String[] plots = fsave.readLine().split(",");
             for (String plot : plots) {
                 if (plot.equals("null")) {
                     continue;
                 }
                 String[] plotDetails = plot.split(":");
-                Plot pl = farm[Integer.parseInt(plotDetails[0])];
+                Plot pl = farm.get(Integer.parseInt(plotDetails[0]));
                 String[] cropDetails = plotDetails[1].split("/");
                 Crop crop = whichCrop(cropDetails[0]);
                 crop.setLifeStage(Integer.parseInt(cropDetails[1]));
