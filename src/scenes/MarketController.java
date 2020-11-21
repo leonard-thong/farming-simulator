@@ -2,7 +2,10 @@ package scenes;
 
 import gameobjects.items.Item;
 import gameobjects.items.PlaceHolder;
-import gameobjects.items.crops.*;
+import gameobjects.items.crops.Cauliflower;
+import gameobjects.items.crops.Corn;
+import gameobjects.items.crops.Crop;
+import gameobjects.items.crops.Sunflower;
 import gameobjects.items.tools.*;
 import gameobjects.npc.FarmWorker;
 import javafx.collections.FXCollections;
@@ -145,6 +148,9 @@ public class MarketController implements Initializable {
     @FXML
     void buy(ActionEvent e) {
         if (selected == null || market.get(selected.getValue()) == null) {
+            //            System.out.println(selected);
+            //            System.out.println(selected.getKey());
+            //            System.out.println(selected.getValue());
             Alert emptySlot = new Alert(Alert.AlertType.ERROR);
             emptySlot.setHeaderText("No item selected!");
             emptySlot.show();
@@ -169,12 +175,12 @@ public class MarketController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Not enough money!");
             alert.show();
-        } else if (market.get(selected.getValue()).get(0).getType() == "Tractor"
+        } else if (market.get(selected.getValue()).get(0).getType().equals("Tractor")
                 && Main.getPlayer().getHarvestingMaximum() == 5) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("You already have a tractor.");
             alert.show();
-        } else if (market.get(selected.getValue()).get(0).getType() == "Irrigation"
+        } else if (market.get(selected.getValue()).get(0).getType().equals("Irrigation")
                 && Main.getPlayer().getWateringMaximum() == 12) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("You already have a irrigation.");
@@ -193,11 +199,11 @@ public class MarketController implements Initializable {
                 inventoryList.setItems(temp);
                 moneyLabel.setText("" + Main.getPlayer().getMoney());
 
-                if (bought.getType() == "Tractor") {
+                if (bought.getType().equals("Tractor")) {
                     Main.getPlayer().setHarvestingMaximum(5);
                 }
 
-                if (bought.getType() == "Irrigation") {
+                if (bought.getType().equals("Irrigation")) {
                     Main.getPlayer().setWateringMaximum(12);
                 }
             }
@@ -219,7 +225,7 @@ public class MarketController implements Initializable {
         ObservableList<Integer> plots =
                 FXCollections.observableArrayList();
         for (int i = 0; i < 25; i++) {
-            if (FarmScene.getFarm()[i].getCrop() != null) {
+            if (FarmScene.getFarm().get(i).getCrop() != null) {
                 plots.add(i + 1);
             }
         }
@@ -247,14 +253,14 @@ public class MarketController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Not enough money!");
                 alert.show();
-            } else if (FarmScene.getFarm()[selectedPlot - 1].getWorker() != null) {
+            } else if (FarmScene.getFarm().get(selectedPlot - 1).getWorker() != null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Plot already has a worker!");
                 alert.show();
             } else {
                 Main.getPlayer().setMoney(money - price);
                 moneyLabel.setText("" + Main.getPlayer().getMoney());
-                FarmScene.getFarm()[selectedPlot - 1].setWorker(worker);
+                FarmScene.getFarm().get(selectedPlot - 1).setWorker(worker);
             }
         }
     }
