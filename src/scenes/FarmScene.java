@@ -294,7 +294,7 @@ public class FarmScene {
                     pl.setPlotImage(new Image("/images/Wilted.png"));
                 } else {
                     pl.cropGrowth();
-                    pl.setWaterLevel(pl.getWaterLevel() + 5);
+                    pl.setWaterLevel(pl.getWaterLevel() - 5);
                 }
                 if (pl.getFertilizerLevel() > 0) {
                     pl.setFertilizerLevel(pl.getFertilizerLevel() - 5);
