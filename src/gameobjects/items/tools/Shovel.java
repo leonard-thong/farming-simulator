@@ -4,7 +4,6 @@ import gameobjects.items.crops.Crop;
 import javafx.scene.image.Image;
 
 public class Shovel extends Tool {
-
     public Shovel() {
         this(100);
     }
