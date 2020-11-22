@@ -557,7 +557,7 @@ public class FarmScene {
                 for (int i = 1; i < player.getInventory().size(); i++) {
                     Item item = player.getInventory().get(i);
                     if (item instanceof Crop) {
-                        writer.append("," + item.getType());
+                        writer.append("," + item.getType() + ":" + ((Crop) item).getLifeStage());
                     } else {
                         writer.append("," + item.getType() + ":" + ((Tool) item).getDurability());
                     }
@@ -577,7 +577,7 @@ public class FarmScene {
                     if (plot.getCrop() == null) {
                         writer.append(",null");
                     } else {
-                        writer.append(",0:" + plot.getCrop().getType() + "/" + plot.getCrop().getLifeStage() + ":" + plot.getGrowth() + ":" + plot.getWaterLevel() + ":" + plot.getFertilizerLevel() + ":");
+                        writer.append("," + i + ":" + plot.getCrop().getType() + "/" + plot.getCrop().getLifeStage() + ":" + plot.getGrowth() + ":" + plot.getWaterLevel() + ":" + plot.getFertilizerLevel() + ":");
                         writer.append(plot.getWorker() != null ? ("true/" + plot.getWorker().getSkill()) : "false");
                         writer.append(":" + plot.getCrop().getHasPesticide());
                     }
