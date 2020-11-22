@@ -48,20 +48,17 @@ public class ConfigSceneController {
     @FXML
     public void nextScene(ActionEvent e) throws FileNotFoundException {
         // Show next scene
-
+        Crop c = new Corn();
         if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
             Main.getPlayer().setName(nameTextField.getText());
             if (seedComboBox.getValue() != null) {
-                if (seedComboBox.getValue().equals("Corn")) {
-                    Main.getPlayer().getInventory().add(new Corn());
+                if (seedComboBox.getValue().equals("Cauliflower")) {
+                    c = new Cauliflower();
                 } else if (seedComboBox.getValue().equals("Sunflower")) {
-                    Main.getPlayer().getInventory().add(new Sunflower());
-                } else {
-                    Main.getPlayer().getInventory().add(new Cauliflower());
+                    c = new Sunflower();
                 }
-            } else {
-                Main.getPlayer().getInventory().add(new Corn());
             }
+            Main.getPlayer().getInventory().add(c);
             if (seasonComboBox.getValue() != null) {
                 Main.getPlayer().setSeason(seasonComboBox.getValue());
             }
