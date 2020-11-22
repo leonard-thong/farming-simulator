@@ -5,5 +5,5 @@ day
 Season
 harvestingMaximum, harvestingCount
 wateringMax, wateringCount
-item1,item2
-pos:crop/lifestage:growth:water:fertilizer:worker/level:pesticide:expanded
+item1,item2,crop:lifestage
+pos:crop/lifestage:growth:water:fertilizer:worker/level:pesticide

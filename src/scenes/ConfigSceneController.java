@@ -146,8 +146,7 @@ public class ConfigSceneController {
                 String[] plotDetails = plot.split(":");
                 Plot pl = farm.get(Integer.parseInt(plotDetails[0]));
                 String[] cropDetails = plotDetails[1].split("/");
-                Crop crop = whichCrop(cropDetails[0]);
-                crop.setLifeStage(Integer.parseInt(cropDetails[1]));
+                Crop crop = whichCrop(cropDetails[0], Integer.parseInt(cropDetails[1]));
                 pl.setCrop(crop);
                 pl.setGrowth(Integer.parseInt(plotDetails[2]));
                 pl.setWaterLevel(Integer.parseInt(plotDetails[3]));
@@ -169,7 +168,7 @@ public class ConfigSceneController {
                 String[] plotDetails = plot.split(":");
                 Plot pl = farm.get(Integer.parseInt(plotDetails[0]));
                 String[] cropDetails = plotDetails[1].split("/");
-                Crop crop = whichCrop(cropDetails[0]);
+                Crop crop = whichCrop(cropDetails[0], Integer.parseInt(cropDetails[1]));
                 crop.setLifeStage(Integer.parseInt(cropDetails[1]));
                 pl.setCrop(crop);
                 pl.setGrowth(Integer.parseInt(plotDetails[2]));
@@ -190,13 +189,13 @@ public class ConfigSceneController {
         }
     }
 
-    private Crop whichCrop(String type) {
+    private Crop whichCrop(String type, int lifestage) {
         if (type.equals("Corn")) {
-            return new Corn(4);
+            return new Corn(lifestage);
         } else if (type.equals("Cauliflower")) {
-            return new Cauliflower(4);
+            return new Cauliflower(lifestage);
         } else if (type.equals("Sunflower")) {
-            return new Sunflower(4);
+            return new Sunflower(lifestage);
         } else {
             return null;
         }
@@ -215,7 +214,7 @@ public class ConfigSceneController {
         } else if (item[0].equals("Fertilizer")) {
             return new Fertilizer();
         } else {
-            return whichCrop(item[0]);
+            return whichCrop(item[0], Integer.parseInt(item[1]));
         }
     }
 }

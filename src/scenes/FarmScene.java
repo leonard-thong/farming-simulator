@@ -512,12 +512,6 @@ public class FarmScene {
     private static void save() throws IOException {
         // show popup to overwrite or create new & save
         File dir = new File("src/saves");
-        if (dir.listFiles().length == 0) {
-            Alert noSaves = new Alert(Alert.AlertType.ERROR);
-            noSaves.setHeaderText("No saves available");
-            noSaves.show();
-            return;
-        }
         ObservableList<String> saves = FXCollections.observableArrayList();
         saves.add("Create new save");
         for (File f : dir.listFiles()) {
@@ -555,7 +549,7 @@ public class FarmScene {
                 if (player.getInventory().size() != 0) {
                     Item item = player.getInventory().get(0);
                     if (item instanceof Crop) {
-                        writer.append(item.getType());
+                        writer.append(item.getType() + ":" + ((Crop) item).getLifeStage());
                     } else {
                         writer.append(item.getType() + ":" + ((Tool) item).getDurability());
                     }
