@@ -137,4 +137,21 @@ class FarmSceneTest {
     void pesticideButtonExists(FxRobot robot) {
         verifyThat("#addPesticideButton", isVisible());
     }
+    /**
+     * Implemented for M6
+     */
+    @Test
+    void checksSaveExists() {
+        verifyThat("#saveButton", isVisible());
+
+    }
+    /**
+     * Implemented for M6
+     */
+    @Test
+    void checksUnlockButtonExists() {
+        verifyThat("#unlockButton", isVisible());
+
+    }
+
 }

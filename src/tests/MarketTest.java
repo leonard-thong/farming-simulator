@@ -157,5 +157,43 @@ class MarketTest {
         }
         assertTrue(chk);
     }
+    /**
+     * Implemented for M6
+     */
+    @Test
+    void checksIfTractorInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/"
+                        + "Desktop/FarmSim/out/production/FarmSim/images/Tractor.jpg")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
+    /**
+     * Implemented for M6
+     */
+    @Test
+    void checksIfIrrigationInMarket(FxRobot robot) {
+        GridPane grid = robot.lookup("#marketPane").query();
+        boolean chk = false;
+        for (Node child : grid.getChildren()) {
+            if (child instanceof ImageView) {
+                if ((((ImageView) child).getImage()).getUrl().equals("file:/Users/aravindvengarai/"
+                        + "Desktop/FarmSim/out/production/FarmSim/images/Irrigation.png")) {
+                    chk = true;
+                    break;
+                }
+
+            }
+        }
+        assertTrue(chk);
+    }
 
 }

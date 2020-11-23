@@ -143,4 +143,12 @@ class ConfigSceneTest {
         assertEquals(new BackgroundFill(Color.BLACK, null, null),
                 vbox.getBackground().getFills().get(0));
     }
+    /**
+     * Implemented for M6
+     */
+    @Test
+    void checksLoadExists() {
+        verifyThat("#buttonLoad", isVisible());
+
+    }
 }

@@ -1,0 +1,5 @@
+For M5 we checked if the load button exists in welcomeScreen as we need a way to load a saved game.
+We checked if expand button exists in farmscene as we need a way to expand our farm.
+We checked if the save button exists in welcomeScreen as we need a way to save game.
+We checked if tractor is in the market, and is available to be purchased.
+We checked if irrigation is in the market, and is available to be purchased.
